@@ -15,6 +15,7 @@ import { Select } from "@/components/ui/select";
 import { useMockSession } from "@/features/auth/mock-session";
 import { useMarketplace } from "@/features/cart/marketplace-store";
 import { getCountryLabel } from "@/lib/auction-helpers";
+import { getAssetPath } from "@/lib/site";
 import { formatCurrency } from "@/lib/utils";
 
 const placeholderImages = ["/auction-campus.svg", "/auction-solar.svg", "/auction-sines.svg"];
@@ -313,7 +314,7 @@ export default function NewAuctionPage() {
               </p>
               <p className="mt-4 text-sm leading-6 text-muted">{preview.description}</p>
               <div className="mt-6 overflow-hidden rounded-[1.5rem] bg-surface-low p-3">
-                <img src={preview.images[0] ?? placeholderImages[0]} alt={preview.title} className="h-64 w-full rounded-[1.1rem] object-cover" />
+                <img src={getAssetPath(preview.images[0] ?? placeholderImages[0])} alt={preview.title} className="h-64 w-full rounded-[1.1rem] object-cover" />
               </div>
               <div className="mt-6 rounded-[1.5rem] bg-surface-low p-5">
                 <p className="institutional-kicker">Opening value in EUR</p>

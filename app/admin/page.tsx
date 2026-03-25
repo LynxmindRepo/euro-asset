@@ -9,6 +9,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useMockSession } from "@/features/auth/mock-session";
 import { useMarketplace } from "@/features/cart/marketplace-store";
+import { hasStaticAuctionDetail } from "@/lib/site";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
 
 export default function AdminPage() {
@@ -165,9 +166,13 @@ export default function AdminPage() {
                       {formatCurrency(auction.currentBid)}
                     </p>
                     <p className="text-sm text-muted lg:text-right">{auction.bids.length}</p>
-                    <Link href={`/auctions/${auction.id}`} className="text-sm text-primary lg:text-right">
-                      View detail
-                    </Link>
+                    {hasStaticAuctionDetail(auction.id) ? (
+                      <Link href={`/auctions/${auction.id}`} className="text-sm text-primary lg:text-right">
+                        View detail
+                      </Link>
+                    ) : (
+                      <span className="text-sm text-muted lg:text-right">Session-only</span>
+                    )}
                   </div>
                 ))}
               </div>

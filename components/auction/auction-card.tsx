@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Auction } from "@/types";
 import { getCategoryLabel, getCountryLabel, getSaleProcedureLabel } from "@/lib/auction-helpers";
+import { getAssetPath, hasStaticAuctionDetail } from "@/lib/site";
 import { formatCurrency, getTimeRemaining } from "@/lib/utils";
 import { StatusBadge } from "@/components/auction/status-badge";
 import { buttonStyles } from "@/components/ui/button";
@@ -27,8 +28,13 @@ export function AuctionCardBase({
   variant: "stacked" | "split";
 }) {
   const router = useRouter();
+  const hasDetailPage = hasStaticAuctionDetail(auction.id);
 
   function openProcess() {
+    if (!hasDetailPage) {
+      return;
+    }
+
     router.push(`/auctions/${auction.id}`);
   }
 
@@ -42,15 +48,15 @@ export function AuctionCardBase({
   if (variant === "split") {
     return (
       <article
-        role="link"
-        tabIndex={0}
-        onClick={openProcess}
-        onKeyDown={handleKeyDown}
-        className="group grid cursor-pointer overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 md:grid-cols-[0.92fr_1.08fr]"
+        role={hasDetailPage ? "link" : undefined}
+        tabIndex={hasDetailPage ? 0 : undefined}
+        onClick={hasDetailPage ? openProcess : undefined}
+        onKeyDown={hasDetailPage ? handleKeyDown : undefined}
+        className={`group grid overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 md:grid-cols-[0.92fr_1.08fr] ${hasDetailPage ? "cursor-pointer" : ""}`}
       >
         <div className="overflow-hidden md:h-full">
           <img
-            src={auction.images[0]}
+            src={getAssetPath(auction.images[0])}
             alt={auction.title}
             className="h-64 w-full object-cover transition duration-300 group-hover:scale-[1.02] md:h-full md:min-h-[28rem]"
           />
@@ -84,13 +90,19 @@ export function AuctionCardBase({
           </div>
           <p className="support-copy mt-4">Responsible entity: {auction.administratorEntity}</p>
           <div className="mt-6 flex gap-3 md:mt-auto">
-            <Link
-              href={`/auctions/${auction.id}`}
-              onClick={(event) => event.stopPropagation()}
-              className={buttonStyles("primary", "w-full flex-1 no-underline")}
-            >
-              View process
-            </Link>
+            {hasDetailPage ? (
+              <Link
+                href={`/auctions/${auction.id}`}
+                onClick={(event) => event.stopPropagation()}
+                className={buttonStyles("primary", "w-full flex-1 no-underline")}
+              >
+                View process
+              </Link>
+            ) : (
+              <span className="inline-flex w-full flex-1 items-center justify-center rounded-xl bg-surface-low px-4 py-3 text-sm text-muted tonal-rule">
+                Session-only process
+              </span>
+            )}
           </div>
         </div>
       </article>
@@ -99,15 +111,15 @@ export function AuctionCardBase({
 
   return (
     <article
-      role="link"
-      tabIndex={0}
-      onClick={openProcess}
-      onKeyDown={handleKeyDown}
-      className="group panel-lg flex h-full cursor-pointer flex-col bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30"
+      role={hasDetailPage ? "link" : undefined}
+      tabIndex={hasDetailPage ? 0 : undefined}
+      onClick={hasDetailPage ? openProcess : undefined}
+      onKeyDown={hasDetailPage ? handleKeyDown : undefined}
+      className={`group panel-lg flex h-full flex-col bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 ${hasDetailPage ? "cursor-pointer" : ""}`}
     >
       <div className="overflow-hidden rounded-2xl">
         <img
-          src={auction.images[0]}
+          src={getAssetPath(auction.images[0])}
           alt={auction.title}
           className="h-64 w-full rounded-2xl object-cover transition duration-300 group-hover:scale-[1.02]"
         />
@@ -141,13 +153,19 @@ export function AuctionCardBase({
       <div className="mt-auto pt-6">
         <p className="support-copy">Responsible entity: {auction.administratorEntity}</p>
         <div className="mt-6 flex gap-3">
-          <Link
-            href={`/auctions/${auction.id}`}
-            onClick={(event) => event.stopPropagation()}
-            className={buttonStyles("primary", "w-full flex-1 no-underline")}
-          >
-            View process
-          </Link>
+          {hasDetailPage ? (
+            <Link
+              href={`/auctions/${auction.id}`}
+              onClick={(event) => event.stopPropagation()}
+              className={buttonStyles("primary", "w-full flex-1 no-underline")}
+            >
+              View process
+            </Link>
+          ) : (
+            <span className="inline-flex w-full flex-1 items-center justify-center rounded-xl bg-surface-low px-4 py-3 text-sm text-muted tonal-rule">
+              Session-only process
+            </span>
+          )}
         </div>
       </div>
     </article>

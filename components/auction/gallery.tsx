@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getAssetPath } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Gallery({
@@ -26,7 +27,7 @@ export function Gallery({
         )}
       >
         <img
-          src={images[active]}
+          src={getAssetPath(images[active])}
           alt={title}
           className={cn(
             "w-full rounded-[1.3rem] object-cover",
@@ -48,7 +49,7 @@ export function Gallery({
             )}
           >
             <img
-              src={image}
+              src={getAssetPath(image)}
               alt={`${title} ${index + 1}`}
               className={cn(
                 "w-full rounded-xl object-cover",

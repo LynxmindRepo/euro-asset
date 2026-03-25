@@ -5,13 +5,19 @@ import { useRouter } from "next/navigation";
 import { StatusBadge } from "@/components/auction/status-badge";
 import { buttonStyles } from "@/components/ui/button";
 import { getCategoryLabel, getCountryLabel, getSaleProcedureLabel } from "@/lib/auction-helpers";
+import { getAssetPath, hasStaticAuctionDetail } from "@/lib/site";
 import { formatCurrency, getTimeRemaining } from "@/lib/utils";
 import { Auction } from "@/types";
 
 export function AuctionListRow({ auction }: { auction: Auction }) {
   const router = useRouter();
+  const hasDetailPage = hasStaticAuctionDetail(auction.id);
 
   function openProcess() {
+    if (!hasDetailPage) {
+      return;
+    }
+
     router.push(`/auctions/${auction.id}`);
   }
 
@@ -24,15 +30,15 @@ export function AuctionListRow({ auction }: { auction: Auction }) {
 
   return (
     <article
-      role="link"
-      tabIndex={0}
-      onClick={openProcess}
-      onKeyDown={handleKeyDown}
-      className="panel-lg grid cursor-pointer gap-6 bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 lg:grid-cols-[248px_1fr_248px] lg:items-stretch"
+      role={hasDetailPage ? "link" : undefined}
+      tabIndex={hasDetailPage ? 0 : undefined}
+      onClick={hasDetailPage ? openProcess : undefined}
+      onKeyDown={hasDetailPage ? handleKeyDown : undefined}
+      className={`panel-lg grid gap-6 bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 lg:grid-cols-[248px_1fr_248px] lg:items-stretch ${hasDetailPage ? "cursor-pointer" : ""}`}
     >
       <div className="overflow-hidden rounded-2xl">
         <img
-          src={auction.images[0]}
+          src={getAssetPath(auction.images[0])}
           alt={auction.title}
           className="h-52 w-full rounded-2xl object-cover transition duration-300 group-hover:scale-[1.015] lg:h-full lg:min-h-[19.5rem]"
         />
@@ -80,13 +86,19 @@ export function AuctionListRow({ auction }: { auction: Auction }) {
             Open the full process record and continue to proposal review.
           </p>
         </div>
-        <Link
-          href={`/auctions/${auction.id}`}
-          onClick={(event) => event.stopPropagation()}
-          className={buttonStyles("primary", "w-full no-underline")}
-        >
-          View process
-        </Link>
+        {hasDetailPage ? (
+          <Link
+            href={`/auctions/${auction.id}`}
+            onClick={(event) => event.stopPropagation()}
+            className={buttonStyles("primary", "w-full no-underline")}
+          >
+            View process
+          </Link>
+        ) : (
+          <span className="inline-flex min-h-11 items-center justify-center rounded-xl bg-surface-low px-4 py-3 text-sm text-muted tonal-rule">
+            Session-only process
+          </span>
+        )}
       </div>
     </article>
   );
