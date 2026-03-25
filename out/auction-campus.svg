@@ -1,0 +1,20 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="campus-sky" x1="600" y1="90" x2="600" y2="770" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F7FA"/>
+      <stop offset="1" stop-color="#D5DEE8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#campus-sky)"/>
+  <rect y="612" width="1200" height="188" fill="#6D7F92"/>
+  <rect x="108" y="164" width="984" height="444" rx="36" fill="#DCE5EE"/>
+  <rect x="166" y="214" width="868" height="182" rx="26" fill="#17355C"/>
+  <rect x="166" y="428" width="268" height="126" rx="24" fill="#D7B86B"/>
+  <rect x="466" y="428" width="568" height="126" rx="24" fill="#0A2343"/>
+  <rect x="206" y="246" width="788" height="28" rx="10" fill="#EFF4F8" fill-opacity="0.82"/>
+  <rect x="206" y="294" width="788" height="20" rx="10" fill="#AABCCD" fill-opacity="0.65"/>
+  <rect x="206" y="332" width="632" height="16" rx="8" fill="#AABCCD" fill-opacity="0.5"/>
+  <path d="M104 652H1092" stroke="#E7EDF3" stroke-width="10" stroke-linecap="round" stroke-dasharray="28 22"/>
+  <path d="M554 608V164" stroke="#EEF4F9" stroke-width="8" stroke-opacity="0.4"/>
+  <path d="M800 608V164" stroke="#EEF4F9" stroke-width="8" stroke-opacity="0.25"/>
+</svg>

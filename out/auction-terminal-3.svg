@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="terminal3-sky" x1="600" y1="76" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF4F8"/>
+      <stop offset="1" stop-color="#D6E0EA"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#terminal3-sky)"/>
+  <path d="M0 610C230 548 380 530 598 530C860 530 1026 564 1200 618V800H0V610Z" fill="#4D6176"/>
+  <rect x="96" y="152" width="1008" height="348" rx="32" fill="#D3DEE8"/>
+  <rect x="148" y="204" width="332" height="244" rx="24" fill="#16355C"/>
+  <rect x="524" y="204" width="528" height="244" rx="24" fill="#D7B86B"/>
+  <rect x="560" y="240" width="456" height="44" rx="14" fill="#F5F7FA"/>
+  <rect x="560" y="304" width="246" height="88" rx="18" fill="#20456E"/>
+  <rect x="824" y="304" width="192" height="88" rx="18" fill="#EFF4F8"/>
+  <path d="M142 676H1064" stroke="#DCE6EF" stroke-width="10" stroke-linecap="round" stroke-dasharray="24 18"/>
+</svg>

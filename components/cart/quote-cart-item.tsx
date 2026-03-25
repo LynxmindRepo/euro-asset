@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { CartItem } from "@/types";
 import { useMarketplace } from "@/features/cart/marketplace-store";
 import { getCountryLabel, getSaleProcedureLabel } from "@/lib/auction-helpers";
+import { getAssetPath } from "@/lib/site";
 import { formatCurrency } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ export function QuoteCartItemRow({ item }: { item: CartItem }) {
   return (
     <article className="rounded-[1.75rem] bg-surface-lowest p-5 shadow-ambient">
       <div className="grid gap-5 lg:grid-cols-[160px_1fr_auto] lg:items-center">
-        <img src={auction.images[0]} alt={auction.title} className="h-32 w-full rounded-2xl object-cover" />
+        <img src={getAssetPath(auction.images[0])} alt={auction.title} className="h-32 w-full rounded-2xl object-cover" />
         <div>
           <p className="institutional-kicker">
             {getCountryLabel(auction.country)} / {getSaleProcedureLabel(auction.saleProcedure)} / {auction.caseReference}

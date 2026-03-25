@@ -1,0 +1,24 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="port-sky" x1="600" y1="70" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF3F7"/>
+      <stop offset="1" stop-color="#D2DCE7"/>
+    </linearGradient>
+    <linearGradient id="sea-port" x1="600" y1="430" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A3B61"/>
+      <stop offset="1" stop-color="#0A213F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#port-sky)"/>
+  <circle cx="968" cy="160" r="70" fill="#D7B86B"/>
+  <rect y="456" width="1200" height="344" fill="url(#sea-port)"/>
+  <path d="M80 584L410 392L690 472L1120 298V800H80V584Z" fill="#23466E"/>
+  <rect x="144" y="168" width="862" height="126" rx="24" fill="#F6F8FA"/>
+  <rect x="176" y="204" width="798" height="22" rx="10" fill="#C4D2DE"/>
+  <rect x="176" y="244" width="468" height="16" rx="8" fill="#C4D2DE" fill-opacity="0.65"/>
+  <rect x="152" y="414" width="258" height="156" rx="20" fill="#EEF4F8"/>
+  <rect x="446" y="386" width="270" height="184" rx="20" fill="#D7E1EA"/>
+  <rect x="752" y="340" width="280" height="230" rx="20" fill="#F6F8FA"/>
+  <path d="M510 604H1010" stroke="#D7B86B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M540 644H1040" stroke="#DCE5ED" stroke-width="8" stroke-linecap="round" stroke-dasharray="20 18"/>
+</svg>

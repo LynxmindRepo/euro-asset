@@ -15,6 +15,7 @@ import {
   getRecentAuctions,
   getSaleProcedureLabel
 } from "@/lib/auction-helpers";
+import { getAssetPath, hasStaticAuctionDetail } from "@/lib/site";
 import { formatCurrency, getTimeRemaining } from "@/lib/utils";
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
   const heroProcess = featured[0];
   const supportingFeatured = featured.slice(1);
   const totalOpenValue = auctions.reduce((sum, auction) => sum + auction.currentBid, 0);
+  const heroHasDetailPage = heroProcess ? hasStaticAuctionDetail(heroProcess.id) : false;
 
   return (
     <PageShell>
@@ -47,7 +49,7 @@ export default function HomePage() {
               <article className="overflow-hidden rounded-[1.9rem] bg-surface-lowest shadow-panel tonal-rule">
                 <div className="overflow-hidden">
                   <img
-                    src={heroProcess.images[0]}
+                    src={getAssetPath(heroProcess.images[0])}
                     alt={heroProcess.title}
                     className="h-80 w-full object-cover md:h-[26rem] xl:h-[28rem]"
                   />
@@ -95,12 +97,18 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="mt-8 flex flex-wrap gap-3">
-                    <Link
-                      href={`/auctions/${heroProcess.id}`}
-                      className={buttonStyles("primary", "no-underline")}
-                    >
-                      Open process
-                    </Link>
+                    {heroHasDetailPage ? (
+                      <Link
+                        href={`/auctions/${heroProcess.id}`}
+                        className={buttonStyles("primary", "no-underline")}
+                      >
+                        Open process
+                      </Link>
+                    ) : (
+                      <span className="inline-flex min-h-11 items-center rounded-xl bg-surface-low px-5 py-3 text-sm text-muted tonal-rule">
+                        Session-only process
+                      </span>
+                    )}
                     <Link href="/cart" className={buttonStyles("secondary", "no-underline")}>
                       Review dossier
                     </Link>
@@ -173,9 +181,13 @@ export default function HomePage() {
                           {formatCurrency(auction.currentBid)}
                         </p>
                       </div>
-                      <Link href={`/auctions/${auction.id}`} className="text-sm font-medium text-primary no-underline">
-                        Open process
-                      </Link>
+                      {hasStaticAuctionDetail(auction.id) ? (
+                        <Link href={`/auctions/${auction.id}`} className="text-sm font-medium text-primary no-underline">
+                          Open process
+                        </Link>
+                      ) : (
+                        <span className="text-sm text-muted">Session-only process</span>
+                      )}
                     </div>
                   </Card>
                 ))}

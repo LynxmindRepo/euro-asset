@@ -1,0 +1,21 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="terminal2-sky" x1="600" y1="80" x2="600" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F7FA"/>
+      <stop offset="1" stop-color="#D7E0E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#terminal2-sky)"/>
+  <rect y="560" width="1200" height="240" fill="#5A6E84"/>
+  <rect x="106" y="166" width="988" height="452" rx="34" fill="#0A2343"/>
+  <rect x="142" y="204" width="360" height="376" rx="24" fill="#EEF3F8"/>
+  <rect x="168" y="238" width="308" height="26" rx="10" fill="#C3D1DE"/>
+  <rect x="168" y="284" width="308" height="26" rx="10" fill="#C3D1DE"/>
+  <rect x="168" y="330" width="308" height="26" rx="10" fill="#C3D1DE"/>
+  <rect x="534" y="204" width="316" height="376" rx="24" fill="#D7B86B"/>
+  <rect x="882" y="204" width="176" height="376" rx="24" fill="#DDE7F0"/>
+  <path d="M92 676H1108" stroke="#E6EDF3" stroke-width="12" stroke-linecap="round" stroke-dasharray="30 22"/>
+  <rect x="700" y="254" width="332" height="140" rx="22" fill="#17365D"/>
+  <rect x="724" y="280" width="284" height="24" rx="10" fill="#EEF3F8"/>
+  <rect x="724" y="322" width="176" height="38" rx="14" fill="#E4EEF7" fill-opacity="0.7"/>
+</svg>

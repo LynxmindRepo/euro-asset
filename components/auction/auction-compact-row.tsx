@@ -4,13 +4,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { StatusBadge } from "@/components/auction/status-badge";
 import { getCountryLabel, getSaleProcedureLabel } from "@/lib/auction-helpers";
+import { hasStaticAuctionDetail } from "@/lib/site";
 import { formatCurrency, getTimeRemaining } from "@/lib/utils";
 import { Auction } from "@/types";
 
 export function AuctionCompactRow({ auction }: { auction: Auction }) {
   const router = useRouter();
+  const hasDetailPage = hasStaticAuctionDetail(auction.id);
 
   function openProcess() {
+    if (!hasDetailPage) {
+      return;
+    }
+
     router.push(`/auctions/${auction.id}`);
   }
 
@@ -23,11 +29,11 @@ export function AuctionCompactRow({ auction }: { auction: Auction }) {
 
   return (
     <div
-      role="link"
-      tabIndex={0}
-      onClick={openProcess}
-      onKeyDown={handleKeyDown}
-      className="grid cursor-pointer gap-4 rounded-2xl bg-surface-lowest px-4 py-4 shadow-ambient tonal-rule transition hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 lg:grid-cols-[1.7fr_1.15fr_0.85fr_0.95fr_0.95fr_0.9fr] lg:items-center"
+      role={hasDetailPage ? "link" : undefined}
+      tabIndex={hasDetailPage ? 0 : undefined}
+      onClick={hasDetailPage ? openProcess : undefined}
+      onKeyDown={hasDetailPage ? handleKeyDown : undefined}
+      className={`grid gap-4 rounded-2xl bg-surface-lowest px-4 py-4 shadow-ambient tonal-rule transition hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 lg:grid-cols-[1.7fr_1.15fr_0.85fr_0.95fr_0.95fr_0.9fr] lg:items-center ${hasDetailPage ? "cursor-pointer" : ""}`}
     >
       <div className="min-w-0">
         <p className="truncate font-display text-[1.2rem] font-semibold tracking-[-0.03em] text-ink">
@@ -54,13 +60,19 @@ export function AuctionCompactRow({ auction }: { auction: Auction }) {
         <p className="font-medium text-ink">{getTimeRemaining(auction.endDate)}</p>
         <p className="mt-1 truncate">{auction.administratorEntity}</p>
       </div>
-      <Link
-        href={`/auctions/${auction.id}`}
-        onClick={(event) => event.stopPropagation()}
-        className="inline-flex min-h-10 items-center justify-center rounded-xl bg-surface-low px-4 py-2 text-sm font-medium text-primary tonal-rule no-underline transition hover:bg-surface-tint lg:justify-self-end"
-      >
-        View process
-      </Link>
+      {hasDetailPage ? (
+        <Link
+          href={`/auctions/${auction.id}`}
+          onClick={(event) => event.stopPropagation()}
+          className="inline-flex min-h-10 items-center justify-center rounded-xl bg-surface-low px-4 py-2 text-sm font-medium text-primary tonal-rule no-underline transition hover:bg-surface-tint lg:justify-self-end"
+        >
+          View process
+        </Link>
+      ) : (
+        <span className="inline-flex min-h-10 items-center justify-center rounded-xl bg-surface-low px-4 py-2 text-sm text-muted tonal-rule lg:justify-self-end">
+          Session-only process
+        </span>
+      )}
     </div>
   );
 }
