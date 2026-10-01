@@ -77,6 +77,11 @@ export function ContactPanel({ listing }: { listing: Listing }) {
           {formatCurrency(listing.price, listing.currency)}
         </p>
         <p className="mt-2 text-xs text-muted">Excl. VAT, transport and registration costs.</p>
+        {!isSold ? (
+          <a href="#cost-estimator" className="mt-3 inline-flex text-sm font-semibold text-primary">
+            Estimate the total cost to your country ↓
+          </a>
+        ) : null}
       </div>
 
       {partner ? (

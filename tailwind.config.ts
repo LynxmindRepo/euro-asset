@@ -50,6 +50,12 @@ const config: Config = {
         18: "4.5rem",
         20: "5rem"
       },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: "0", transform: "translateY(4px)" },
+          to: { opacity: "1", transform: "translateY(0)" }
+        }
+      },
       backgroundImage: {
         "midnight-gradient":
           "linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-container)) 62%, rgb(var(--primary-accent)) 100%)"

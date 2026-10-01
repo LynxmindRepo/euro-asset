@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { PageShell } from "@/components/layout/page-shell";
 import { ContactPanel } from "@/components/listing/contact-panel";
+import { CostEstimator } from "@/components/listing/cost-estimator";
 import { Gallery } from "@/components/listing/gallery";
 import { ListingCard } from "@/components/listing/listing-card";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
@@ -100,6 +101,8 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                 </ul>
               </section>
             ) : null}
+
+            <CostEstimator listing={listing} />
           </div>
 
           <ContactPanel listing={listing} />
