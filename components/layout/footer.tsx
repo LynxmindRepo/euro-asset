@@ -36,6 +36,9 @@ export function Footer() {
               <Link href="/sell" className="no-underline transition hover:text-white">
                 Sell with us
               </Link>
+              <Link href="/resources" className="no-underline transition hover:text-white">
+                Partners &amp; Resources
+              </Link>
             </div>
           </nav>
 

@@ -122,6 +122,13 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
+          <p className="mt-6 text-sm text-muted">
+            Need transport, insurance or a secure payment?{" "}
+            <Link href="/resources" className="font-semibold text-primary">
+              See our Partners &amp; Resources
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

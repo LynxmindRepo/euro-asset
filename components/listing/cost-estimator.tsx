@@ -5,6 +5,8 @@ import { Select } from "@/components/ui/select";
 import { SparkleIcon } from "@/components/ui/sparkle-icon";
 import { buyerCountries } from "@/data/cost-rates";
 import { currencies } from "@/data/currencies";
+import { estimatorLineResources, resourceCategories } from "@/data/resources";
+import Link from "next/link";
 import { useCurrency } from "@/features/preferences/currency-context";
 import { useUnits } from "@/features/preferences/units-context";
 import { CostEstimate, estimateTotalCost, guessBuyerCountry } from "@/lib/cost-estimator";
@@ -328,6 +330,32 @@ function CostTable({ estimate, visibleLines, complete }: { estimate: CostEstimat
           </tfoot>
         ) : null}
       </table>
+      {complete ? <QuoteLinks estimate={estimate} /> : null}
+    </div>
+  );
+}
+
+/** "Get real quotes" — links to the Partners & Resources sections relevant to this estimate. */
+function QuoteLinks({ estimate }: { estimate: CostEstimate }) {
+  const ids = Array.from(new Set(estimate.lines.flatMap((line) => estimatorLineResources[line.id] ?? [])));
+  if (!ids.includes("financing")) ids.push("financing");
+  const categories = resourceCategories.filter((category) => ids.includes(category.id));
+
+  return (
+    <div className="border-t border-surface-high px-4 py-3 text-sm">
+      <p className="font-medium text-ink">Get real quotes from our partners:</p>
+      <ul className="mt-2 flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <li key={category.id}>
+            <Link
+              href={`/resources#${category.id}`}
+              className="inline-flex rounded-full bg-surface-low px-3 py-1 text-xs font-semibold text-primary no-underline tonal-rule transition hover:bg-surface-tint"
+            >
+              {category.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

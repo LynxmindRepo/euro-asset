@@ -64,6 +64,25 @@ export default function BuyersPage() {
         across Europe — listed only by professional, verified Disposal Partners, translated, and ready to act on.
       </ClosingStatement>
 
+      <section aria-labelledby="after-title" className="pb-16">
+        <div className="shell">
+          <div className="flex flex-col gap-4 rounded-[2rem] bg-surface-lowest p-6 shadow-panel tonal-rule sm:p-8 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h2 id="after-title" className="font-display text-2xl font-semibold text-ink">
+                Found it? We help with the rest.
+              </h2>
+              <p className="support-copy mt-1 max-w-2xl">
+                Every listing has an AI Cost Estimator for transport, currency and registration — and our partners can
+                quote the real thing, including insurance and escrow.
+              </p>
+            </div>
+            <Link href="/resources" className={buttonStyles("secondary", "shrink-0 no-underline")}>
+              Partners &amp; Resources
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section aria-labelledby="start-title" className="pb-8">
         <div className="shell">
           <h2 id="start-title" className="section-title text-[clamp(1.8rem,3vw,2.5rem)]">
