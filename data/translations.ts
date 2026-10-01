@@ -69,6 +69,12 @@ type Pattern = [RegExp, (groups: string[], language: TargetLanguage) => string |
 
 const tr = (text: string, language: TargetLanguage) => translateText(text, language);
 
+/** "mileage" → "kilométrage": dictionary keys are capitalised labels, sentences use them in lower case. */
+const lowerLabel = (label: string, language: TargetLanguage) => {
+  const translated = tr(label.charAt(0).toUpperCase() + label.slice(1), language);
+  return translated.charAt(0).toLowerCase() + translated.slice(1);
+};
+
 const patterns: Pattern[] = [
   [/^(\d+) listings? found$/i, ([n], l) =>
     l === "fr" ? `${n} ${n === "1" ? "annonce trouvée" : "annonces trouvées"}` : `${n} ${n === "1" ? "annons hittad" : "annonser hittade"}`],
@@ -108,13 +114,29 @@ const patterns: Pattern[] = [
   [/^Delete saved search: (.+)$/, ([name], l) =>
     l === "fr" ? `Supprimer la recherche enregistrée : ${name}` : `Ta bort den sparade sökningen: ${name}`],
   [/^Done\. (\d+) fields filled automatically(?:, (\d+) need your attention: (.+))?\.$/, ([filled, missing, fields], l) => {
-    const list = fields ? fields.split(", ").map((field) => tr(field, l).toLowerCase()).join(", ") : "";
+    const list = fields ? fields.split(", ").map((field) => lowerLabel(field, l)).join(", ") : "";
     if (l === "fr") {
       return `Terminé. ${filled} champs remplis automatiquement${missing ? `, ${missing} à compléter : ${list}` : ""}.`;
     }
     return `Klart. ${filled} fält ifyllda automatiskt${missing ? `, ${missing} behöver kompletteras: ${list}` : ""}.`;
   }],
-  [/^Converted from “(.+)” at indicative rates\.$/, ([source], l) =>
+  // Listing import ("AI" steps)
+  [/^Detecting the category: (.+)$/, ([category], l) =>
+    l === "fr" ? `Détection de la catégorie : ${tr(category, l)}` : `Identifierar kategorin: ${tr(category, l)}`],
+  [/^Finding the price: (.+)$/, ([price], l) => (l === "fr" ? `Recherche du prix : ${price}` : `Hittar priset: ${price}`)],
+  [/^Locating the asset: (.+)$/, ([place], l) =>
+    l === "fr" ? `Localisation de l’actif : ${tr(place, l)}` : `Lokaliserar tillgången: ${tr(place, l)}`],
+  [/^Extracting specifications \((\d+) found(?:: (.+))?\)$/, ([count, labels], l) => {
+    const list = labels ? labels.split(", ").map((label) => lowerLabel(label, l)).join(", ") : "";
+    return l === "fr"
+      ? `Extraction des caractéristiques (${count} trouvée${count === "1" ? "" : "s"}${list ? ` : ${list}` : ""})`
+      : `Hämtar specifikationer (${count} hittade${list ? `: ${list}` : ""})`;
+  }],
+  [/^Picking (\d+) highlights?$/, ([count], l) =>
+    l === "fr"
+      ? `Sélection de ${count} point${count === "1" ? "" : "s"} fort${count === "1" ? "" : "s"}`
+      : `Väljer ${count} ${count === "1" ? "höjdpunkt" : "höjdpunkter"}`],
+  [/^Converted from “(.+)” at indicative rates\.$/,([source], l) =>
     l === "fr" ? `Converti depuis « ${source} » à un taux indicatif.` : `Omräknat från ”${source}” med ungefärlig kurs.`],
   [/^Up to (\d+) images, 10 MB each\. The first photo is the main one\. Photos stay in this browser \(demo\)\.$/, ([max], l) =>
     l === "fr"

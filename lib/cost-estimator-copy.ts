@@ -47,7 +47,7 @@ type EstimatorCopy = {
   stepRoute: (from: string, to: string, distance: string) => string;
   stepRegistration: (domestic: boolean, country: string) => string;
   stepCustoms: string;
-  stepFx: (currency: string, rate: number) => string;
+  stepFx: (currency: string, rate: string) => string;
   stepTotal: string;
   qNoTransport: string;
   aNoTransport: (city: string, property: boolean, percent: string, country: string, amount: string) => string;

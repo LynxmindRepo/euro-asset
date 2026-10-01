@@ -5,6 +5,11 @@
 export const uiFr: Record<string, string> = {
 
   "Translated automatically from English.": "Traduit automatiquement de l’anglais.", "Original text in English.": "Texte original en anglais.", "Show original": "Voir l’original", "Show translation": "Voir la traduction",
+  // Listing import steps
+  "Reading your listing": "Lecture de votre annonce", "Category unclear — please choose one": "Catégorie incertaine — merci d’en choisir une",
+  "No price found — please add it": "Aucun prix trouvé — merci de l’ajouter", "No location found — please add it": "Aucun lieu trouvé — merci de l’ajouter",
+  "Writing the listing summary": "Rédaction du résumé de l’annonce", "Preparing your listing for every market": "Préparation de votre annonce pour tous les marchés",
+  "Converting your listing…": "Conversion de votre annonce…", "Location": "Lieu", "Location missing": "Lieu manquant",
   // Partner statistics
   "How your listings perform": "Performance de vos annonces",
   "Last 30 days. Simulated figures for the demo — in the live product they come from real visits and messages.": "30 derniers jours. Chiffres simulés pour la démo — dans le produit réel, ils proviennent des visites et messages réels.",
@@ -238,6 +243,11 @@ export const uiFr: Record<string, string> = {
 export const uiSv: Record<string, string> = {
 
   "Translated automatically from English.": "Automatiskt översatt från engelska.", "Original text in English.": "Originaltext på engelska.", "Show original": "Visa original", "Show translation": "Visa översättning",
+  // Listing import steps
+  "Reading your listing": "Läser din annons", "Category unclear — please choose one": "Oklar kategori – välj en",
+  "No price found — please add it": "Inget pris hittades – lägg till det", "No location found — please add it": "Ingen plats hittades – lägg till den",
+  "Writing the listing summary": "Skriver annonsens sammanfattning", "Preparing your listing for every market": "Förbereder din annons för alla marknader",
+  "Converting your listing…": "Konverterar din annons…", "Location": "Plats", "Location missing": "Plats saknas",
   // Partner statistics
   "How your listings perform": "Så presterar dina annonser",
   "Last 30 days. Simulated figures for the demo — in the live product they come from real visits and messages.": "Senaste 30 dagarna. Simulerade siffror för demon – i den riktiga tjänsten kommer de från verkliga besök och meddelanden.",

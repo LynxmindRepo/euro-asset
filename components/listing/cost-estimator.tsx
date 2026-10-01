@@ -13,7 +13,7 @@ import { useLanguage } from "@/features/preferences/language-context";
 import { useUnits } from "@/features/preferences/units-context";
 import { CostEstimate, estimateTotalCost, guessBuyerCountry } from "@/lib/cost-estimator";
 import { estimatorCopy } from "@/lib/cost-estimator-copy";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency, formatRate } from "@/lib/utils";
 import { Listing } from "@/types";
 import { Localized } from "@/components/ui/localized";
 
@@ -328,7 +328,7 @@ function CostTable({ estimate, visibleLines, complete }: { estimate: CostEstimat
               <th scope="row" className="px-4 py-3 font-semibold">
                 Estimated total
                 {estimate.currency !== "EUR" ? (
-                  <span className="block text-xs font-normal text-white/80">≈ {formatCurrency(estimate.totalEur)} · 1 EUR = {estimate.rate} {estimate.currency}</span>
+                  <span className="block text-xs font-normal text-white/80">≈ {formatCurrency(estimate.totalEur)} · 1 EUR = {formatRate(estimate.rate)} {estimate.currency}</span>
                 ) : null}
               </th>
               <td className={cn("whitespace-nowrap px-4 py-3 text-right font-display text-lg font-semibold")}>

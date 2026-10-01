@@ -5,7 +5,12 @@ import { setFormatLanguage } from "@/lib/utils";
 
 export type Language = "en" | "fr" | "sv";
 
-type LanguageContextValue = { language: Language; setLanguage: (language: Language) => void };
+type LanguageContextValue = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  /** Applies the saved (or browser) language once; called by <LanguageRestorer> after the page has hydrated. */
+  restoreLanguage: () => void;
+};
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 const STORAGE_KEY = "bridgeon-language";
@@ -24,19 +29,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   setFormatLanguage(language);
 
   useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved === "en" || saved === "fr" || saved === "sv") {
-        setLanguageState(saved);
-        return;
-      }
-    } catch {
-      // Storage may be unavailable in private browsing; use the browser language instead.
-    }
-    setLanguageState(browserLanguage());
-  }, []);
-
-  useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
@@ -45,6 +37,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       language,
+      restoreLanguage: () => {
+        let next: Language = browserLanguage();
+        try {
+          const saved = window.localStorage.getItem(STORAGE_KEY);
+          if (saved === "en" || saved === "fr" || saved === "sv") next = saved;
+        } catch {
+          // Storage may be unavailable in private browsing; use the browser language instead.
+        }
+        setLanguageState(next);
+      },
       setLanguage: (next: Language) => {
         setLanguageState(next);
         try {
@@ -58,6 +60,23 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+}
+
+let restored = false;
+
+/**
+ * Restores the visitor's language. Rendered by PageShell, i.e. inside the page's Suspense boundary, so its effect
+ * runs only once the page has hydrated. Switching earlier (from the provider) would let the page hydrate with the
+ * new language's number/date formats (`setFormatLanguage` is module state) while the server HTML is in English.
+ */
+export function LanguageRestorer() {
+  const { restoreLanguage } = useLanguage();
+  useEffect(() => {
+    if (restored) return;
+    restored = true;
+    restoreLanguage();
+  }, [restoreLanguage]);
+  return null;
 }
 
 export function useLanguage() {

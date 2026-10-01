@@ -12,7 +12,7 @@ import { eurRates } from "@/data/currencies";
 import { translateText } from "@/data/translations";
 import type { Language } from "@/features/preferences/language-context";
 import { estimatorCopy } from "@/lib/cost-estimator-copy";
-import { formatCurrency, formatMeasure, UnitSystem } from "@/lib/utils";
+import { formatCurrency, formatMeasure, formatRate, UnitSystem } from "@/lib/utils";
 import { Listing } from "@/types";
 
 export type CostLine = {
@@ -196,7 +196,7 @@ export function estimateTotalCost(
 
   if (currency !== "EUR") {
     const fx = Math.round(listing.price * fxSpread);
-    steps.push(t.stepFx(currency, rate));
+    steps.push(t.stepFx(currency, formatRate(rate)));
     lines.push({ id: "fx", label: t.fx, detail: t.fxDetail(percent(fxSpread)), amountEur: fx });
   }
 

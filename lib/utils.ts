@@ -35,6 +35,11 @@ export function formatDate(value: string) {
   }).format(new Date(value));
 }
 
+/** Exchange rates keep up to 4 decimals ("0.8546" / "0,8546"). */
+export function formatRate(value: number) {
+  return new Intl.NumberFormat(formatLocale, { maximumFractionDigits: 4 }).format(value);
+}
+
 /** Day and month only ("27 Sept" / "27 sept."), for chart axes. */
 export function formatDayMonth(value: Date) {
   return new Intl.DateTimeFormat(formatLocale, { day: "numeric", month: "short" }).format(value);
