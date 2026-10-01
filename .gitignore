@@ -1,2 +1,8 @@
 node_modules/
 .next/
+
+# Static export — built by the GitHub Actions deploy workflow, not committed
+out/
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
