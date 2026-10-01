@@ -63,6 +63,28 @@ footer :focus-visible {
   outline-color: #fff;
 }
 
+/* Clickable cards: the title link stretches over the whole card (no nested interactive
+   elements), and the focus ring is drawn around the card instead of the title text. */
+.card-link {
+  position: relative;
+}
+
+.card-link-target::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card-link-target:focus-visible {
+  outline: none;
+}
+
+.card-link:has(.card-link-target:focus-visible) {
+  outline: 3px solid rgb(var(--accent-ink));
+  outline-offset: 3px;
+}
+
 /* WCAG 2.3.3: honour reduced-motion preferences. */
 @media (prefers-reduced-motion: reduce) {
   html {

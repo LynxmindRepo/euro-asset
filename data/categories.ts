@@ -2,23 +2,33 @@ import { Category } from "@/types";
 
 export const categories: Category[] = [
   {
-    id: "infraestruturas",
-    label: "Infrastructure",
-    description: "Operational assets with institutional scale and regional significance."
+    id: "vehicles",
+    label: "Vehicles",
+    description: "Trucks, vans, trailers and company cars from fleet disposals."
   },
   {
-    id: "logistica",
-    label: "Logistics",
-    description: "Fleets, hubs, and operating assets with recurring demand."
+    id: "machinery",
+    label: "Machinery & Equipment",
+    description: "Construction, production and workshop machinery ready for a new operator."
   },
   {
-    id: "energia",
-    label: "Energy",
-    description: "Equipment, concessions, and production assets with an industrial profile."
-  },
-  {
-    id: "imobiliario",
+    id: "real-estate",
     label: "Real Estate",
-    description: "Portfolios and urban repositioning opportunities for special-situations buyers."
+    description: "Warehouses, offices and industrial sites from insolvent estates."
+  },
+  {
+    id: "inventory",
+    label: "Inventory & Stock",
+    description: "Retail stock, raw materials and complete inventories sold in lots."
+  },
+  {
+    id: "it-office",
+    label: "IT & Office",
+    description: "Servers, computers and office furniture from closed businesses."
+  },
+  {
+    id: "energy",
+    label: "Energy & Industrial",
+    description: "Solar parks, generators and industrial installations."
   }
 ];

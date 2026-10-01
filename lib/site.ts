@@ -1,8 +1,8 @@
-import { initialAuctions } from "@/data/auctions";
+import { initialListings } from "@/data/listings";
 
 export const repoBasePath = process.env.NODE_ENV === "production" ? "/euro-asset" : "";
 
-const staticAuctionIds = new Set(initialAuctions.map((auction) => auction.id));
+const staticListingIds = new Set(initialListings.map((listing) => listing.id));
 
 export function getAssetPath(path: string) {
   if (!path.startsWith("/")) {
@@ -16,6 +16,7 @@ export function getAssetPath(path: string) {
   return `${repoBasePath}${path}`;
 }
 
-export function hasStaticAuctionDetail(auctionId: string) {
-  return staticAuctionIds.has(auctionId);
+/** Only the initial listings get a statically exported detail page; listings created in-session do not. */
+export function hasStaticListingDetail(listingId: string) {
+  return staticListingIds.has(listingId);
 }

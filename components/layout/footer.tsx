@@ -14,30 +14,27 @@ export function Footer() {
               height={420}
               className="h-auto w-56"
             />
-            <h3 className="section-title mt-4 max-w-3xl text-white">
-              Visual prototype for European special situations and industrial asset sales.
-            </h3>
+            <p className="section-title mt-4 max-w-3xl text-white">
+              Insolvency assets from professional sellers across Europe.
+            </p>
           </div>
 
-          <div>
+          <nav aria-label="Footer">
             <p className="text-sm uppercase tracking-[0.18em] text-white/75">Navigate</p>
             <div className="mt-4 grid gap-3 text-sm text-white/80">
               <Link href="/" className="no-underline transition hover:text-white">
                 Overview
               </Link>
-              <Link href="/auctions" className="no-underline transition hover:text-white">
-                Processes
-              </Link>
-              <Link href="/cart" className="no-underline transition hover:text-white">
-                Dossier
+              <Link href="/listings" className="no-underline transition hover:text-white">
+                Listings
               </Link>
             </div>
-          </div>
+          </nav>
 
           <div>
             <p className="text-sm uppercase tracking-[0.18em] text-white/75">Note</p>
             <p className="support-copy mt-4 max-w-md text-white/80">
-              This environment uses mock data, local session state, and an English-only interface for demo purposes in the current phase.
+              Presentation prototype: listings, sellers and messages are fictional and nothing is sent or stored.
             </p>
           </div>
         </div>

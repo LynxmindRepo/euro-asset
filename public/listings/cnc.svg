@@ -1,0 +1,14 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg-cnc" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#EEF2F6"/><stop offset="1" stop-color="#D5DEE8"/></linearGradient></defs>
+  <rect width="1200" height="800" fill="url(#bg-cnc)"/>
+  <rect y="600" width="1200" height="200" fill="#C4CFDB"/>
+  <rect y="600" width="1200" height="6" fill="#FA6F06" opacity=".55"/>
+  <rect x="260" y="170" width="620" height="430" rx="24" fill="#E8EDF2" stroke="#00183E" stroke-width="8"/>
+  <rect x="300" y="220" width="400" height="260" rx="14" fill="#BFD3E6" stroke="#00183E" stroke-width="6"/>
+  <rect x="470" y="250" width="40" height="120" fill="#8C9AAB"/><path d="M490 370l-20 40h40z" fill="#22303F"/>
+  <rect x="340" y="420" width="320" height="30" rx="6" fill="#8C9AAB"/>
+  <rect x="730" y="230" width="120" height="180" rx="12" fill="#00183E"/>
+  <rect x="748" y="250" width="84" height="60" rx="6" fill="#BFD3E6"/>
+  <circle cx="770" cy="345" r="10" fill="#FA6F06"/><circle cx="810" cy="345" r="10" fill="#7FD0A0"/>
+  <rect x="260" y="520" width="620" height="24" fill="#FA6F06"/>
+</svg>

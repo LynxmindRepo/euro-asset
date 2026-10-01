@@ -6,12 +6,10 @@ import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/logo";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { useMockSession } from "@/features/auth/mock-session";
-import { useMarketplace } from "@/features/cart/marketplace-store";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const { currentUser, users, loginAs, logout } = useMockSession();
-  const { cartItems } = useMarketplace();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const pathname = usePathname();
 
@@ -30,14 +28,9 @@ export function Header() {
   const navItems = [
     { href: "/", label: "Overview", active: pathname === "/" },
     {
-      href: "/auctions",
-      label: "Processes",
-      active: pathname.startsWith("/auctions"),
-    },
-    {
-      href: "/cart",
-      label: "Dossier",
-      active: pathname.startsWith("/cart") || pathname.startsWith("/checkout"),
+      href: "/listings",
+      label: "Listings",
+      active: pathname.startsWith("/listings"),
     },
   ];
 
@@ -45,12 +38,13 @@ export function Header() {
     <>
       <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-xl">
         <div className="shell flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center justify-between gap-6">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
             <Logo />
-            <nav className="hidden items-center gap-1.5 text-sm text-muted lg:flex">
+            <nav aria-label="Main" className="flex flex-wrap items-center gap-1.5 text-sm text-muted">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
+                  aria-current={item.active ? "page" : undefined}
                   href={item.href}
                   className={cn(
                     "rounded-[1.1rem] px-4 py-2.5 no-underline transition duration-200",
@@ -60,13 +54,11 @@ export function Header() {
                   )}
                 >
                   {item.label}
-                  {item.href === "/cart" && cartItems.length > 0
-                    ? ` (${cartItems.length})`
-                    : ""}
                 </Link>
               ))}
               {currentUser?.role === "admin" ? (
                 <Link
+                  aria-current={pathname.startsWith("/admin") ? "page" : undefined}
                   href="/admin"
                   className={cn(
                     "rounded-[1.1rem] px-4 py-2.5 no-underline transition duration-200",
@@ -142,9 +134,8 @@ export function Header() {
                   Enter the platform with a demo profile.
                 </h2>
                 <p className="support-copy mt-3 max-w-2xl">
-                  This login flow is intentionally local to the prototype and
-                  lets you present the buyer and admin journeys without a live
-                  authentication backend.
+                  Demo login only — no real account is created. Switch between
+                  the buyer and admin profiles to present both journeys.
                 </p>
               </div>
               <button
@@ -187,13 +178,13 @@ export function Header() {
                   <p className="mt-2 text-sm text-muted">{user.company}</p>
                   <p className="mt-6 text-sm leading-6 text-muted">
                     {user.role === "admin"
-                      ? "Access the operational dashboard, create new process records, and review session activity."
-                      : "Review live processes, stage a proposal dossier, and continue through formal submission."}
+                      ? "Open the dashboard, publish new listings and see buyer messages from this session."
+                      : "Search listings across Europe and contact Disposal Partners directly."}
                   </p>
                   <div className="mt-6 rounded-[1.35rem] bg-surface-lowest/80 px-4 py-4 text-sm text-muted tonal-rule">
                     {user.role === "admin"
-                      ? "Use this route to demonstrate curation, intake, and dashboard oversight."
-                      : "Use this route to demonstrate search, process review, and formal proposal delivery."}
+                      ? "Use this profile to demo the back office."
+                      : "Use this profile to demo the buyer journey."}
                   </div>
                 </button>
               ))}

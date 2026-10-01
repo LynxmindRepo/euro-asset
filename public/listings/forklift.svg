@@ -1,0 +1,14 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg-forklift" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#EEF2F6"/><stop offset="1" stop-color="#D5DEE8"/></linearGradient></defs>
+  <rect width="1200" height="800" fill="url(#bg-forklift)"/>
+  <rect y="600" width="1200" height="200" fill="#C4CFDB"/>
+  <rect y="600" width="1200" height="6" fill="#FA6F06" opacity=".55"/>
+  <rect x="280" y="380" width="300" height="170" rx="24" fill="#FA6F06"/>
+  <rect x="320" y="240" width="20" height="150" fill="#00183E"/><rect x="500" y="240" width="20" height="150" fill="#00183E"/>
+  <rect x="310" y="230" width="220" height="20" rx="8" fill="#00183E"/>
+  <rect x="600" y="160" width="24" height="430" fill="#22303F"/><rect x="640" y="160" width="24" height="430" fill="#22303F"/>
+  <rect x="664" y="560" width="240" height="18" fill="#8C9AAB"/>
+  <rect x="690" y="420" width="190" height="140" fill="#C9A77A" stroke="#8C6B43" stroke-width="5"/>
+  <path d="M690 490h190M785 420v140" stroke="#8C6B43" stroke-width="5"/>
+  <circle cx="350" cy="575" r="44" fill="#22303F"/><circle cx="350" cy="575" r="19.8" fill="#8C9AAB"/>  <circle cx="540" cy="575" r="44" fill="#22303F"/><circle cx="540" cy="575" r="19.8" fill="#8C9AAB"/>
+</svg>

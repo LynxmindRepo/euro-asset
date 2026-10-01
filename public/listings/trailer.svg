@@ -1,0 +1,12 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg-trailer" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#EEF2F6"/><stop offset="1" stop-color="#D5DEE8"/></linearGradient></defs>
+  <rect width="1200" height="800" fill="url(#bg-trailer)"/>
+  <rect y="600" width="1200" height="200" fill="#C4CFDB"/>
+  <rect y="600" width="1200" height="6" fill="#FA6F06" opacity=".55"/>
+  <rect x="140" y="230" width="820" height="290" rx="16" fill="#F9FBFD" stroke="#00183E" stroke-width="8"/>
+  <rect x="140" y="440" width="820" height="20" fill="#FA6F06"/>
+  <rect x="960" y="250" width="90" height="170" rx="10" fill="#8C9AAB"/>
+  <rect x="300" y="520" width="20" height="60" fill="#22303F"/>
+  <rect x="140" y="520" width="820" height="20" fill="#22303F"/>
+  <circle cx="700" cy="575" r="46" fill="#22303F"/><circle cx="700" cy="575" r="20.7" fill="#8C9AAB"/>  <circle cx="800" cy="575" r="46" fill="#22303F"/><circle cx="800" cy="575" r="20.7" fill="#8C9AAB"/>  <circle cx="900" cy="575" r="46" fill="#22303F"/><circle cx="900" cy="575" r="20.7" fill="#8C9AAB"/>
+</svg>

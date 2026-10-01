@@ -1,0 +1,13 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg-excavator" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#EEF2F6"/><stop offset="1" stop-color="#D5DEE8"/></linearGradient></defs>
+  <rect width="1200" height="800" fill="url(#bg-excavator)"/>
+  <rect y="600" width="1200" height="200" fill="#C4CFDB"/>
+  <rect y="600" width="1200" height="6" fill="#FA6F06" opacity=".55"/>
+  <rect x="250" y="500" width="520" height="100" rx="50" fill="#22303F"/>
+  <circle cx="300" cy="550" r="30" fill="#8C9AAB"/><circle cx="720" cy="550" r="30" fill="#8C9AAB"/>
+  <rect x="280" y="380" width="430" height="120" rx="20" fill="#FA6F06"/>
+  <rect x="300" y="260" width="170" height="140" rx="16" fill="#00183E"/>
+  <rect x="320" y="280" width="120" height="80" rx="8" fill="#BFD3E6"/>
+  <path d="M640 400L860 200L1000 330" stroke="#00183E" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M960 330h110l-40 120h-90z" fill="#22303F"/>
+</svg>

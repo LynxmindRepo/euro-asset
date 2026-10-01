@@ -1,42 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { StatusBadge } from "@/components/auction/status-badge";
 import { AdminSidebar } from "@/components/admin/sidebar";
 import { PageShell } from "@/components/layout/page-shell";
-import { buttonStyles } from "@/components/ui/button";
+import { StatusBadge } from "@/components/listing/status-badge";
+import { Button, buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useMockSession } from "@/features/auth/mock-session";
-import { useMarketplace } from "@/features/cart/marketplace-store";
-import { hasStaticAuctionDetail } from "@/lib/site";
+import { useMarketplace } from "@/features/marketplace/marketplace-store";
+import { getListingCountries, getPartner } from "@/lib/listing-helpers";
+import { hasStaticListingDetail } from "@/lib/site";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
 
 export default function AdminPage() {
   const { currentUser } = useMockSession();
-  const { auctions, sessionEvents } = useMarketplace();
-
-  function openLoginModal() {
-    window.dispatchEvent(new Event("open-mock-login"));
-  }
+  const { listings, partners, inquiries } = useMarketplace();
 
   if (!currentUser || currentUser.role !== "admin") {
     return (
       <PageShell>
         <div className="shell section-space">
           <div className="panel-xl bg-surface-low">
-            <p className="institutional-kicker">Admin access</p>
-            <h1 className="page-title mt-3 text-[clamp(2.2rem,4vw,3.1rem)]">
-              Sign in with the admin profile to enter the operational dashboard.
-            </h1>
-            <p className="support-copy mt-4 max-w-2xl">
-              This area is intentionally gated in the demo so you can present a cleaner transition
-              between the buyer journey and the backoffice workflow.
-            </p>
+            <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">Sign in with the admin profile to open the dashboard.</h1>
+            <p className="support-copy mt-4 max-w-2xl">The back office is only available to the demo admin profile.</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button onClick={openLoginModal}>Open login</Button>
-              <Link href="/auctions" className={buttonStyles("secondary", "no-underline")}>
-                Return to processes
+              <Button onClick={() => window.dispatchEvent(new Event("open-mock-login"))}>Open login</Button>
+              <Link href="/listings" className={buttonStyles("secondary", "no-underline")}>
+                Back to listings
               </Link>
             </div>
           </div>
@@ -45,14 +35,13 @@ export default function AdminPage() {
     );
   }
 
-  const openCount = auctions.filter((auction) => auction.status !== "encerrado").length;
-  const totalVolume = auctions.reduce((sum, auction) => sum + auction.currentBid, 0);
-  const closingSoonCount = auctions.filter((auction) => auction.status === "a-encerrar").length;
-  const scheduledCount = auctions.filter((auction) => auction.status === "agendado").length;
-  const createdThisSession = sessionEvents.filter((event) => event.type === "auction-created");
-  const docsOnRequestCount = auctions.filter((auction) =>
-    auction.documents.some((document) => document.availability === "sob-pedido")
-  ).length;
+  const metrics = [
+    { label: "Active listings", value: listings.filter((listing) => listing.status !== "sold").length },
+    { label: "Disposal Partners", value: partners.length },
+    { label: "Countries covered", value: getListingCountries(listings).length },
+    { label: "Listings sold", value: listings.filter((listing) => listing.status === "sold").length },
+    { label: "Messages this session", value: inquiries.length }
+  ];
 
   return (
     <PageShell>
@@ -60,123 +49,94 @@ export default function AdminPage() {
         <div className="shell grid gap-8 xl:grid-cols-[260px_1fr]">
           <AdminSidebar />
           <div className="grid gap-8">
-            <div className="grid gap-5 lg:grid-cols-4">
-              <Card variant="metric">
-                <p className="institutional-kicker">Active processes</p>
-                <p className="mt-3 metric-figure">{openCount}</p>
-                <p className="mt-2 text-sm text-muted">Processes currently under curation and negotiation</p>
-              </Card>
-              <Card variant="metric">
-                <p className="institutional-kicker">Tracked volume</p>
-                <p className="mt-3 metric-figure">{formatCurrency(totalVolume)}</p>
-                <p className="mt-2 text-sm text-muted">Aggregate value across active processes</p>
-              </Card>
-              <Card variant="metric">
-                <p className="institutional-kicker">Closing soon</p>
-                <p className="mt-3 metric-figure text-accent-ink">{closingSoonCount}</p>
-                <p className="mt-2 text-sm text-muted">Assets requiring immediate commercial attention</p>
-              </Card>
-              <Card variant="metric" className="bg-surface-legal">
-                <p className="institutional-kicker">Scheduled intake</p>
-                <p className="mt-3 metric-figure">{scheduledCount}</p>
-                <p className="mt-2 text-sm text-muted">Processes prepared but not yet live for review</p>
-              </Card>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">Dashboard</h1>
+              <Link href="/admin/new" className={buttonStyles("accent", "no-underline")}>
+                New listing
+              </Link>
             </div>
 
-            <Card variant="muted" className="p-6">
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                  <p className="institutional-kicker">Process management</p>
-                  <h1 className="page-title mt-3 text-[clamp(2.4rem,4vw,3.35rem)]">
-                    Operational dashboard for curation, intake, and review.
-                  </h1>
-                  <p className="support-copy mt-4 max-w-3xl">
-                    The admin environment is intentionally lightweight in this phase, but it should
-                    still read like a controlled backoffice rather than a generic content tool.
-                  </p>
-                </div>
-                <Link href="/admin/new" className={buttonStyles("primary", "no-underline")}>
-                  Create new process
-                </Link>
+            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {metrics.map((metric) => (
+                <Card key={metric.label} variant="metric">
+                  <dt className="institutional-kicker">{metric.label}</dt>
+                  <dd className="metric-figure mt-3 text-primary">{metric.value}</dd>
+                </Card>
+              ))}
+            </dl>
+
+            <section aria-labelledby="messages-title">
+              <h2 id="messages-title" className="subsection-title text-2xl">
+                Buyer messages
+              </h2>
+              {inquiries.length === 0 ? (
+                <p className="support-copy mt-3">
+                  No messages yet. Send one from any listing page to see it appear here.
+                </p>
+              ) : (
+                <ul className="mt-4 grid gap-3">
+                  {inquiries.map((inquiry) => {
+                    const listing = listings.find((candidate) => candidate.id === inquiry.listingId);
+
+                    return (
+                      <li key={inquiry.id} className="rounded-2xl bg-surface-lowest p-5 shadow-ambient tonal-rule">
+                        <p className="font-semibold text-ink">{listing?.title}</p>
+                        <p className="mt-1 text-sm text-muted">
+                          From {inquiry.name} ({inquiry.email}) to {getPartner(inquiry.partnerId)?.name} ·{" "}
+                          {formatDateTime(inquiry.createdAt)}
+                        </p>
+                        <p className="mt-2 text-sm text-ink">{inquiry.message}</p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </section>
+
+            <section aria-labelledby="listings-title">
+              <h2 id="listings-title" className="subsection-title text-2xl">
+                All listings
+              </h2>
+              <div className="mt-4 overflow-x-auto rounded-2xl bg-surface-lowest shadow-ambient tonal-rule">
+                <table className="w-full min-w-[720px] text-left text-sm">
+                  <thead className="bg-surface-tint">
+                    <tr>
+                      <th scope="col" className="px-5 py-3 font-semibold text-ink">Listing</th>
+                      <th scope="col" className="px-5 py-3 font-semibold text-ink">Disposal Partner</th>
+                      <th scope="col" className="px-5 py-3 font-semibold text-ink">Status</th>
+                      <th scope="col" className="px-5 py-3 text-right font-semibold text-ink">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {listings.map((listing) => (
+                      <tr key={listing.id} className="border-t border-surface-high">
+                        <td className="px-5 py-3">
+                          {hasStaticListingDetail(listing.id) ? (
+                            <Link href={`/listings/${listing.id}`} className="font-medium text-primary">
+                              {listing.title}
+                            </Link>
+                          ) : (
+                            <span className="font-medium text-ink">
+                              {listing.title} <span className="text-xs text-muted">(session only)</span>
+                            </span>
+                          )}
+                          <span className="block text-xs text-muted">
+                            {listing.city}, {listing.country}
+                          </span>
+                        </td>
+                        <td className="px-5 py-3 text-ink">{getPartner(listing.partnerId)?.name}</td>
+                        <td className="px-5 py-3">
+                          <StatusBadge status={listing.status} />
+                        </td>
+                        <td className="px-5 py-3 text-right font-semibold text-primary">
+                          {formatCurrency(listing.price, listing.currency)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <div className="mt-6 grid gap-3 lg:grid-cols-[0.85fr_0.85fr_1.1fr]">
-                <div className="panel-lg bg-surface-lowest tonal-rule shadow-ambient">
-                  <p className="institutional-kicker">Current session</p>
-                  <p className="section-title mt-3">
-                    {createdThisSession.length} created
-                  </p>
-                  <p className="support-copy mt-2">
-                    This counter highlights processes created in memory during the current demo session.
-                  </p>
-                </div>
-                <div className="panel-lg bg-surface-tint tonal-rule">
-                  <p className="institutional-kicker">Controlled documents</p>
-                  <p className="section-title mt-3">
-                    {docsOnRequestCount}
-                  </p>
-                  <p className="support-copy mt-2">
-                    Active processes containing materials marked as available on request.
-                  </p>
-                </div>
-                <div className="panel-lg bg-surface-legal tonal-rule">
-                  <p className="institutional-kicker">Latest event</p>
-                  {createdThisSession.length > 0 ? (
-                    <>
-                      <p className="mt-3 font-medium text-ink">
-                        {auctions.find((auction) => auction.id === createdThisSession[0].auctionId)?.title ??
-                          "Process created"}
-                      </p>
-                      <p className="mt-2 text-sm text-muted">
-                        {formatDateTime(createdThisSession[0].createdAt)}
-                      </p>
-                    </>
-                  ) : (
-                    <p className="mt-3 text-sm text-muted">
-                      No processes have been created in this session yet.
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="mt-8 hidden rounded-[1.4rem] bg-surface-tint px-5 py-4 tonal-rule lg:grid lg:grid-cols-[1.6fr_0.8fr_0.8fr_0.7fr_0.6fr]">
-                <p className="institutional-kicker">Asset</p>
-                <p className="institutional-kicker text-right">Status</p>
-                <p className="institutional-kicker text-right">Current value</p>
-                <p className="institutional-kicker text-right">Bids</p>
-                <p className="institutional-kicker text-right">Action</p>
-              </div>
-              <div className="mt-3 grid gap-3">
-                {auctions.map((auction) => (
-                  <div
-                    key={auction.id}
-                    className="panel-lg grid gap-4 bg-surface-lowest shadow-ambient tonal-rule lg:grid-cols-[1.6fr_0.8fr_0.8fr_0.7fr_0.6fr] lg:items-center"
-                  >
-                    <div>
-                      <p className="font-display text-2xl font-semibold tracking-[-0.04em]">
-                        {auction.title}
-                      </p>
-                      <p className="mt-2 text-sm text-muted">
-                        {auction.location} / {auction.region}
-                      </p>
-                      <p className="mt-1 text-xs text-muted">{auction.caseReference}</p>
-                    </div>
-                    <div className="lg:justify-self-end">
-                      <StatusBadge status={auction.status} />
-                    </div>
-                    <p className="text-sm font-semibold text-ink lg:text-right">
-                      {formatCurrency(auction.currentBid)}
-                    </p>
-                    <p className="text-sm text-muted lg:text-right">{auction.bids.length}</p>
-                    {hasStaticAuctionDetail(auction.id) ? (
-                      <Link href={`/auctions/${auction.id}`} className="text-sm text-primary lg:text-right">
-                        View detail
-                      </Link>
-                    ) : (
-                      <span className="text-sm text-muted lg:text-right">Session-only</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </Card>
+            </section>
           </div>
         </div>
       </section>

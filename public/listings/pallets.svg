@@ -1,0 +1,22 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg-pallets" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#EEF2F6"/><stop offset="1" stop-color="#D5DEE8"/></linearGradient></defs>
+  <rect width="1200" height="800" fill="url(#bg-pallets)"/>
+  <rect y="600" width="1200" height="200" fill="#C4CFDB"/>
+  <rect y="600" width="1200" height="6" fill="#FA6F06" opacity=".55"/>
+  <rect x="260" y="450" width="230" height="140" fill="#C9A77A" stroke="#8C6B43" stroke-width="5"/>
+  <path d="M260 520h230M375 450v140" stroke="#8C6B43" stroke-width="5"/>
+  <rect x="280" y="500" width="80" height="22" rx="4" fill="#FA6F06"/>
+  <rect x="520" y="450" width="230" height="140" fill="#C9A77A" stroke="#8C6B43" stroke-width="5"/>
+  <path d="M520 520h230M635 450v140" stroke="#8C6B43" stroke-width="5"/>
+  <rect x="540" y="500" width="80" height="22" rx="4" fill="#FA6F06"/>
+  <rect x="780" y="450" width="230" height="140" fill="#C9A77A" stroke="#8C6B43" stroke-width="5"/>
+  <path d="M780 520h230M895 450v140" stroke="#8C6B43" stroke-width="5"/>
+  <rect x="800" y="500" width="80" height="22" rx="4" fill="#FA6F06"/>
+  <rect x="390" y="300" width="230" height="140" fill="#C9A77A" stroke="#8C6B43" stroke-width="5"/>
+  <path d="M390 370h230M505 300v140" stroke="#8C6B43" stroke-width="5"/>
+  <rect x="410" y="350" width="80" height="22" rx="4" fill="#FA6F06"/>
+  <rect x="650" y="300" width="230" height="140" fill="#C9A77A" stroke="#8C6B43" stroke-width="5"/>
+  <path d="M650 370h230M765 300v140" stroke="#8C6B43" stroke-width="5"/>
+  <rect x="670" y="350" width="80" height="22" rx="4" fill="#FA6F06"/>
+  <rect x="250" y="590" width="770" height="14" fill="#8C6B43"/>
+</svg>

@@ -1,13 +1,16 @@
 export type UserRole = "admin" | "user";
 
-export type AuctionStatus = "aberto" | "a-encerrar" | "agendado" | "encerrado";
+export type ListingStatus = "available" | "reserved" | "sold";
 
-export type SaleProcedure =
-  | "insolvencia"
-  | "liquidacao"
-  | "reestruturacao"
-  | "venda-judicial"
-  | "venda-privada";
+/** Where the asset comes from. Bridgeon only lists assets from professional disposals. */
+export type ListingOrigin =
+  | "insolvency"
+  | "liquidation"
+  | "restructuring"
+  | "judicial-sale"
+  | "private-sale";
+
+export type PartnerType = "broker" | "auctioneer" | "disposal-firm" | "administrator";
 
 export type Category = {
   id: string;
@@ -23,102 +26,78 @@ export type User = {
   avatar: string;
 };
 
-export type Bid = {
+/** A professional seller (broker, licensed auctioneer, disposal firm or administrator). */
+export type DisposalPartner = {
   id: string;
-  userId: string;
-  amount: number;
-  createdAt: string;
+  name: string;
+  type: PartnerType;
+  city: string;
+  country: string;
+  website: string;
+  email: string;
+  phone: string;
+  verified: boolean;
+  memberSince: string;
+  description: string;
 };
 
-export type DocumentItem = {
-  id: string;
+/** Technical characteristic. Numeric values keep their unit so they can be converted later (kg → lbs, km → miles). */
+export type ListingSpec = {
   label: string;
-  type: "teaser" | "caderno-encargos" | "avaliacao" | "legal" | "nda" | "financeiro";
-  availability: "disponivel" | "sob-pedido";
+  value: number | string;
+  unit?: "kg" | "km" | "m2" | "h" | "kW" | "kWp" | "units" | "year";
 };
 
-export type Auction = {
+export type Listing = {
   id: string;
-  slug: string;
   title: string;
-  location: string;
+  description: string;
+  categoryId: string;
+  origin: ListingOrigin;
+  status: ListingStatus;
+  price: number;
+  currency: "EUR";
+  city: string;
   region: string;
   country: string;
-  jurisdiction: string;
-  currency: "EUR";
-  categoryId: string;
-  status: AuctionStatus;
-  saleProcedure: SaleProcedure;
-  description: string;
-  executiveSummary: string[];
-  highlights: string[];
-  legalNotes: string[];
-  submissionRequirements: string[];
-  documents: DocumentItem[];
-  basePrice: number;
-  currentBid: number;
-  reserveMet: boolean;
-  endDate: string;
-  startDate: string;
   images: string[];
-  bids: Bid[];
-  seller: string;
-  lot: string;
-  caseReference: string;
-  administratorName: string;
-  administratorEntity: string;
-  occupancyStatus: string;
-  encumbrancesSummary: string;
+  specs: ListingSpec[];
+  highlights: string[];
+  partnerId: string;
+  /** Vehicles and some machinery must be re-registered in the buyer's country. */
+  requiresRegistration: boolean;
+  publishedAt: string;
   createdBy: string;
 };
 
-export type CartItem = {
+export type Inquiry = {
   id: string;
-  auctionId: string;
-  amount: number;
-  note?: string;
+  listingId: string;
+  partnerId: string;
+  name: string;
+  email: string;
+  message: string;
   createdAt: string;
-};
-
-export type SubmissionStatus = "draft" | "submitting" | "success";
-
-export type Submission = {
-  id: string;
-  userId: string;
-  createdAt: string;
-  items: CartItem[];
-  totalAmount: number;
-  status: SubmissionStatus;
 };
 
 export type SessionEvent = {
   id: string;
-  type: "auction-created";
-  auctionId: string;
+  type: "listing-created" | "inquiry-sent";
+  listingId: string;
   createdAt: string;
 };
 
-export type NewAuctionInput = {
+export type NewListingInput = {
   title: string;
   description: string;
   categoryId: string;
-  basePrice: number;
-  location: string;
+  origin: ListingOrigin;
+  price: number;
+  city: string;
   region: string;
   country: string;
-  jurisdiction: string;
-  saleProcedure: SaleProcedure;
-  caseReference: string;
-  administratorName: string;
-  administratorEntity: string;
-  occupancyStatus: string;
-  encumbrancesSummary: string;
-  startDate: string;
-  endDate: string;
+  partnerId: string;
   images: string[];
-  seller: string;
-  executiveSummary: string[];
   highlights: string[];
-  legalNotes: string[];
-  submissionRequirements: string[];
+  requiresRegistration: boolean;
 };
