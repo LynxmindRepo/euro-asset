@@ -4,6 +4,20 @@
 
 export const uiFr: Record<string, string> = {
 
+  "Translated automatically from English.": "Traduit automatiquement de l’anglais.", "Original text in English.": "Texte original en anglais.", "Show original": "Voir l’original", "Show translation": "Voir la traduction",
+  // Partner statistics
+  "How your listings perform": "Performance de vos annonces",
+  "Last 30 days. Simulated figures for the demo — in the live product they come from real visits and messages.": "30 derniers jours. Chiffres simulés pour la démo — dans le produit réel, ils proviennent des visites et messages réels.",
+  "Listing views": "Vues des annonces", "Saved by buyers": "Enregistrées par des acheteurs", "Views from other countries": "Vues depuis d’autres pays",
+  "Daily views, last 14 days": "Vues par jour, 14 derniers jours", "Day": "Jour", "Views": "Vues",
+  "Where your viewers are": "D’où viennent vos visiteurs", "· your market": "· votre marché", "Per listing": "Par annonce",
+  "Messages": "Messages",
+  // Favourites
+  "Favourites": "Favoris", "Your favourites": "Vos favoris", "listing": "annonce", "listings": "annonces",
+  "Listings you saved with the heart, to compare and come back to later. Saved in this browser only (demo).": "Les annonces enregistrées avec le cœur, pour les comparer et y revenir plus tard. Enregistrées dans ce navigateur uniquement (démo).",
+  "No favourites yet": "Aucun favori pour l’instant", "Tap the heart on any listing to keep it here.": "Touchez le cœur d’une annonce pour la retrouver ici.",
+  "Save to favourites": "Ajouter aux favoris", "Saved to favourites": "Dans vos favoris",
+  "Added to your favourites.": "Ajoutée à vos favoris.", "Removed from your favourites.": "Retirée de vos favoris.",
   // Language and region menu
   "Language and region": "Langue et région", "Language and region:": "Langue et région :", "Done": "Terminé",
   "Language": "Langue", "Currency": "Devise", "Metric": "Métrique", "Imperial": "Impérial",
@@ -223,6 +237,20 @@ export const uiFr: Record<string, string> = {
 
 export const uiSv: Record<string, string> = {
 
+  "Translated automatically from English.": "Automatiskt översatt från engelska.", "Original text in English.": "Originaltext på engelska.", "Show original": "Visa original", "Show translation": "Visa översättning",
+  // Partner statistics
+  "How your listings perform": "Så presterar dina annonser",
+  "Last 30 days. Simulated figures for the demo — in the live product they come from real visits and messages.": "Senaste 30 dagarna. Simulerade siffror för demon – i den riktiga tjänsten kommer de från verkliga besök och meddelanden.",
+  "Listing views": "Visningar av annonser", "Saved by buyers": "Sparade av köpare", "Views from other countries": "Visningar från andra länder",
+  "Daily views, last 14 days": "Visningar per dag, senaste 14 dagarna", "Day": "Dag", "Views": "Visningar",
+  "Where your viewers are": "Var dina besökare finns", "· your market": "· din marknad", "Per listing": "Per annons",
+  "Messages": "Meddelanden",
+  // Favourites
+  "Favourites": "Favoriter", "Your favourites": "Dina favoriter", "listing": "annons", "listings": "annonser",
+  "Listings you saved with the heart, to compare and come back to later. Saved in this browser only (demo).": "Annonser du har sparat med hjärtat, för att jämföra och återvända till senare. Sparas bara i den här webbläsaren (demo).",
+  "No favourites yet": "Inga favoriter än", "Tap the heart on any listing to keep it here.": "Tryck på hjärtat på en annons för att spara den här.",
+  "Save to favourites": "Spara som favorit", "Saved to favourites": "Sparad som favorit",
+  "Added to your favourites.": "Tillagd i dina favoriter.", "Removed from your favourites.": "Borttagen från dina favoriter.",
   // Language and region menu
   "Language and region": "Språk och region", "Language and region:": "Språk och region:", "Done": "Klar",
   "Language": "Språk", "Currency": "Valuta", "Metric": "Metriskt", "Imperial": "Brittiskt",

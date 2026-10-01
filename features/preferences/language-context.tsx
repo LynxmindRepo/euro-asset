@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import { setFormatLanguage } from "@/lib/utils";
 
 export type Language = "en" | "fr" | "sv";
 
@@ -19,6 +20,8 @@ function browserLanguage(): Language {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
+  // Formatters read the language synchronously, before the children of this render are formatted.
+  setFormatLanguage(language);
 
   useEffect(() => {
     try {

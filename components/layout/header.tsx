@@ -8,6 +8,7 @@ import { PreferenceControls } from "@/components/layout/preference-controls";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { useMockSession } from "@/features/auth/mock-session";
 import { useSavedSearches } from "@/features/saved-searches/saved-searches-context";
+import { useFavourites } from "@/features/favourites/favourites-context";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/types";
 import { Localized } from "@/components/ui/localized";
@@ -33,6 +34,7 @@ const roleCopy: Record<UserRole, { badge: string; description: string; demo: str
 export function Header() {
   const { currentUser, users, loginAs, logout } = useMockSession();
   const { searches, totalNew } = useSavedSearches();
+  const { ids: favouriteIds } = useFavourites();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const pathname = usePathname();
 
@@ -58,6 +60,9 @@ export function Header() {
     { href: "/buyers", label: "For buyers", active: pathname.startsWith("/buyers") },
     { href: "/sell", label: "Sell with us", active: pathname.startsWith("/sell") },
     ...(searches.length > 0 ? [{ href: "/saved", label: "Saved", active: pathname.startsWith("/saved") }] : []),
+    ...(favouriteIds.length > 0
+      ? [{ href: "/favourites", label: "Favourites", active: pathname.startsWith("/favourites") }]
+      : []),
   ];
 
   return (
@@ -84,6 +89,12 @@ export function Header() {
                     <span className="ml-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-xs font-semibold text-primary">
                       {totalNew}
                       <span className="sr-only"> new match{totalNew === 1 ? "" : "es"}</span>
+                    </span>
+                  ) : null}
+                  {item.href === "/favourites" ? (
+                    <span className="ml-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-surface-high px-1.5 text-xs font-semibold text-primary">
+                      {favouriteIds.length}
+                      <span className="sr-only">{favouriteIds.length === 1 ? " listing" : " listings"}</span>
                     </span>
                   ) : null}
                 </Link>

@@ -52,7 +52,7 @@ export function PartnerShell({
   return (
     <PageShell>
       <Localized><section className="section-space">
-        <div className="shell grid gap-8 xl:grid-cols-[260px_1fr]">
+        <div className="shell grid grid-cols-[minmax(0,1fr)] gap-8 xl:grid-cols-[260px_minmax(0,1fr)]">
           <aside aria-label="Disposal Partner area" className="h-fit rounded-[2rem] bg-surface-low p-4 tonal-rule">
             <p className="px-3 pt-2 text-sm font-semibold text-accent-ink">Disposal Partner</p>
             <p className="px-3 pt-1 font-display text-lg font-semibold text-ink">{partner.name}</p>

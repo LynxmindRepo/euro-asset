@@ -9,6 +9,7 @@ import { Price } from "@/components/ui/price";
 import { useUnits } from "@/features/preferences/units-context";
 import { cn, formatPublished, formatSpecShort } from "@/lib/utils";
 import { Localized } from "@/components/ui/localized";
+import { FavouriteButton } from "@/components/listing/favourite-button";
 
 export function ListingTitle({ listing, className }: { listing: Listing; className?: string }) {
   if (!hasStaticListingDetail(listing.id)) {
@@ -53,6 +54,8 @@ export function ListingCard({ listing }: { listing: Listing }) {
         {listing.status !== "available" ? (
           <StatusBadge status={listing.status} className="absolute left-4 top-4" />
         ) : null}
+        {/* Sits above the card's stretched title link (z-10), so it is a separate control, not nested in the link. */}
+        <FavouriteButton listing={listing} className="absolute right-3 top-3" />
       </div>
       <div className="flex flex-1 flex-col p-5">
         <p className="eyebrow">{getCategoryLabel(listing.categoryId)}</p>

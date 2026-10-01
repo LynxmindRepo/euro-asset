@@ -84,7 +84,8 @@ const patterns: Pattern[] = [
   [/^(\d+) days ago$/i, ([n], l) => (l === "fr" ? `il y a ${n} jours` : `för ${n} dagar sedan`)],
   [/^today$/, (_, l) => (l === "fr" ? "aujourd’hui" : "i dag")],
   [/^yesterday$/, (_, l) => (l === "fr" ? "hier" : "i går")],
-  [/^([\d,.]+) ([a-z][a-z ]*)$/, ([n, noun], l) => countPhrase(n, noun, l)],
+  // Numbers may already be grouped for the language: "18,000", "18 000" (no-break spaces match \s).
+  [/^(\d[\d,.\s]*?) ([a-z][a-z ]*)$/, ([n, noun], l) => countPhrase(n, noun, l)],
   [/^(\d+) new$/, ([n], l) => (l === "fr" ? `${n} ${n === "1" ? "nouvelle" : "nouvelles"}` : `${n} ${n === "1" ? "ny" : "nya"}`)],
   [/^Sellers price their assets in EUR\. Other currencies are converted at indicative (.+) of (.+)\.$/, ([source, date], l) =>
     l === "fr"
@@ -94,6 +95,8 @@ const patterns: Pattern[] = [
     l === "fr"
       ? `Prix ${bound === "Minimum" ? "minimum" : "maximum"} en ${currency}`
       : `${bound === "Minimum" ? "Lägsta" : "Högsta"} pris i ${currency}`],
+  [/^Save to favourites: (.+)$/, ([title], l) =>
+    l === "fr" ? `Ajouter aux favoris : ${tr(title, l)}` : `Spara som favorit: ${tr(title, l)}`],
   [/^Request a quote from (.+)$/, ([name], l) => (l === "fr" ? `Demander un devis à ${name}` : `Begär en offert från ${name}`)],
   [/^Mark (.+) as sold$/, ([title], l) => (l === "fr" ? `Marquer « ${tr(title, l)} » comme vendu` : `Markera ”${tr(title, l)}” som såld`)],
   [/^Edit (.+)$/, ([title], l) => (l === "fr" ? `Modifier « ${tr(title, l)} »` : `Redigera ”${tr(title, l)}”`)],

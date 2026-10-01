@@ -4,8 +4,19 @@ export function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
+const formatLocales = { en: "en-GB", fr: "fr-FR", sv: "sv-SE" } as const;
+let formatLocale: string = formatLocales.en;
+
+/**
+ * Numbers, prices and dates follow the site language ("72,000" / "72 000"). Set by `LanguageProvider` while it
+ * renders, so every formatter below uses the current language without needing it as a parameter.
+ */
+export function setFormatLanguage(language: keyof typeof formatLocales) {
+  formatLocale = formatLocales[language];
+}
+
 export function formatCurrency(value: number, currency = "EUR") {
-  return new Intl.NumberFormat("en-GB", {
+  return new Intl.NumberFormat(formatLocale, {
     style: "currency",
     currency,
     maximumFractionDigits: 0
@@ -13,19 +24,24 @@ export function formatCurrency(value: number, currency = "EUR") {
 }
 
 export function formatNumber(value: number) {
-  return new Intl.NumberFormat("en-GB").format(value);
+  return new Intl.NumberFormat(formatLocale).format(value);
 }
 
 export function formatDate(value: string) {
-  return new Intl.DateTimeFormat("en-GB", {
+  return new Intl.DateTimeFormat(formatLocale, {
     day: "2-digit",
     month: "short",
     year: "numeric"
   }).format(new Date(value));
 }
 
+/** Day and month only ("27 Sept" / "27 sept."), for chart axes. */
+export function formatDayMonth(value: Date) {
+  return new Intl.DateTimeFormat(formatLocale, { day: "numeric", month: "short" }).format(value);
+}
+
 export function formatDateTime(value: string) {
-  return new Intl.DateTimeFormat("en-GB", {
+  return new Intl.DateTimeFormat(formatLocale, {
     day: "2-digit",
     month: "short",
     year: "numeric",

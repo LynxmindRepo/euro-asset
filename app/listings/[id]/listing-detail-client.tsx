@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { PageShell } from "@/components/layout/page-shell";
 import { ContactPanel } from "@/components/listing/contact-panel";
@@ -11,12 +12,29 @@ import { useUnits } from "@/features/preferences/units-context";
 import { getCategoryLabel, getOriginLabel } from "@/lib/listing-helpers";
 import { formatDate, formatSpecValue } from "@/lib/utils";
 import { Listing } from "@/types";
+import { SparkleIcon } from "@/components/ui/sparkle-icon";
+import { FavouriteButton } from "@/components/listing/favourite-button";
+import { translateText } from "@/data/translations";
+import { useLanguage } from "@/features/preferences/language-context";
+
+/**
+ * Seller text shown untouched. It is a component on purpose: <Localized> only translates strings it can see,
+ * not the inside of components, so the original stays in English (marked with lang="en").
+ */
+function OriginalText({ text }: { text: string }) {
+  return <span lang="en">{text}</span>;
+}
 
 export function ListingDetailClient({ listing: initial }: { listing: Listing }) {
   const { listings } = useMarketplace();
   // The page is pre-rendered from the initial data; use the in-session version so edits (price, status…) show up.
   const listing = listings.find((candidate) => candidate.id === initial.id) ?? initial;
   const { units } = useUnits();
+  const { language } = useLanguage();
+  const [showOriginal, setShowOriginal] = useState(false);
+  // Only listings with a translation get the notice (session-created listings stay as written).
+  const isTranslated = language !== "en" && translateText(listing.title, language) !== listing.title;
+  const original = isTranslated && showOriginal;
   const similar = listings
     .filter(
       (candidate) =>
@@ -55,17 +73,37 @@ export function ListingDetailClient({ listing: initial }: { listing: Listing }) 
               <p className="eyebrow">
                 {getCategoryLabel(listing.categoryId)} · {getOriginLabel(listing.origin)}
               </p>
-              <h1 className="page-title mt-3 text-[clamp(2rem,4vw,3rem)]">{listing.title}</h1>
+              <h1 className="page-title mt-3 text-[clamp(2rem,4vw,3rem)]">
+                {original ? <OriginalText text={listing.title} /> : listing.title}
+              </h1>
               <p className="mt-2 text-base text-muted">
                 {listing.city}, {listing.region}, {listing.country} · Published {formatDate(listing.publishedAt)}
               </p>
+              {isTranslated ? (
+                <p className="mt-3 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full bg-surface-low px-3.5 py-1.5 text-sm text-ink tonal-rule">
+                  <SparkleIcon className="h-4 w-4 text-accent-ink" />
+                  {original ? "Original text in English." : "Translated automatically from English."}
+                  <button
+                    type="button"
+                    onClick={() => setShowOriginal((value) => !value)}
+                    className="font-semibold text-primary underline underline-offset-2"
+                  >
+                    {original ? "Show translation" : "Show original"}
+                  </button>
+                </p>
+              ) : null}
+              <div className="mt-4">
+                <FavouriteButton listing={listing} variant="full" />
+              </div>
             </header>
 
             <section aria-labelledby="description-title">
               <h2 id="description-title" className="subsection-title text-2xl">
                 Description
               </h2>
-              <p className="body-copy mt-3 max-w-3xl">{listing.description}</p>
+              <p className="body-copy mt-3 max-w-3xl">
+                {original ? <OriginalText text={listing.description} /> : listing.description}
+              </p>
             </section>
 
             {listing.specs.length > 0 ? (

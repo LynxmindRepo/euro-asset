@@ -6,6 +6,7 @@ import { StatusBadge } from "@/components/listing/status-badge";
 import { PartnerShell } from "@/components/partner/partner-shell";
 import { buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { PartnerStats } from "@/components/partner/partner-stats";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { getListingCountries } from "@/lib/listing-helpers";
 import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
@@ -52,6 +53,8 @@ export default function PartnerDashboardPage() {
                 ))}
               </dl>
             </div>
+
+            <PartnerStats partner={partner} />
 
             <section aria-labelledby="mine-title">
               <div className="flex flex-wrap items-end justify-between gap-4">

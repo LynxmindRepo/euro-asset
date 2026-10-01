@@ -7,6 +7,7 @@ import { CurrencyProvider } from "@/features/preferences/currency-context";
 import { UnitsProvider } from "@/features/preferences/units-context";
 import { SavedSearchesProvider } from "@/features/saved-searches/saved-searches-context";
 import { LanguageProvider } from "@/features/preferences/language-context";
+import { FavouritesProvider } from "@/features/favourites/favourites-context";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -16,7 +17,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <CurrencyProvider>
           <UnitsProvider>
             <ToastProvider>
-              <SavedSearchesProvider>{children}</SavedSearchesProvider>
+              <SavedSearchesProvider>
+                <FavouritesProvider>{children}</FavouritesProvider>
+              </SavedSearchesProvider>
             </ToastProvider>
           </UnitsProvider>
         </CurrencyProvider>
