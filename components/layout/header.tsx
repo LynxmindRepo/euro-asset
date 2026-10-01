@@ -116,12 +116,11 @@ export function Header() {
                   My listings
                 </Link>
               ) : null}
-              <PreferenceControls id="site-currency-mobile" className="ml-auto sm:hidden" />
           </nav>
 
           {currentUser ? (
-            <div className="order-2 ml-auto flex items-center gap-2 lg:order-3">
-              <PreferenceControls className="hidden sm:flex" />
+            <div className="order-2 ml-auto flex items-center gap-1.5 sm:gap-2 lg:order-3">
+              <PreferenceControls />
               <div className="hidden rounded-[1.35rem] bg-surface-low px-4 py-3 text-sm tonal-rule md:block">
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span className="font-semibold text-ink">
@@ -153,8 +152,8 @@ export function Header() {
               </button>
             </div>
           ) : (
-            <div className="order-2 ml-auto flex items-center gap-2 lg:order-3">
-              <PreferenceControls className="hidden sm:flex" />
+            <div className="order-2 ml-auto flex items-center gap-1.5 sm:gap-2 lg:order-3">
+              <PreferenceControls />
               <Button onClick={() => setIsLoginOpen(true)} className="px-5 py-2.5">
                 Login
               </Button>

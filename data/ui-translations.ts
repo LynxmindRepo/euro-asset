@@ -3,6 +3,11 @@
 // Terminology: "Disposal Partner" stays in English as a brand term; Swedish uses "annons/annonser" for listings.
 
 export const uiFr: Record<string, string> = {
+
+  // Language and region menu
+  "Language and region": "Langue et région", "Language and region:": "Langue et région :", "Done": "Terminé",
+  "Language": "Langue", "Currency": "Devise", "Metric": "Métrique", "Imperial": "Impérial",
+  "Sellers set prices in EUR. Other currencies are indicative.": "Les vendeurs fixent les prix en EUR. Les autres devises sont indicatives.",
   // Terminology overrides
   "Disposal Partner": "Disposal Partner",
   "Disposal Partners": "Disposal Partners",
@@ -217,6 +222,11 @@ export const uiFr: Record<string, string> = {
 };
 
 export const uiSv: Record<string, string> = {
+
+  // Language and region menu
+  "Language and region": "Språk och region", "Language and region:": "Språk och region:", "Done": "Klar",
+  "Language": "Språk", "Currency": "Valuta", "Metric": "Metriskt", "Imperial": "Brittiskt",
+  "Sellers set prices in EUR. Other currencies are indicative.": "Säljarna sätter priserna i EUR. Andra valutor är ungefärliga.",
   // Terminology overrides: "annons/annonser" for listings, "Disposal Partner" kept in English
   "Disposal Partner": "Disposal Partner",
   "Disposal Partners": "Disposal Partners",
