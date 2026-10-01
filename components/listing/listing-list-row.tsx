@@ -8,12 +8,13 @@ import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
 import { Price } from "@/components/ui/price";
 import { useUnits } from "@/features/preferences/units-context";
 import { cn, formatPublished, formatSpecValue } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export function ListingListRow({ listing }: { listing: Listing }) {
   const { units } = useUnits();
 
   return (
-    <article className="card-link group grid overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 md:grid-cols-[280px_1fr]">
+    <Localized><article className="card-link group grid overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 md:grid-cols-[280px_1fr]">
       <div className="relative overflow-hidden">
         <img
           src={getAssetPath(listing.images[0])}
@@ -59,6 +60,6 @@ export function ListingListRow({ listing }: { listing: Listing }) {
         </div>
         {!hasStaticListingDetail(listing.id) ? <SessionOnlyNote /> : null}
       </div>
-    </article>
+    </article></Localized>
   );
 }

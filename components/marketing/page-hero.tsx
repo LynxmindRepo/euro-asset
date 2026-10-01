@@ -1,3 +1,5 @@
+import { Localized } from "@/components/ui/localized";
+
 export function PageHero({
   eyebrow,
   title,
@@ -10,7 +12,7 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="pb-16 pt-6 sm:pt-10">
+    <Localized><section className="pb-16 pt-6 sm:pt-10">
       <div className="shell">
         <div className="relative overflow-hidden rounded-[2.25rem] bg-midnight-gradient px-6 py-12 text-white shadow-panel sm:px-12 lg:py-16">
           <div aria-hidden="true" className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
@@ -24,6 +26,6 @@ export function PageHero({
           </div>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

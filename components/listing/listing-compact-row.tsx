@@ -6,12 +6,13 @@ import { StatusBadge } from "@/components/listing/status-badge";
 import { getCategoryLabel, getPartner } from "@/lib/listing-helpers";
 import { Price } from "@/components/ui/price";
 import { cn } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export const compactColumns = "lg:grid-cols-[2fr_1fr_1.2fr_1fr_0.8fr]";
 
 export function ListingCompactRow({ listing }: { listing: Listing }) {
   return (
-    <article
+    <Localized><article
       className={cn(
         "card-link grid gap-2 rounded-2xl bg-surface-lowest px-5 py-4 shadow-ambient tonal-rule transition hover:bg-surface-bright lg:items-center lg:gap-4",
         compactColumns
@@ -33,6 +34,6 @@ export function ListingCompactRow({ listing }: { listing: Listing }) {
       <div className="lg:text-right">
         <StatusBadge status={listing.status} />
       </div>
-    </article>
+    </article></Localized>
   );
 }

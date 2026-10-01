@@ -19,6 +19,7 @@ import { ImportResult, importExamples, parseListingText } from "@/lib/listing-im
 import { getAssetPath } from "@/lib/site";
 import { formatSpecShort } from "@/lib/utils";
 import { ListingOrigin, ListingSpec } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 type Phase = "input" | "analysing" | "review";
 type Field = "title" | "price" | "country";
@@ -147,7 +148,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
     ) : null;
 
   return (
-    <div className="grid gap-6">
+    <Localized><div className="grid gap-6">
       <p role="status" className="sr-only">
         {announcement}
       </p>
@@ -482,6 +483,6 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
           </aside>
         </div>
       ) : null}
-    </div>
+    </div></Localized>
   );
 }

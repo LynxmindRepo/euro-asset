@@ -12,6 +12,7 @@ import { useUnits } from "@/features/preferences/units-context";
 import { CostEstimate, estimateTotalCost, guessBuyerCountry } from "@/lib/cost-estimator";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Listing } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 type Entry = {
   id: number;
@@ -138,7 +139,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   if (listing.status === "sold") return null;
 
   return (
-    <section
+    <Localized><section
       id="cost-estimator"
       aria-labelledby="estimator-title"
       className="scroll-mt-28 overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule"
@@ -286,7 +287,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
           {announcement}
         </p>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 

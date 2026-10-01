@@ -8,6 +8,7 @@ import { useMockSession } from "@/features/auth/mock-session";
 import { getPartner } from "@/lib/listing-helpers";
 import { cn } from "@/lib/utils";
 import { DisposalPartner } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 const items = [
   { href: "/partner", label: "Dashboard" },
@@ -31,7 +32,7 @@ export function PartnerShell({
   if (!partner) {
     return (
       <PageShell>
-        <div className="shell section-space">
+        <Localized><div className="shell section-space">
           <div className="panel-xl bg-surface-low">
             <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">Sign in as a Disposal Partner</h1>
             <p className="support-copy mt-4 max-w-2xl">
@@ -43,14 +44,14 @@ export function PartnerShell({
               <Button onClick={() => window.dispatchEvent(new Event("open-mock-login"))}>Open login</Button>
             </div>
           </div>
-        </div>
+        </div></Localized>
       </PageShell>
     );
   }
 
   return (
     <PageShell>
-      <section className="section-space">
+      <Localized><section className="section-space">
         <div className="shell grid gap-8 xl:grid-cols-[260px_1fr]">
           <aside aria-label="Disposal Partner area" className="h-fit rounded-[2rem] bg-surface-low p-4 tonal-rule">
             <p className="px-3 pt-2 text-sm font-semibold text-accent-ink">Disposal Partner</p>
@@ -82,7 +83,7 @@ export function PartnerShell({
             <div className="mt-8">{children(partner)}</div>
           </div>
         </div>
-      </section>
+      </section></Localized>
     </PageShell>
   );
 }

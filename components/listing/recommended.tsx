@@ -9,6 +9,7 @@ import { useCurrency } from "@/features/preferences/currency-context";
 import { useSavedSearches } from "@/features/saved-searches/saved-searches-context";
 import { describeCriteria, hasCriteria, matchesCriteria } from "@/lib/listing-filters";
 import { Listing } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 /** "Let matches come to you": listings surfaced from saved searches, or from the last search as a fallback. */
 export function RecommendedListings({ limit = 3 }: { limit?: number }) {
@@ -47,7 +48,7 @@ export function RecommendedListings({ limit = 3 }: { limit?: number }) {
     .slice(0, limit);
 
   return (
-    <section aria-labelledby="recommended-title" className="pb-20">
+    <Localized><section aria-labelledby="recommended-title" className="pb-20">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -69,6 +70,6 @@ export function RecommendedListings({ limit = 3 }: { limit?: number }) {
           ))}
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

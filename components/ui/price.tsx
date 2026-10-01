@@ -2,6 +2,7 @@
 
 import { useCurrency } from "@/features/preferences/currency-context";
 import { cn, formatCurrency } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 /**
  * Shows an EUR price in the visitor's currency, like airline fares: the converted amount first,
@@ -24,7 +25,7 @@ export function Price({
   const converted = currency !== "EUR";
 
   return (
-    <span className="block">
+    <Localized><span className="block">
       {/* A sold price is struck through and muted, whatever colour the caller asked for. */}
       <span className={cn(sold ? className?.replace(/\btext-primary\b/g, "") : className, sold && "text-muted line-through")}>
         {converted ? <span aria-hidden="true">≈ </span> : null}
@@ -36,6 +37,6 @@ export function Price({
           Seller&apos;s price {formatCurrency(eur)}
         </span>
       ) : null}
-    </span>
+    </span></Localized>
   );
 }

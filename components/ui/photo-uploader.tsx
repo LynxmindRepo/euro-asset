@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from "react";
 import { getAssetPath } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 const MAX_PHOTOS = 10;
 const MAX_BYTES = 10 * 1024 * 1024;
@@ -58,7 +59,7 @@ export function PhotoUploader({
   }
 
   return (
-    <div className="grid gap-3">
+    <Localized><div className="grid gap-3">
       <span className="field-label" id={`${inputId}-label`}>
         {label}
       </span>
@@ -148,6 +149,6 @@ export function PhotoUploader({
       <p role="status" className="sr-only">
         {message}
       </p>
-    </div>
+    </div></Localized>
   );
 }

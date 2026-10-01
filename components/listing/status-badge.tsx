@@ -1,10 +1,11 @@
 import { ListingStatus } from "@/types";
 import { getStatusLabel } from "@/lib/listing-helpers";
 import { cn } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export function StatusBadge({ status, className }: { status: ListingStatus; className?: string }) {
   return (
-    <span
+    <Localized><span
       className={cn(
         "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold",
         status === "available" && "bg-success text-success-ink",
@@ -14,6 +15,6 @@ export function StatusBadge({ status, className }: { status: ListingStatus; clas
       )}
     >
       {getStatusLabel(status)}
-    </span>
+    </span></Localized>
   );
 }

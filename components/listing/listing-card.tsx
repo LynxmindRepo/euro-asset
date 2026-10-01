@@ -8,6 +8,7 @@ import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
 import { Price } from "@/components/ui/price";
 import { useUnits } from "@/features/preferences/units-context";
 import { cn, formatPublished, formatSpecShort } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export function ListingTitle({ listing, className }: { listing: Listing; className?: string }) {
   if (!hasStaticListingDetail(listing.id)) {
@@ -22,7 +23,7 @@ export function ListingTitle({ listing, className }: { listing: Listing; classNa
 }
 
 export function SessionOnlyNote() {
-  return <p className="mt-3 text-xs text-muted">Created in this session — no detail page in the static demo.</p>;
+  return <Localized><p className="mt-3 text-xs text-muted">Created in this session — no detail page in the static demo.</p></Localized>;
 }
 
 export function PartnerLine({ partnerId }: { partnerId: string }) {
@@ -31,10 +32,10 @@ export function PartnerLine({ partnerId }: { partnerId: string }) {
   if (!partner) return null;
 
   return (
-    <p className="text-sm text-muted">
+    <Localized><p className="text-sm text-muted">
       Sold by <span className="font-medium text-ink">{partner.name}</span>
       {partner.verified ? <span className="ml-1 text-success-ink">✓ Verified</span> : null}
-    </p>
+    </p></Localized>
   );
 }
 
@@ -42,7 +43,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
   const { units } = useUnits();
 
   return (
-    <article className="card-link group flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5">
+    <Localized><article className="card-link group flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5">
       <div className="relative overflow-hidden">
         <img
           src={getAssetPath(listing.images[0])}
@@ -84,6 +85,6 @@ export function ListingCard({ listing }: { listing: Listing }) {
         </div>
         {!hasStaticListingDetail(listing.id) ? <SessionOnlyNote /> : null}
       </div>
-    </article>
+    </article></Localized>
   );
 }

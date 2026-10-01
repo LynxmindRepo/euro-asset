@@ -7,6 +7,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { categories } from "@/data/categories";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { getListingCountries } from "@/lib/listing-helpers";
+import { Localized } from "@/components/ui/localized";
 
 const popularSearches = ["Truck", "Excavator", "Forklift", "Warehouse", "Servers"];
 
@@ -33,7 +34,7 @@ export function Hero() {
   }
 
   return (
-    <section className="pb-16 pt-6 sm:pt-10">
+    <Localized><section className="pb-16 pt-6 sm:pt-10">
       <div className="shell">
         <div className="relative overflow-hidden rounded-[2.25rem] bg-midnight-gradient px-5 py-12 text-white shadow-panel sm:px-12 lg:py-16">
           <div aria-hidden="true" className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
@@ -145,6 +146,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

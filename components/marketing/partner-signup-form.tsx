@@ -8,6 +8,7 @@ import { Input, Textarea } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { PartnerApplication, PartnerType } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 type Field = "company" | "country" | "contactName" | "email";
 type Errors = Partial<Record<Field, string>>;
@@ -68,7 +69,7 @@ export function PartnerSignupForm() {
 
   if (sentTo) {
     return (
-      <div role="status" className="grid gap-4">
+      <Localized><div role="status" className="grid gap-4">
         <Banner tone="success">
           Thank you — your registration has been received. We&apos;ll contact you at {sentTo} with a quote tailored to
           your listings. (Demo — nothing is sent.)
@@ -83,12 +84,12 @@ export function PartnerSignupForm() {
         >
           Register another company
         </button>
-      </div>
+      </div></Localized>
     );
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="grid gap-5">
+    <Localized><form noValidate onSubmit={handleSubmit} className="grid gap-5">
       <p className="text-sm text-muted">Fields marked * are required.</p>
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="grid gap-2">
@@ -213,6 +214,6 @@ export function PartnerSignupForm() {
       <Button type="submit" variant="accent" disabled={isSending} className="justify-self-start">
         {isSending ? "Sending…" : "Register and get a quote"}
       </Button>
-    </form>
+    </form></Localized>
   );
 }

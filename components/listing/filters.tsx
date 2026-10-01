@@ -4,12 +4,13 @@ import { categories } from "@/data/categories";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { ListingFilters as Filters } from "@/features/listings/use-listing-filters";
+import { Localized } from "@/components/ui/localized";
 
 const fieldClass = "grid gap-2";
 
 export function ListingFilters({ filters, countries, currency }: { filters: Filters; countries: string[]; currency: string }) {
   return (
-    <section aria-labelledby="filters-title" className="rounded-[2rem] bg-surface-low px-5 py-5 shadow-ambient tonal-rule">
+    <Localized><section aria-labelledby="filters-title" className="rounded-[2rem] bg-surface-low px-5 py-5 shadow-ambient tonal-rule">
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
         <h2 id="filters-title" className="eyebrow">
           Search and filter
@@ -123,6 +124,6 @@ export function ListingFilters({ filters, countries, currency }: { filters: Filt
           </div>
         </fieldset>
       </div>
-    </section>
+    </section></Localized>
   );
 }

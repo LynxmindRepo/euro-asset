@@ -2,10 +2,11 @@ import Link from "next/link";
 import { RATES_DATE, RATES_SOURCE } from "@/data/currencies";
 import { getAssetPath } from "@/lib/site";
 import { formatDate } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export function Footer() {
   return (
-    <footer className="mt-20 bg-primary text-white">
+    <Localized><footer className="mt-20 bg-primary text-white">
       <div className="shell py-12">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div>
@@ -54,6 +55,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </footer></Localized>
   );
 }

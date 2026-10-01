@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 const items = [
   { href: "/admin", label: "Dashboard" },
@@ -14,7 +15,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside aria-label="Admin" className="h-fit rounded-[2rem] bg-surface-low p-4 tonal-rule">
+    <Localized><aside aria-label="Admin" className="h-fit rounded-[2rem] bg-surface-low p-4 tonal-rule">
       <p className="eyebrow px-3 pt-2">Back office</p>
       <p className="px-3 pt-3 text-sm leading-6 text-muted">
         Publish listings, follow buyer messages and see the marketplace at a glance.
@@ -35,6 +36,6 @@ export function AdminSidebar() {
           </Link>
         ))}
       </nav>
-    </aside>
+    </aside></Localized>
   );
 }

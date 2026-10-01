@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export function Banner({
   tone = "info",
@@ -10,7 +11,7 @@ export function Banner({
   children: React.ReactNode;
 }) {
   return (
-    <div
+    <Localized><div
       className={cn(
         "rounded-2xl px-4 py-3 text-sm leading-6 tonal-rule",
         tone === "info" && "bg-surface-high text-ink",
@@ -19,6 +20,6 @@ export function Banner({
       )}
     >
       {children}
-    </div>
+    </div></Localized>
   );
 }

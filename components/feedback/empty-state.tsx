@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Localized } from "@/components/ui/localized";
 import { buttonStyles } from "@/components/ui/button";
 
 export function EmptyState({
@@ -13,7 +14,7 @@ export function EmptyState({
   cta?: string;
 }) {
   return (
-    <div className="panel-xl bg-surface-low text-center">
+    <Localized><div className="panel-xl bg-surface-low text-center">
       <h3 className="subsection-title mt-3">{title}</h3>
       <p className="support-copy mx-auto mt-3 max-w-xl">{description}</p>
       {href && cta ? (
@@ -23,6 +24,6 @@ export function EmptyState({
           </Link>
         </div>
       ) : null}
-    </div>
+    </div></Localized>
   );
 }

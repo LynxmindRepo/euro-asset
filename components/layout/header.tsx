@@ -10,6 +10,7 @@ import { useMockSession } from "@/features/auth/mock-session";
 import { useSavedSearches } from "@/features/saved-searches/saved-searches-context";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 const roleCopy: Record<UserRole, { badge: string; description: string; demo: string }> = {
   user: {
@@ -60,7 +61,7 @@ export function Header() {
   ];
 
   return (
-    <>
+    <Localized>
       <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-xl">
         <div className="shell flex flex-wrap items-center gap-x-6 gap-y-3 py-4">
           <Logo />
@@ -236,6 +237,6 @@ export function Header() {
           </div>
         </div>
       ) : null}
-    </>
+    </Localized>
   );
 }

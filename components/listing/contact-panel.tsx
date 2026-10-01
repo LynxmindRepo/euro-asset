@@ -12,6 +12,7 @@ import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { getOriginLabel, getPartner, getPartnerTypeLabel } from "@/lib/listing-helpers";
 import { Price } from "@/components/ui/price";
 import { cn, formatDate } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
@@ -62,7 +63,7 @@ export function ContactPanel({ listing }: { listing: Listing }) {
     ) : null;
 
   return (
-    <aside aria-label="Price and seller" className="grid gap-5">
+    <Localized><aside aria-label="Price and seller" className="grid gap-5">
       <div className="rounded-[1.75rem] bg-surface-lowest p-6 shadow-panel tonal-rule">
         <div className="flex flex-wrap items-center gap-2">
           <StatusBadge status={listing.status} />
@@ -200,6 +201,6 @@ export function ContactPanel({ listing }: { listing: Listing }) {
           </form>
         )}
       </section>
-    </aside>
+    </aside></Localized>
   );
 }

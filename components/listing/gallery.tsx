@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { getAssetPath } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { Localized } from "@/components/ui/localized";
 
 export function Gallery({ images, title }: { images: string[]; title: string }) {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="grid gap-3">
+    <Localized><div className="grid gap-3">
       <div className="overflow-hidden rounded-[1.75rem] bg-surface-low">
         <img
           src={getAssetPath(images[active])}
@@ -35,6 +36,6 @@ export function Gallery({ images, title }: { images: string[]; title: string }) 
           ))}
         </div>
       ) : null}
-    </div>
+    </div></Localized>
   );
 }
