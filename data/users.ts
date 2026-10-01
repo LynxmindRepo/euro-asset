@@ -4,7 +4,7 @@ export const mockUsers: User[] = [
   {
     id: "admin-1",
     name: "Helena Duarte",
-    company: "EuroAssets Capital",
+    company: "Bridgeon Assets",
     role: "admin",
     avatar: "HD"
   },

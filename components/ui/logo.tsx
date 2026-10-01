@@ -10,8 +10,8 @@ export function Logo() {
           <span className="h-8 w-2 rounded-full bg-gradient-to-t from-tertiary to-white/80" />
         </span>
       </span>
-      <span className="font-display text-xl font-bold tracking-[-0.04em] text-primary">
-        EuroAssets
+      <span className="whitespace-nowrap font-display text-xl font-bold tracking-[-0.04em] text-primary">
+        Bridgeon Assets
       </span>
     </Link>
   );

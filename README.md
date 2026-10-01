@@ -1,4 +1,4 @@
-# EuroAssets Demo
+# Bridgeon Assets Demo
 
 Visual Next.js prototype for a European marketplace focused on insolvency, liquidation, restructuring, and judicial sale processes. The current phase is a demo-ready MVP with local mock data, no backend, fixed `EUR` currency, and a design direction explicitly grounded in `design.md`.
 

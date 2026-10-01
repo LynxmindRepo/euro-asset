@@ -14,8 +14,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "EuroAssets Demo",
-  description: "Premium special situations marketplace prototype with mock data."
+  title: "Bridgeon Assets",
+  description: "Exclusive insolvency assets from across Europe — search, compare, and connect with trusted sellers in one place."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
