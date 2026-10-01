@@ -1,4 +1,6 @@
 import { Language } from "@/features/preferences/language-context";
+import { marketContentFr, marketContentSv } from "@/data/market-content-translations";
+import { countNouns, monthNames, uiFr, uiSv } from "@/data/ui-translations";
 
 type Translation = Record<string, string>;
 
@@ -23,6 +25,8 @@ const fr: Translation = {
   "Everything you need after you find the asset.": "Tout ce qu’il vous faut après avoir trouvé un actif.", "Find an asset": "Trouver un actif", "Request a quote": "Demander un devis", "Quote requested": "Devis demandé", "Typical cost:": "Coût habituel :", "Coming soon": "Bientôt disponible", "Automated asset valuation": "Estimation automatique des actifs", "Search once. Find it anywhere.": "Une seule recherche. Trouvez partout.", "Start searching": "Commencer la recherche", "Selling assets? List with us": "Vous vendez des actifs ? Publiez avec nous", "Where your listing is seen": "Où votre annonce sera visible", "More markets coming": "D’autres marchés bientôt", "Markets covered": "Marchés couverts", "See how importing works": "Découvrez l’importation d’annonces", "Try the import tool": "Essayer l’outil d’importation", "See live listings": "Voir les annonces en ligne", "What happens next": "Et ensuite ?",
   "Search once, see everything": "Une seule recherche, tout voir", "One search across every country we cover — no more checking a dozen different national sites to find what you're looking for.": "Une seule recherche dans tous les pays couverts : inutile de consulter une douzaine de sites nationaux pour trouver ce que vous cherchez.", "Filter, sort, and save your search": "Filtrez, triez et enregistrez votre recherche", "Narrow down by category, location, or price in seconds, then save your search and get notified automatically when a new match appears.": "Affinez par catégorie, lieu ou prix en quelques secondes, puis enregistrez votre recherche pour être averti lorsqu’une nouvelle annonce correspond.", "Find what you won't find locally": "Trouvez ce qui n’existe pas sur votre marché", "Access cross-border assets your local market never sees — inventory that never even reaches a domestic listing site.": "Accédez à des actifs transfrontaliers absents de votre marché local et à des stocks qui ne paraissent jamais sur les sites nationaux.", "Let matches come to you": "Laissez les annonces venir à vous", "Relevant listings are surfaced automatically, based on what you're looking for — less time searching, more time deciding.": "Les annonces pertinentes apparaissent selon vos critères : moins de temps à chercher, plus de temps pour décider.", "Only professional sellers, never guesswork": "Des vendeurs professionnels, sans mauvaises surprises", "We work exclusively with professional Disposal Partners — brokers, licensed auctioneers, disposal firms, and administrators. Every listing is already photographed and documented by someone who knows the asset, not an unverified individual seller.": "Nous travaillons uniquement avec des partenaires de cession professionnels : courtiers, commissaires-priseurs agréés, sociétés de cession et administrateurs. Chaque annonce est documentée par un professionnel qui connaît l’actif, jamais par un particulier non vérifié.", "Deal directly, no middleman": "Traitez directement, sans intermédiaire", "Connect straight with the Disposal Partner selling the asset — no added markup, no unnecessary steps in between.": "Contactez directement le partenaire de cession qui vend l’actif : sans majoration ni étape inutile.",
   "Register once, reach everywhere": "Inscrivez-vous une fois, touchez tous les marchés", "Sign up as a Disposal Partner — brokers, licensed auctioneers, disposal firms, and administrators welcome. One registration gives you access to buyers in every country we cover, not just your own.": "Inscrivez-vous comme partenaire de cession : courtiers, commissaires-priseurs agréés, sociétés de cession et administrateurs sont les bienvenus. Une seule inscription vous donne accès aux acheteurs de tous les pays couverts.", "List in minutes, not hours": "Publiez en quelques minutes", "Add the category, location, photos, and description — the same information you've already prepared for your local sale. No new process to learn, no extra work.": "Ajoutez la catégorie, le lieu, les photos et la description : les mêmes informations que celles déjà préparées pour votre vente locale. Aucun nouvel outil à apprendre ni travail supplémentaire.", "Instantly go international": "Passez immédiatement à l’international", "Your listing is translated and optimized automatically the moment you publish it. International buyers can find and understand it without you lifting a finger.": "Dès sa publication, votre annonce est traduite et optimisée automatiquement. Les acheteurs internationaux peuvent la trouver et la comprendre sans démarche supplémentaire.", "Pay only for what you need": "Payez uniquement selon vos besoins", "Pricing is tailored to your listing — get in touch for a quote, especially if you're listing several assets at once. No bloated packages, no paying for reach you don't use.": "Le tarif est adapté à vos annonces. Demandez un devis, notamment si vous proposez plusieurs actifs. Pas de formule superflue ni de portée inutile à payer.", "Live everywhere, instantly": "Présent partout, immédiatement", "The moment you publish, your listing is visible to buyers across every market we cover — no manual republishing, no juggling separate accounts per country.": "Dès sa publication, votre annonce est visible par les acheteurs de tous les marchés couverts : aucune republication ni gestion de comptes par pays.", "Stay in control": "Gardez le contrôle", "A simple dashboard to edit listings, mark items as sold, and see buyer inquiries — everything in one place, so nothing slips through the cracks.": "Un tableau de bord simple pour modifier vos annonces, marquer les ventes et consulter les demandes des acheteurs. Tout est au même endroit.",
+  ...marketContentFr,
+  ...uiFr
 };
 
 const sv: Translation = {
@@ -36,29 +40,111 @@ const sv: Translation = {
   "Back": "Tillbaka", "Cancel": "Avbryt", "Save changes": "Spara ändringar", "Edit listing": "Redigera objekt", "Import a listing": "Importera objekt", "New listing": "Nytt objekt", "Create listing": "Skapa objekt", "Mark as sold": "Markera som såld", "Relist": "Publicera igen", "Buyer messages": "Köparmeddelanden", "Your listings": "Dina objekt", "Dashboard": "Översikt", "No listings yet — import your first one in seconds.": "Du har inga objekt än – importera ditt första på några sekunder.", "No messages yet.": "Inga meddelanden än.", "Preview": "Förhandsgranskning", "Photos": "Bilder", "Add photos": "Lägg till bilder", "Main photo": "Huvudbild", "Set as main": "Ange som huvudbild", "Remove": "Ta bort", "Delete": "Ta bort", "Continue": "Fortsätt", "Publish listing": "Publicera objekt", "Back office": "Administration", "Price (EUR)": "Pris (EUR)", "Description": "Beskrivning", "City": "Ort", "Region": "Region", "Status": "Status", "Title": "Rubrik", "Type": "Typ", "Company": "Företag", "Phone": "Telefon",
   "No results found.": "Inga resultat hittades.", "Try changing your filters or search terms.": "Prova att ändra filtren eller sökorden.", "Something went wrong. Please try again.": "Något gick fel. Försök igen.", "Search by keyword": "Sök med nyckelord", "No saved searches yet": "Inga sparade sökningar än", "View results": "Visa resultat", "Email alerts": "E-postaviseringar", "Recommended for you": "Rekommenderat för dig", "Manage saved searches": "Hantera sparade sökningar", "Refine your search": "Förfina sökningen", "Everything you need after you find the asset.": "Allt du behöver när du har hittat tillgången.", "Find an asset": "Hitta en tillgång", "Request a quote": "Begär en offert", "Quote requested": "Offertförfrågan skickad", "Typical cost:": "Typisk kostnad:", "Coming soon": "Kommer snart", "Automated asset valuation": "Automatisk värdering av tillgångar", "Search once. Find it anywhere.": "Sök en gång. Hitta överallt.", "Start searching": "Börja söka", "Selling assets? List with us": "Säljer du tillgångar? Lägg upp dem hos oss", "Where your listing is seen": "Här visas ditt objekt", "More markets coming": "Fler marknader kommer", "Markets covered": "Marknader vi täcker", "See how importing works": "Se hur importen fungerar", "Try the import tool": "Prova importverktyget", "See live listings": "Se publicerade objekt", "What happens next": "Vad händer sedan?",
   "Search once, see everything": "Sök en gång, se allt", "One search across every country we cover — no more checking a dozen different national sites to find what you're looking for.": "En sökning i alla länder vi täcker – slipp leta på ett dussin nationella webbplatser.", "Filter, sort, and save your search": "Filtrera, sortera och spara sökningen", "Narrow down by category, location, or price in seconds, then save your search and get notified automatically when a new match appears.": "Filtrera efter kategori, plats eller pris på några sekunder. Spara sökningen och få en avisering när ett nytt objekt matchar.", "Find what you won't find locally": "Hitta sådant som inte finns på din lokala marknad", "Access cross-border assets your local market never sees — inventory that never even reaches a domestic listing site.": "Hitta tillgångar över gränserna och lager som aldrig når de nationella annonssajterna.", "Let matches come to you": "Låt matchningarna hitta dig", "Relevant listings are surfaced automatically, based on what you're looking for — less time searching, more time deciding.": "Relevanta objekt visas automatiskt utifrån det du söker – mindre tid på sökning, mer tid för beslut.", "Only professional sellers, never guesswork": "Bara professionella säljare, inga frågetecken", "We work exclusively with professional Disposal Partners — brokers, licensed auctioneers, disposal firms, and administrators. Every listing is already photographed and documented by someone who knows the asset, not an unverified individual seller.": "Vi arbetar bara med professionella avyttringspartner: mäklare, licensierade auktionsförrättare, avyttringsbolag och förvaltare. Varje objekt är dokumenterat av någon som känner tillgången – inte av en overifierad privatperson.", "Deal directly, no middleman": "Gör affären direkt, utan mellanhänder", "Connect straight with the Disposal Partner selling the asset — no added markup, no unnecessary steps in between.": "Kontakta avyttringspartnern direkt – utan påslag eller onödiga mellansteg.", "Register once, reach everywhere": "Registrera dig en gång, nå ut överallt", "Sign up as a Disposal Partner — brokers, licensed auctioneers, disposal firms, and administrators welcome. One registration gives you access to buyers in every country we cover, not just your own.": "Registrera dig som avyttringspartner. Mäklare, licensierade auktionsförrättare, avyttringsbolag och förvaltare är välkomna. En registrering ger tillgång till köpare i alla länder vi täcker.", "List in minutes, not hours": "Publicera på minuter, inte timmar", "Add the category, location, photos, and description — the same information you've already prepared for your local sale. No new process to learn, no extra work.": "Lägg till kategori, plats, bilder och beskrivning – samma information som du redan har för din lokala försäljning. Inget nytt arbetssätt och inget extra arbete.", "Instantly go international": "Nå internationella köpare direkt", "Your listing is translated and optimized automatically the moment you publish it. International buyers can find and understand it without you lifting a finger.": "Objektet översätts och anpassas automatiskt när du publicerar det. Internationella köpare kan hitta och förstå det utan extra arbete.", "Pay only for what you need": "Betala bara för det du behöver", "Pricing is tailored to your listing — get in touch for a quote, especially if you're listing several assets at once. No bloated packages, no paying for reach you don't use.": "Priset anpassas efter dina objekt. Be om en offert, särskilt om du publicerar flera tillgångar. Inga onödiga paket eller räckvidd du inte använder.", "Live everywhere, instantly": "Synlig överallt direkt", "The moment you publish, your listing is visible to buyers across every market we cover — no manual republishing, no juggling separate accounts per country.": "Så fort du publicerar syns objektet för köpare på alla marknader vi täcker – ingen manuell återpublicering eller separata konton per land.", "Stay in control": "Behåll kontrollen", "A simple dashboard to edit listings, mark items as sold, and see buyer inquiries — everything in one place, so nothing slips through the cracks.": "En enkel översikt där du kan redigera objekt, markera sålda tillgångar och se köparförfrågningar. Allt finns samlat på ett ställe."
+  , ...marketContentSv,
+  ...uiSv
 };
 
 const dictionaries: Record<Exclude<Language, "en">, Translation> = { fr, sv };
 
+type TargetLanguage = Exclude<Language, "en">;
+
+/** "46 pallets" → "46 palettes"; returns null when the noun is unknown. */
+function countPhrase(amount: string, noun: string, language: TargetLanguage) {
+  const forms = countNouns[language][noun.toLowerCase()];
+  if (!forms) return null;
+  return `${amount} ${amount === "1" ? forms[0] : forms[1]}`;
+}
+
+const englishMonths = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/** en-GB short dates ("30 Sept 2026", "05 May 2025", "30 aug 2026"). */
+function translateDate(day: string, month: string, year: string, language: TargetLanguage) {
+  const index = englishMonths.indexOf(month.slice(0, 3).toLowerCase());
+  if (index < 0) return null;
+  return `${Number(day)} ${monthNames[language][index]} ${year}`;
+}
+
+// Sentences built from data at runtime. Each pattern receives the regex groups and returns the translation.
+type Pattern = [RegExp, (groups: string[], language: TargetLanguage) => string | null];
+
+const tr = (text: string, language: TargetLanguage) => translateText(text, language);
+
+const patterns: Pattern[] = [
+  [/^(\d+) listings? found$/i, ([n], l) =>
+    l === "fr" ? `${n} ${n === "1" ? "annonce trouvée" : "annonces trouvées"}` : `${n} ${n === "1" ? "annons hittad" : "annonser hittade"}`],
+  [/^(\d+) listings? match(?:ing)?$/i, ([n], l) =>
+    l === "fr" ? `${n} ${n === "1" ? "annonce correspond" : "annonces correspondent"}` : `${n} ${n === "1" ? "annons matchar" : "annonser matchar"}`],
+  [/^(\d+) listings? match · saved (.+)$/, ([n, date], l) =>
+    `${tr(`${n} listing${n === "1" ? "" : "s"} match`, l)} · ${l === "fr" ? "enregistrée le" : "sparad"} ${tr(date, l)}`],
+  [/^(\d{1,2}) ([A-Za-z]{3,4}) (\d{4})$/, ([day, month, year], l) => translateDate(day, month, year, l)],
+  [/^(\d{1,2}) ([A-Za-z]{3,4}) (\d{4}), (\d{2}:\d{2})$/, ([day, month, year, time], l) => {
+    const date = translateDate(day, month, year, l);
+    return date ? `${date}, ${time}` : null;
+  }],
+  [/^(\d+) days ago$/i, ([n], l) => (l === "fr" ? `il y a ${n} jours` : `för ${n} dagar sedan`)],
+  [/^today$/, (_, l) => (l === "fr" ? "aujourd’hui" : "i dag")],
+  [/^yesterday$/, (_, l) => (l === "fr" ? "hier" : "i går")],
+  [/^([\d,.]+) ([a-z][a-z ]*)$/, ([n, noun], l) => countPhrase(n, noun, l)],
+  [/^(\d+) new$/, ([n], l) => (l === "fr" ? `${n} ${n === "1" ? "nouvelle" : "nouvelles"}` : `${n} ${n === "1" ? "ny" : "nya"}`)],
+  [/^Sellers price their assets in EUR\. Other currencies are converted at indicative (.+) of (.+)\.$/, ([source, date], l) =>
+    l === "fr"
+      ? `Les vendeurs fixent leurs prix en EUR. Les autres devises sont converties selon les ${tr(source, l)} du ${tr(date, l)}, à titre indicatif.`
+      : `Säljarna sätter sina priser i EUR. Andra valutor räknas om med ${tr(source, l)} från ${tr(date, l)} och är ungefärliga.`],
+  [/^(Minimum|Maximum) price in ([A-Z]{3})$/, ([bound, currency], l) =>
+    l === "fr"
+      ? `Prix ${bound === "Minimum" ? "minimum" : "maximum"} en ${currency}`
+      : `${bound === "Minimum" ? "Lägsta" : "Högsta"} pris i ${currency}`],
+  [/^Request a quote from (.+)$/, ([name], l) => (l === "fr" ? `Demander un devis à ${name}` : `Begär en offert från ${name}`)],
+  [/^Mark (.+) as sold$/, ([title], l) => (l === "fr" ? `Marquer « ${tr(title, l)} » comme vendu` : `Markera ”${tr(title, l)}” som såld`)],
+  [/^Edit (.+)$/, ([title], l) => (l === "fr" ? `Modifier « ${tr(title, l)} »` : `Redigera ”${tr(title, l)}”`)],
+  [/^Relist (.+)$/, ([title], l) => (l === "fr" ? `Republier « ${tr(title, l)} »` : `Publicera ”${tr(title, l)}” igen`)],
+  [/^Show image (\d+) of (\d+)$/, ([n, total], l) => (l === "fr" ? `Afficher l’image ${n} sur ${total}` : `Visa bild ${n} av ${total}`)],
+  [/^Set photo (\d+) as main photo$/, ([n], l) => (l === "fr" ? `Définir la photo ${n} comme photo principale` : `Gör bild ${n} till huvudbild`)],
+  [/^Remove photo (\d+)$/, ([n], l) => (l === "fr" ? `Supprimer la photo ${n}` : `Ta bort bild ${n}`)],
+  [/^Remove (.+)$/, ([label], l) => (l === "fr" ? `Supprimer : ${tr(label, l)}` : `Ta bort: ${tr(label, l)}`)],
+  [/^Delete saved search: (.+)$/, ([name], l) =>
+    l === "fr" ? `Supprimer la recherche enregistrée : ${name}` : `Ta bort den sparade sökningen: ${name}`],
+  [/^Done\. (\d+) fields filled automatically(?:, (\d+) need your attention: (.+))?\.$/, ([filled, missing, fields], l) => {
+    const list = fields ? fields.split(", ").map((field) => tr(field, l).toLowerCase()).join(", ") : "";
+    if (l === "fr") {
+      return `Terminé. ${filled} champs remplis automatiquement${missing ? `, ${missing} à compléter : ${list}` : ""}.`;
+    }
+    return `Klart. ${filled} fält ifyllda automatiskt${missing ? `, ${missing} behöver kompletteras: ${list}` : ""}.`;
+  }],
+  [/^Converted from “(.+)” at indicative rates\.$/, ([source], l) =>
+    l === "fr" ? `Converti depuis « ${source} » à un taux indicatif.` : `Omräknat från ”${source}” med ungefärlig kurs.`],
+  [/^Up to (\d+) images, 10 MB each\. The first photo is the main one\. Photos stay in this browser \(demo\)\.$/, ([max], l) =>
+    l === "fr"
+      ? `Jusqu’à ${max} images de 10 Mo chacune. La première photo est la photo principale. Les photos restent dans ce navigateur (démo).`
+      : `Upp till ${max} bilder, högst 10 MB per bild. Den första bilden blir huvudbild. Bilderna stannar i den här webbläsaren (demo).`],
+  [/^Hello, I'm interested in "(.+)"\. Is it still available\?$/, ([title], l) =>
+    l === "fr"
+      ? `Bonjour, je suis intéressé(e) par « ${tr(title, l)} ». Est-ce toujours disponible ?`
+      : `Hej! Jag är intresserad av ”${tr(title, l)}”. Finns den kvar?`],
+  // "Listings (3)", "Price (EUR)": translate the head, keep the bracket.
+  [/^(.+) \(([^()]+)\)$/, ([head, inside], l) => {
+    const translated = dictionaries[l][head];
+    return translated ? `${translated} (${inside})` : null;
+  }],
+  // "Lisbon, Portugal": translate each part of a place.
+  [/^([^,]+), ([^,]+)$/, ([city, country], l) => {
+    const translated = dictionaries[l][country];
+    return translated ? `${tr(city, l)}, ${translated}` : null;
+  }]
+];
+
 export function translateText(text: string, language: Language): string {
   if (language === "en") return text;
   const clean = text.trim();
+  if (!clean) return text;
   const translated = dictionaries[language][clean];
   if (translated) return text.replace(clean, translated);
 
-  const count = clean.match(/^(\d+) listing(s)? found$/i);
-  if (count) {
-    const phrase = language === "fr"
-      ? `${count[1]} ${count[1] === "1" ? "annonce trouvée" : "annonces trouvées"}`
-      : `${count[1]} ${count[1] === "1" ? "objet trouvé" : "objets trouvés"}`;
-    return text.replace(clean, phrase);
-  }
-  const matches = clean.match(/^(\d+) listing(s)? match(ing)?$/i);
-  if (matches) {
-    const phrase = language === "fr"
-      ? `${matches[1]} ${matches[1] === "1" ? "annonce correspond" : "annonces correspondent"}`
-      : `${matches[1]} objekt matchar`;
-    return text.replace(clean, phrase);
+  for (const [pattern, build] of patterns) {
+    const match = clean.match(pattern);
+    if (!match) continue;
+    const phrase = build(match.slice(1), language);
+    if (phrase) return text.replace(clean, phrase);
   }
   return text;
 }

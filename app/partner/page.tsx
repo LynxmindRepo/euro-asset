@@ -56,7 +56,7 @@ export default function PartnerDashboardPage() {
             <section aria-labelledby="mine-title">
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <h2 id="mine-title" className="subsection-title text-2xl">
-                  Listings ({mine.length})
+                  {`Listings (${mine.length})`}
                 </h2>
                 <Link href="/partner/import" className={buttonStyles("accent", "no-underline")}>
                   Import a listing
@@ -127,7 +127,7 @@ export default function PartnerDashboardPage() {
 
             <section aria-labelledby="messages-title">
               <h2 id="messages-title" className="subsection-title text-2xl">
-                Buyer messages ({messages.length})
+                {`Buyer messages (${messages.length})`}
               </h2>
               {messages.length === 0 ? (
                 <p className="support-copy mt-3">

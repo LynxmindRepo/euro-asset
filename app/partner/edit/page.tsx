@@ -13,6 +13,7 @@ import { Select } from "@/components/ui/select";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { getCategoryPlaceholder } from "@/lib/listing-helpers";
 import { Listing, ListingStatus } from "@/types";
+import { Localized } from "@/components/ui/localized";
 
 // Static export: the listing id comes from the query string (?id=…), so this one page can edit any listing,
 // including listings created during the session.
@@ -87,7 +88,7 @@ function EditForm({ listing }: { listing: Listing }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid max-w-3xl gap-5 rounded-[1.75rem] bg-surface-lowest p-6 shadow-panel tonal-rule">
+    <Localized><form onSubmit={handleSubmit} className="grid max-w-3xl gap-5 rounded-[1.75rem] bg-surface-lowest p-6 shadow-panel tonal-rule">
       <FormField label="Title">
         <Input required value={form.title} onChange={(event) => update("title", event.target.value)} />
       </FormField>
@@ -144,6 +145,6 @@ function EditForm({ listing }: { listing: Listing }) {
           Cancel
         </Link>
       </div>
-    </form>
+    </form></Localized>
   );
 }

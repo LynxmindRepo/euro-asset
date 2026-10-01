@@ -7,9 +7,12 @@ import { buyerCountries } from "@/data/cost-rates";
 import { currencies } from "@/data/currencies";
 import { estimatorLineResources, resourceCategories } from "@/data/resources";
 import Link from "next/link";
+import { translateText } from "@/data/translations";
 import { useCurrency } from "@/features/preferences/currency-context";
+import { useLanguage } from "@/features/preferences/language-context";
 import { useUnits } from "@/features/preferences/units-context";
 import { CostEstimate, estimateTotalCost, guessBuyerCountry } from "@/lib/cost-estimator";
+import { estimatorCopy } from "@/lib/cost-estimator-copy";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Listing } from "@/types";
 import { Localized } from "@/components/ui/localized";
@@ -46,6 +49,9 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   const [country, setCountry] = useState(fallbackCountry);
   const { currency: siteCurrency } = useCurrency();
   const { units } = useUnits();
+  const { language } = useLanguage();
+  const copy = estimatorCopy[language];
+  const countryName = translateText(country, language);
   const [currency, setCurrency] = useState(siteCurrency);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [animation, setAnimation] = useState<Animation | null>(null);
@@ -71,12 +77,13 @@ export function CostEstimator({ listing }: { listing: Listing }) {
     lastEstimateEntry?.estimate &&
     (lastEstimateEntry.estimate.currency !== currency ||
       lastEstimateEntry.estimate.units !== units ||
-      !lastEstimateEntry.question.includes(country));
+      lastEstimateEntry.estimate.buyerCountry !== country ||
+      lastEstimateEntry.estimate.language !== language);
 
   function ask(question: string, answer: { estimate?: CostEstimate; text: string; steps: string[] }) {
     const id = nextId.current++;
     setEntries((current) => [...current, { id, question, ...answer }]);
-    setAnnouncement(answer.estimate ? "Estimating the total cost…" : "Thinking…");
+    setAnnouncement(answer.estimate ? copy.estimating : `${copy.thinking}…`);
     setAnimation(
       reducedMotion
         ? { entryId: id, phase: "done", step: answer.steps.length, words: Infinity, lines: Infinity }
@@ -85,8 +92,8 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   }
 
   function askTotalCost() {
-    const estimate = estimateTotalCost(listing, country, currency, units);
-    ask(`What's the total cost to bring it to ${country}, in ${currency}?`, {
+    const estimate = estimateTotalCost(listing, country, currency, units, language);
+    ask(copy.question(countryName, currency), {
       estimate,
       text: estimate.summary,
       steps: estimate.steps
@@ -131,7 +138,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
     if (!entry) return;
     setAnnouncement(
       entry.estimate
-        ? `Estimate ready. Total about ${formatCurrency(entry.estimate.totalEur * entry.estimate.rate, entry.estimate.currency)}.`
+        ? estimatorCopy[entry.estimate.language].ready(formatCurrency(entry.estimate.totalEur * entry.estimate.rate, entry.estimate.currency))
         : entry.text
     );
   }, [animation, entries]);
@@ -258,7 +265,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
               className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-primary shadow-ambient transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <SparkleIcon className="h-4 w-4" />
-              {entries.length === 0 ? "What's the total cost?" : `Recalculate for ${country} in ${currency}`}
+              {entries.length === 0 ? "What's the total cost?" : copy.recalculate(countryName, currency)}
             </button>
           ) : null}
           {lastEstimate && !inputsChanged && !isBusy
@@ -269,7 +276,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
                     key={followUp.question}
                     type="button"
                     disabled={isBusy}
-                    onClick={() => ask(followUp.question, { text: followUp.answer, steps: ["Thinking"] })}
+                    onClick={() => ask(followUp.question, { text: followUp.answer, steps: [copy.thinking] })}
                     className="rounded-full bg-surface-high px-4 py-2 text-sm font-medium text-primary tonal-rule transition hover:bg-surface-tint disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {followUp.question}
@@ -295,9 +302,9 @@ function CostTable({ estimate, visibleLines, complete }: { estimate: CostEstimat
   const amount = (eur: number) => formatCurrency(eur * estimate.rate, estimate.currency);
 
   return (
-    <div className="mt-3 overflow-hidden rounded-xl bg-surface-lowest tonal-rule">
+    <Localized><div className="mt-3 overflow-hidden rounded-xl bg-surface-lowest tonal-rule">
       <table className="w-full text-left text-sm">
-        <caption className="sr-only">Estimated total cost breakdown in {estimate.currency}</caption>
+        <caption className="sr-only">{estimatorCopy[estimate.language].caption(estimate.currency)}</caption>
         <thead className="sr-only">
           <tr>
             <th scope="col">Cost</th>
@@ -332,7 +339,7 @@ function CostTable({ estimate, visibleLines, complete }: { estimate: CostEstimat
         ) : null}
       </table>
       {complete ? <QuoteLinks estimate={estimate} /> : null}
-    </div>
+    </div></Localized>
   );
 }
 
@@ -343,7 +350,7 @@ function QuoteLinks({ estimate }: { estimate: CostEstimate }) {
   const categories = resourceCategories.filter((category) => ids.includes(category.id));
 
   return (
-    <div className="border-t border-surface-high px-4 py-3 text-sm">
+    <Localized><div className="border-t border-surface-high px-4 py-3 text-sm">
       <p className="font-medium text-ink">Get real quotes from our partners:</p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {categories.map((category) => (
@@ -357,6 +364,6 @@ function QuoteLinks({ estimate }: { estimate: CostEstimate }) {
           </li>
         ))}
       </ul>
-    </div>
+    </div></Localized>
   );
 }

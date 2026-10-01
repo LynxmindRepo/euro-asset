@@ -13,6 +13,8 @@ import { getOriginLabel, getPartner, getPartnerTypeLabel } from "@/lib/listing-h
 import { Price } from "@/components/ui/price";
 import { cn, formatDate } from "@/lib/utils";
 import { Localized } from "@/components/ui/localized";
+import { translateText } from "@/data/translations";
+import { useLanguage } from "@/features/preferences/language-context";
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
@@ -31,7 +33,10 @@ export function ContactPanel({ listing }: { listing: Listing }) {
   const { pushToast } = useToast();
   const [name, setName] = useState(currentUser?.name ?? "");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(`Hello, I'm interested in "${listing.title}". Is it still available?`);
+  const { language } = useLanguage();
+  // The suggested message follows the site language until the visitor edits it.
+  const [draft, setMessage] = useState<string | null>(null);
+  const message = draft ?? translateText(`Hello, I'm interested in "${listing.title}". Is it still available?`, language);
   const [errors, setErrors] = useState<Errors>({});
   const [isSending, setIsSending] = useState(false);
   const [sent, setSent] = useState(false);

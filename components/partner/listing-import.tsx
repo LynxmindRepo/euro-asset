@@ -27,7 +27,7 @@ type Field = "title" | "price" | "country";
 const STEP_MS = 600;
 
 function AutoHint({ filled }: { filled: boolean }) {
-  return filled ? (
+  return <Localized>{filled ? (
     <span className="inline-flex items-center gap-1 text-xs text-muted">
       <SparkleIcon className="h-3 w-3 text-accent-ink" /> Filled automatically — check it
     </span>
@@ -35,7 +35,7 @@ function AutoHint({ filled }: { filled: boolean }) {
     <span className="inline-flex rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent-ink">
       Not found in your text — please add
     </span>
-  );
+  )}</Localized>;
 }
 
 /**
@@ -340,7 +340,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
                   />
                   {result.listing.sourcePrice ? (
                     <p id="import-price-source" className="field-hint">
-                      Converted from “{result.listing.sourcePrice}” at indicative rates.
+                      {`Converted from “${result.listing.sourcePrice}” at indicative rates.`}
                     </p>
                   ) : null}
                   {fieldError("price")}

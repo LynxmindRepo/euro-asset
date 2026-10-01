@@ -89,11 +89,11 @@ export function ListingFilters({ filters, countries, currency }: { filters: Filt
           </Select>
         </div>
         <fieldset className="grid gap-2 md:col-span-1 xl:col-span-2">
-          <legend className="field-label mb-2">Price ({currency})</legend>
+          <legend className="field-label mb-2">{`Price (${currency})`}</legend>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label htmlFor="filter-min-price" className="sr-only">
-                Minimum price in {currency}
+                {`Minimum price in ${currency}`}
               </label>
               <Input
                 id="filter-min-price"
@@ -108,7 +108,7 @@ export function ListingFilters({ filters, countries, currency }: { filters: Filt
             </div>
             <div>
               <label htmlFor="filter-max-price" className="sr-only">
-                Maximum price in {currency}
+                {`Maximum price in ${currency}`}
               </label>
               <Input
                 id="filter-max-price"

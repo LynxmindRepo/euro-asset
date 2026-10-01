@@ -139,7 +139,7 @@ export default function ListingsPage() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-3">
               <p className="text-sm text-muted" role="status" aria-live="polite">
-                <span className="font-semibold text-ink">{total}</span> listing{total === 1 ? "" : "s"} found
+                {`${total} listing${total === 1 ? "" : "s"} found`}
               </p>
               {savedMatch ? (
                 <Link href="/saved" className="inline-flex items-center gap-1 rounded-full bg-success px-3 py-1.5 text-sm font-semibold text-success-ink no-underline">

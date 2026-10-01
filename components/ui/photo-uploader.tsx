@@ -91,7 +91,7 @@ export function PhotoUploader({
           Add photos
         </button>
         <p id={hintId} className="field-hint">
-          Up to {MAX_PHOTOS} images, 10 MB each. The first photo is the main one. Photos stay in this browser (demo).
+          {`Up to ${MAX_PHOTOS} images, 10 MB each. The first photo is the main one. Photos stay in this browser (demo).`}
         </p>
         <input
           ref={inputRef}

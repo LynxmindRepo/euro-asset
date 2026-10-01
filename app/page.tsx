@@ -70,7 +70,7 @@ export default function HomePage() {
                     </Link>
                     <p className="mt-1 text-sm leading-6 text-muted">{category.description}</p>
                     <p className="mt-2 text-sm font-semibold text-primary">
-                      {count} listing{count === 1 ? "" : "s"}
+                      {`${count} listing${count === 1 ? "" : "s"}`}
                     </p>
                   </div>
                 </li>

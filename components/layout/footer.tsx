@@ -49,8 +49,7 @@ export function Footer() {
               Presentation prototype: listings, sellers and messages are fictional and nothing is sent or stored.
             </p>
             <p className="support-copy mt-3 max-w-md text-white/80">
-              Sellers price their assets in EUR. Other currencies are converted at indicative {RATES_SOURCE} of{" "}
-              {formatDate(RATES_DATE)}.
+              {`Sellers price their assets in EUR. Other currencies are converted at indicative ${RATES_SOURCE} of ${formatDate(RATES_DATE)}.`}
             </p>
           </div>
         </div>

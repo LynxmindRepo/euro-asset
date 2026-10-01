@@ -68,7 +68,7 @@ export default function SavedSearchesPage() {
                             ) : null}
                           </div>
                           <p className="mt-1 text-sm text-muted">
-                            {matches.length} listing{matches.length === 1 ? "" : "s"} match · saved {formatDate(search.createdAt)}
+                            {`${matches.length} listing${matches.length === 1 ? "" : "s"} match · saved ${formatDate(search.createdAt)}`}
                           </p>
                           {fresh.length > 0 ? (
                             <ul aria-label="New matches" className="mt-3 grid gap-1 text-sm">

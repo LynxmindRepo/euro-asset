@@ -12,13 +12,13 @@ import { Localized } from "@/components/ui/localized";
 
 export function ListingTitle({ listing, className }: { listing: Listing; className?: string }) {
   if (!hasStaticListingDetail(listing.id)) {
-    return <span className={className}>{listing.title}</span>;
+    return <Localized><span className={className}>{listing.title}</span></Localized>;
   }
 
   return (
-    <Link href={`/listings/${listing.id}`} className={cn("card-link-target no-underline hover:underline", className)}>
+    <Localized><Link href={`/listings/${listing.id}`} className={cn("card-link-target no-underline hover:underline", className)}>
       {listing.title}
-    </Link>
+    </Link></Localized>
   );
 }
 

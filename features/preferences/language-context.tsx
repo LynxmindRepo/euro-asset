@@ -35,15 +35,22 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, language);
-    } catch {
-      // The preference still works for this page session when storage is unavailable.
-    }
   }, [language]);
 
+  // Persist only explicit choices. Writing from an effect would store the "en" default on the first render,
+  // before the saved value is read, and overwrite the visitor's choice.
   const value = useMemo(
-    () => ({ language, setLanguage: (next: Language) => setLanguageState(next) }),
+    () => ({
+      language,
+      setLanguage: (next: Language) => {
+        setLanguageState(next);
+        try {
+          window.localStorage.setItem(STORAGE_KEY, next);
+        } catch {
+          // The preference still works for this page session when storage is unavailable.
+        }
+      }
+    }),
     [language]
   );
 
