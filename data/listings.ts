@@ -116,7 +116,7 @@ export const initialListings: Listing[] = [
     id: "volvo-fh-tractor-unit",
     title: "Volvo FH 500 tractor unit, 2019",
     description:
-      "Well-maintained 4x2 tractor unit from a haulage company's restructured fleet. Full service history, recent tyres, ready for registration in any EU country.",
+      "Well-maintained 4x2 truck (tractor unit) from a haulage company's restructured fleet. Full service history, recent tyres, ready for registration in any EU country.",
     categoryId: "vehicles",
     origin: "restructuring",
     status: "available",

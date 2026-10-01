@@ -35,6 +35,7 @@ export function useListingFilters(listings: Listing[], initialState?: ListingFil
         normalizedQuery.length === 0 ||
         [
           listing.title,
+          listing.description,
           listing.city,
           listing.region,
           listing.country,

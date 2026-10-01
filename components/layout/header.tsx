@@ -37,10 +37,10 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-xl">
-        <div className="shell flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-            <Logo />
-            <nav aria-label="Main" className="flex flex-wrap items-center gap-1.5 text-sm text-muted">
+        <div className="shell flex flex-wrap items-center gap-x-6 gap-y-3 py-4">
+          <Logo />
+          {/* Mobile: logo + account on the first row, navigation on its own row below. */}
+          <nav aria-label="Main" className="order-3 flex w-full flex-wrap items-center gap-1.5 text-sm text-muted lg:order-2 lg:w-auto">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -70,12 +70,11 @@ export function Header() {
                   Admin
                 </Link>
               ) : null}
-            </nav>
-          </div>
+          </nav>
 
           {currentUser ? (
-            <div className="flex flex-wrap items-center justify-end gap-2">
-              <div className="rounded-[1.35rem] bg-surface-low px-4 py-3 text-sm tonal-rule">
+            <div className="order-2 ml-auto flex items-center gap-2 lg:order-3">
+              <div className="hidden rounded-[1.35rem] bg-surface-low px-4 py-3 text-sm tonal-rule md:block">
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span className="font-semibold text-ink">
                     {currentUser.company}
@@ -106,8 +105,10 @@ export function Header() {
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-3">
-              <Button onClick={() => setIsLoginOpen(true)}>Login</Button>
+            <div className="order-2 ml-auto flex items-center gap-3 lg:order-3">
+              <Button onClick={() => setIsLoginOpen(true)} className="px-5 py-2.5">
+                Login
+              </Button>
             </div>
           )}
         </div>
