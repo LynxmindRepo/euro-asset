@@ -7,6 +7,7 @@ import { Logo } from "@/components/ui/logo";
 import { PreferenceControls } from "@/components/layout/preference-controls";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { useMockSession } from "@/features/auth/mock-session";
+import { useSavedSearches } from "@/features/saved-searches/saved-searches-context";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/types";
 
@@ -30,6 +31,7 @@ const roleCopy: Record<UserRole, { badge: string; description: string; demo: str
 
 export function Header() {
   const { currentUser, users, loginAs, logout } = useMockSession();
+  const { searches, totalNew } = useSavedSearches();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const pathname = usePathname();
 
@@ -54,6 +56,7 @@ export function Header() {
     },
     { href: "/buyers", label: "For buyers", active: pathname.startsWith("/buyers") },
     { href: "/sell", label: "Sell with us", active: pathname.startsWith("/sell") },
+    ...(searches.length > 0 ? [{ href: "/saved", label: "Saved", active: pathname.startsWith("/saved") }] : []),
   ];
 
   return (
@@ -76,6 +79,12 @@ export function Header() {
                   )}
                 >
                   {item.label}
+                  {item.href === "/saved" && totalNew > 0 ? (
+                    <span className="ml-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-xs font-semibold text-primary">
+                      {totalNew}
+                      <span className="sr-only"> new match{totalNew === 1 ? "" : "es"}</span>
+                    </span>
+                  ) : null}
                 </Link>
               ))}
               {currentUser?.role === "admin" ? (

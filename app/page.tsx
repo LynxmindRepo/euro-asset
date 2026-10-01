@@ -5,6 +5,7 @@ import { Hero } from "@/components/hero";
 import { PageShell } from "@/components/layout/page-shell";
 import { CategoryIcon } from "@/components/listing/category-icon";
 import { ListingCard } from "@/components/listing/listing-card";
+import { RecommendedListings } from "@/components/listing/recommended";
 import { buttonStyles } from "@/components/ui/button";
 import { categories } from "@/data/categories";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
@@ -38,6 +39,8 @@ export default function HomePage() {
   return (
     <PageShell>
       <Hero />
+
+      <RecommendedListings />
 
       <section aria-labelledby="categories-title" className="pb-20">
         <div className="shell">

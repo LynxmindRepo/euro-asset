@@ -12,6 +12,11 @@ import { Select } from "@/components/ui/select";
 import { useListingFilters } from "@/features/listings/use-listing-filters";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { useCurrency } from "@/features/preferences/currency-context";
+import { useSavedSearches } from "@/features/saved-searches/saved-searches-context";
+import { useToast } from "@/components/feedback/toast-provider";
+import { hasCriteria } from "@/lib/listing-filters";
+import Link from "next/link";
+import { BellIcon } from "@/components/ui/bell-icon";
 import { getListingCountries } from "@/lib/listing-helpers";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +31,8 @@ const views: { id: View; label: string }[] = [
 export default function ListingsPage() {
   const { listings } = useMarketplace();
   const { currency, rate } = useCurrency();
+  const { saveSearch, isSaved, setLastCriteria } = useSavedSearches();
+  const { pushToast } = useToast();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -93,6 +100,21 @@ export default function ListingsPage() {
     view
   ]);
 
+  // Remember the latest real search (debounced) — used for "Recommended for you" when nothing is saved.
+  useEffect(() => {
+    if (!hasCriteria(filters.criteria)) return;
+    const timer = window.setTimeout(() => setLastCriteria(filters.criteria), 800);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.criteria]);
+
+  const savedMatch = isSaved(filters.criteria);
+
+  function handleSaveSearch() {
+    saveSearch(filters.criteria);
+    pushToast({ tone: "success", text: "Search saved. We'll let you know when new matches appear." });
+  }
+
   const visibleListings = filters.filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filters.filtered.length;
   const total = filters.filtered.length;
@@ -115,9 +137,24 @@ export default function ListingsPage() {
           </div>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted" role="status" aria-live="polite">
-              <span className="font-semibold text-ink">{total}</span> listing{total === 1 ? "" : "s"} found
-            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="text-sm text-muted" role="status" aria-live="polite">
+                <span className="font-semibold text-ink">{total}</span> listing{total === 1 ? "" : "s"} found
+              </p>
+              {savedMatch ? (
+                <Link href="/saved" className="inline-flex items-center gap-1 rounded-full bg-success px-3 py-1.5 text-sm font-semibold text-success-ink no-underline">
+                  <span aria-hidden="true">✓</span> Search saved
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleSaveSearch}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-surface-high px-3 py-1.5 text-sm font-semibold text-primary tonal-rule transition hover:bg-surface-tint"
+                >
+                  <BellIcon className="h-4 w-4" /> Save this search
+                </button>
+              )}
+            </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <div className="flex items-center gap-2">
                 <label htmlFor="sort-by" className="whitespace-nowrap text-sm text-muted">

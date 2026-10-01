@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { getCategoryLabel, getPartner } from "@/lib/listing-helpers";
+import { ListingCriteria, matchesCriteria } from "@/lib/listing-filters";
 import { Listing } from "@/types";
 
 export type ListingFilterState = {
@@ -26,34 +26,22 @@ export function useListingFilters(listings: Listing[], initialState?: ListingFil
   const [maxPrice, setMaxPrice] = useState(initialState?.maxPrice ?? "");
   const [sortBy, setSortBy] = useState(initialState?.sortBy ?? "latest");
 
+  // Criteria in EUR (min/max are typed in the visitor's currency) — shared with saved searches.
+  const criteria = useMemo<ListingCriteria>(
+    () => ({
+      query,
+      categoryId,
+      country,
+      origin,
+      status,
+      minEur: Number(minPrice) ? Number(minPrice) / rate : undefined,
+      maxEur: Number(maxPrice) ? Number(maxPrice) / rate : undefined
+    }),
+    [query, categoryId, country, origin, status, minPrice, maxPrice, rate]
+  );
+
   const filtered = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    const min = (Number(minPrice) || 0) / rate;
-    const max = (Number(maxPrice) || Number.POSITIVE_INFINITY) / rate;
-
-    const result = listings.filter((listing) => {
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        [
-          listing.title,
-          listing.description,
-          listing.city,
-          listing.region,
-          listing.country,
-          getCategoryLabel(listing.categoryId),
-          getPartner(listing.partnerId)?.name ?? ""
-        ].some((field) => field.toLowerCase().includes(normalizedQuery));
-
-      return (
-        matchesQuery &&
-        (categoryId === "all" || listing.categoryId === categoryId) &&
-        (country === "all" || listing.country === country) &&
-        (origin === "all" || listing.origin === origin) &&
-        (status === "all" || listing.status === status) &&
-        listing.price >= min &&
-        listing.price <= max
-      );
-    });
+    const result = listings.filter((listing) => matchesCriteria(listing, criteria));
 
     return result.sort((left, right) => {
       if (sortBy === "price-asc") return left.price - right.price;
@@ -61,7 +49,7 @@ export function useListingFilters(listings: Listing[], initialState?: ListingFil
       if (sortBy === "alphabetical") return left.title.localeCompare(right.title);
       return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime();
     });
-  }, [listings, query, categoryId, country, origin, status, minPrice, maxPrice, sortBy, rate]);
+  }, [listings, criteria, sortBy]);
 
   function clearFilters() {
     setQuery("");
@@ -92,6 +80,7 @@ export function useListingFilters(listings: Listing[], initialState?: ListingFil
     maxPrice,
     sortBy,
     filtered,
+    criteria,
     activeCount,
     setQuery,
     setCategoryId,

@@ -5,6 +5,7 @@ import { MarketplaceProvider } from "@/features/marketplace/marketplace-store";
 import { ToastProvider } from "@/components/feedback/toast-provider";
 import { CurrencyProvider } from "@/features/preferences/currency-context";
 import { UnitsProvider } from "@/features/preferences/units-context";
+import { SavedSearchesProvider } from "@/features/saved-searches/saved-searches-context";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +13,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <MarketplaceProvider>
         <CurrencyProvider>
           <UnitsProvider>
-            <ToastProvider>{children}</ToastProvider>
+            <ToastProvider>
+              <SavedSearchesProvider>{children}</SavedSearchesProvider>
+            </ToastProvider>
           </UnitsProvider>
         </CurrencyProvider>
       </MarketplaceProvider>

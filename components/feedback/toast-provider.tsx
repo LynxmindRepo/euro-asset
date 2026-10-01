@@ -25,7 +25,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     setToasts((current) => [...current, { ...toast, id }]);
     window.setTimeout(() => {
       setToasts((current) => current.filter((item) => item.id !== id));
-    }, 3200);
+    }, 6000);
   }, []);
 
   const value = useMemo(() => ({ pushToast }), [pushToast]);
@@ -33,7 +33,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div className="pointer-events-none fixed bottom-4 right-4 z-50 grid w-[min(360px,calc(100vw-2rem))] gap-3">
+      {/* Live region so screen readers announce every toast (WCAG 4.1.3). */}
+      <div
+        role="status"
+        aria-live="polite"
+        className="pointer-events-none fixed bottom-4 right-4 z-50 grid w-[min(360px,calc(100vw-2rem))] gap-3"
+      >
         {toasts.map((toast) => (
           <div
             key={toast.id}
