@@ -202,7 +202,7 @@ export function estimateTotalCost(
   const biggest = lines.filter((line) => line.id !== "asset").sort((a, b) => b.amountEur - a.amountEur)[0];
 
   const intro = immovableCategories.has(listing.categoryId)
-    ? `Buying "${listing.title}" as a buyer from ${buyer.name}`
+    ? `For a buyer in ${buyer.name}, "${listing.title}"`
     : `Bringing "${listing.title}" to ${buyer.name}`;
   const summary = `${intro} would cost about ${money(totalEur)} in total: ${money(
     listing.price
