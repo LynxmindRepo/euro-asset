@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Select } from "@/components/ui/select";
-import { buyerCountries, currencies } from "@/data/cost-rates";
+import { buyerCountries } from "@/data/cost-rates";
+import { currencies } from "@/data/currencies";
+import { useCurrency } from "@/features/preferences/currency-context";
 import { CostEstimate, estimateTotalCost, guessBuyerCountry } from "@/lib/cost-estimator";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Listing } from "@/types";
@@ -45,7 +47,8 @@ function usePrefersReducedMotion() {
 export function CostEstimator({ listing }: { listing: Listing }) {
   const fallbackCountry = listing.country === "Germany" ? "France" : "Germany";
   const [country, setCountry] = useState(fallbackCountry);
-  const [currency, setCurrency] = useState("EUR");
+  const { currency: siteCurrency } = useCurrency();
+  const [currency, setCurrency] = useState(siteCurrency);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [animation, setAnimation] = useState<Animation | null>(null);
   const [announcement, setAnnouncement] = useState("");
@@ -56,8 +59,12 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   useEffect(() => {
     const guessed = guessBuyerCountry(navigator.language, fallbackCountry);
     setCountry(guessed);
-    setCurrency(buyerCountries.find((item) => item.name === guessed)?.currency ?? "EUR");
   }, [fallbackCountry]);
+
+  // Follow the site-wide currency chosen in the header (can still be changed here for this estimate).
+  useEffect(() => {
+    setCurrency(siteCurrency);
+  }, [siteCurrency]);
 
   const isBusy = animation !== null && animation.phase !== "done";
   const lastEstimate = useMemo(() => [...entries].reverse().find((entry) => entry.estimate)?.estimate, [entries]);
@@ -162,7 +169,6 @@ export function CostEstimator({ listing }: { listing: Listing }) {
               value={country}
               onChange={(event) => {
                 setCountry(event.target.value);
-                setCurrency(buyerCountries.find((item) => item.name === event.target.value)?.currency ?? "EUR");
               }}
             >
               {buyerCountries.map((item) => (

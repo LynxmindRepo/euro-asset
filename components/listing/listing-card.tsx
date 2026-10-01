@@ -5,7 +5,8 @@ import { Listing } from "@/types";
 import { StatusBadge } from "@/components/listing/status-badge";
 import { getCategoryLabel, getPartner } from "@/lib/listing-helpers";
 import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
-import { cn, formatCurrency, formatPublished, formatSpecShort } from "@/lib/utils";
+import { Price } from "@/components/ui/price";
+import { cn, formatPublished, formatSpecShort } from "@/lib/utils";
 
 export function ListingTitle({ listing, className }: { listing: Listing; className?: string }) {
   if (!hasStaticListingDetail(listing.id)) {
@@ -57,14 +58,13 @@ export function ListingCard({ listing }: { listing: Listing }) {
         <p className="mt-1 text-sm text-muted">
           {listing.city}, {listing.country}
         </p>
-        <p
-          className={cn(
-            "mt-4 font-display text-2xl font-semibold tracking-[-0.03em]",
-            listing.status === "sold" ? "text-muted line-through" : "text-primary"
-          )}
-        >
-          {formatCurrency(listing.price, listing.currency)}
-        </p>
+        <div className="mt-4">
+          <Price
+            eur={listing.price}
+            sold={listing.status === "sold"}
+            className="font-display text-2xl font-semibold tracking-[-0.03em] text-primary"
+          />
+        </div>
         {listing.specs.length > 0 ? (
           <ul className="mt-3 flex flex-wrap gap-2" aria-label="Key specifications">
             {listing.specs.slice(0, 3).map((spec) => (

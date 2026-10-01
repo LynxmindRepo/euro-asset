@@ -4,11 +4,11 @@ import {
   customsClearance,
   domesticTransferShare,
   energyTransferRate,
-  eurRates,
   fxSpread,
   languageCountry,
   transportRates
 } from "@/data/cost-rates";
+import { eurRates } from "@/data/currencies";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { Listing } from "@/types";
 

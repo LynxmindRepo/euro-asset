@@ -7,7 +7,7 @@ import { ListingFilters as Filters } from "@/features/listings/use-listing-filte
 
 const fieldClass = "grid gap-2";
 
-export function ListingFilters({ filters, countries }: { filters: Filters; countries: string[] }) {
+export function ListingFilters({ filters, countries, currency }: { filters: Filters; countries: string[]; currency: string }) {
   return (
     <section aria-labelledby="filters-title" className="rounded-[2rem] bg-surface-low px-5 py-5 shadow-ambient tonal-rule">
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
@@ -88,11 +88,11 @@ export function ListingFilters({ filters, countries }: { filters: Filters; count
           </Select>
         </div>
         <fieldset className="grid gap-2 md:col-span-1 xl:col-span-2">
-          <legend className="field-label mb-2">Price (EUR)</legend>
+          <legend className="field-label mb-2">Price ({currency})</legend>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label htmlFor="filter-min-price" className="sr-only">
-                Minimum price in EUR
+                Minimum price in {currency}
               </label>
               <Input
                 id="filter-min-price"
@@ -107,7 +107,7 @@ export function ListingFilters({ filters, countries }: { filters: Filters; count
             </div>
             <div>
               <label htmlFor="filter-max-price" className="sr-only">
-                Maximum price in EUR
+                Maximum price in {currency}
               </label>
               <Input
                 id="filter-max-price"

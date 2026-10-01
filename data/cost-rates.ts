@@ -48,20 +48,6 @@ export const assetCities: Record<string, { lat: number; lon: number }> = {
   Braga: { lat: 41.55, lon: -8.42 }
 };
 
-/** Indicative exchange rates: 1 EUR = x. */
-export const eurRates: Record<string, number> = {
-  EUR: 1,
-  SEK: 11.2,
-  DKK: 7.46,
-  NOK: 11.6,
-  PLN: 4.3,
-  CZK: 25.1,
-  CHF: 0.94,
-  GBP: 0.85,
-  USD: 1.08
-};
-
-export const currencies = Object.keys(eurRates);
 
 export const transportRates = {
   /** Vehicles driven or carried on a car transporter. */

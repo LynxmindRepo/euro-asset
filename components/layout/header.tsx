@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/logo";
+import { CurrencySelect } from "@/components/layout/currency-select";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { useMockSession } from "@/features/auth/mock-session";
 import { cn } from "@/lib/utils";
@@ -72,10 +73,12 @@ export function Header() {
                   Admin
                 </Link>
               ) : null}
+              <CurrencySelect id="site-currency-mobile" className="ml-auto sm:hidden" />
           </nav>
 
           {currentUser ? (
             <div className="order-2 ml-auto flex items-center gap-2 lg:order-3">
+              <CurrencySelect className="hidden sm:block" />
               <div className="hidden rounded-[1.35rem] bg-surface-low px-4 py-3 text-sm tonal-rule md:block">
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span className="font-semibold text-ink">
@@ -107,7 +110,8 @@ export function Header() {
               </button>
             </div>
           ) : (
-            <div className="order-2 ml-auto flex items-center gap-3 lg:order-3">
+            <div className="order-2 ml-auto flex items-center gap-2 lg:order-3">
+              <CurrencySelect className="hidden sm:block" />
               <Button onClick={() => setIsLoginOpen(true)} className="px-5 py-2.5">
                 Login
               </Button>

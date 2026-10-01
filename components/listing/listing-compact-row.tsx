@@ -4,7 +4,8 @@ import { Listing } from "@/types";
 import { ListingTitle } from "@/components/listing/listing-card";
 import { StatusBadge } from "@/components/listing/status-badge";
 import { getCategoryLabel, getPartner } from "@/lib/listing-helpers";
-import { cn, formatCurrency } from "@/lib/utils";
+import { Price } from "@/components/ui/price";
+import { cn } from "@/lib/utils";
 
 export const compactColumns = "lg:grid-cols-[2fr_1fr_1.2fr_1fr_0.8fr]";
 
@@ -26,14 +27,9 @@ export function ListingCompactRow({ listing }: { listing: Listing }) {
       </div>
       <p className="text-sm text-muted">{getCategoryLabel(listing.categoryId)}</p>
       <p className="text-sm text-ink">{getPartner(listing.partnerId)?.name}</p>
-      <p
-        className={cn(
-          "font-semibold lg:text-right",
-          listing.status === "sold" ? "text-muted line-through" : "text-primary"
-        )}
-      >
-        {formatCurrency(listing.price, listing.currency)}
-      </p>
+      <div className="lg:text-right">
+        <Price eur={listing.price} sold={listing.status === "sold"} className="font-semibold text-primary" />
+      </div>
       <div className="lg:text-right">
         <StatusBadge status={listing.status} />
       </div>

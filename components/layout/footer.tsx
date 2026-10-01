@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { RATES_DATE, RATES_SOURCE } from "@/data/currencies";
 import { getAssetPath } from "@/lib/site";
+import { formatDate } from "@/lib/utils";
 
 export function Footer() {
   return (
@@ -41,6 +43,10 @@ export function Footer() {
             <p className="text-sm uppercase tracking-[0.18em] text-white/75">Note</p>
             <p className="support-copy mt-4 max-w-md text-white/80">
               Presentation prototype: listings, sellers and messages are fictional and nothing is sent or stored.
+            </p>
+            <p className="support-copy mt-3 max-w-md text-white/80">
+              Sellers price their assets in EUR. Other currencies are converted at indicative {RATES_SOURCE} of{" "}
+              {formatDate(RATES_DATE)}.
             </p>
           </div>
         </div>

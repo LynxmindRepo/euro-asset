@@ -5,7 +5,8 @@ import { ListingTitle, PartnerLine, SessionOnlyNote } from "@/components/listing
 import { StatusBadge } from "@/components/listing/status-badge";
 import { getCategoryLabel, getOriginLabel } from "@/lib/listing-helpers";
 import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
-import { cn, formatCurrency, formatPublished, formatSpecValue } from "@/lib/utils";
+import { Price } from "@/components/ui/price";
+import { cn, formatPublished, formatSpecValue } from "@/lib/utils";
 
 export function ListingListRow({ listing }: { listing: Listing }) {
   return (
@@ -43,14 +44,11 @@ export function ListingListRow({ listing }: { listing: Listing }) {
           ) : null}
         </div>
         <div className="flex flex-col justify-between gap-4 lg:min-w-52 lg:items-end lg:text-right">
-          <p
-            className={cn(
-              "font-display text-3xl font-semibold tracking-[-0.03em]",
-              listing.status === "sold" ? "text-muted line-through" : "text-primary"
-            )}
-          >
-            {formatCurrency(listing.price, listing.currency)}
-          </p>
+          <Price
+            eur={listing.price}
+            sold={listing.status === "sold"}
+            className="font-display text-3xl font-semibold tracking-[-0.03em] text-primary"
+          />
           <div className="grid gap-1">
             <PartnerLine partnerId={listing.partnerId} />
             <p className="text-xs text-muted">Published {formatPublished(listing.publishedAt).toLowerCase()}</p>

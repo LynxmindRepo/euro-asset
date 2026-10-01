@@ -10,7 +10,8 @@ import { Input, Textarea } from "@/components/ui/input";
 import { useMockSession } from "@/features/auth/mock-session";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { getOriginLabel, getPartner, getPartnerTypeLabel } from "@/lib/listing-helpers";
-import { cn, formatCurrency, formatDate } from "@/lib/utils";
+import { Price } from "@/components/ui/price";
+import { cn, formatDate } from "@/lib/utils";
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
@@ -68,14 +69,14 @@ export function ContactPanel({ listing }: { listing: Listing }) {
           <span className="rounded-full bg-surface-low px-3 py-1 text-xs text-ink">{getOriginLabel(listing.origin)}</span>
         </div>
         <p className="mt-4 text-sm text-muted">Asking price</p>
-        <p
-          className={cn(
-            "mt-1 font-display text-4xl font-semibold tracking-[-0.04em]",
-            isSold ? "text-muted line-through" : "text-primary"
-          )}
-        >
-          {formatCurrency(listing.price, listing.currency)}
-        </p>
+        <div className="mt-1">
+          <Price
+            eur={listing.price}
+            sold={isSold}
+            className="font-display text-4xl font-semibold tracking-[-0.04em] text-primary"
+            originalClassName="mt-1 text-sm"
+          />
+        </div>
         <p className="mt-2 text-xs text-muted">Excl. VAT, transport and registration costs.</p>
         {!isSold ? (
           <a href="#cost-estimator" className="mt-3 inline-flex text-sm font-semibold text-primary">

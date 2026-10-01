@@ -15,7 +15,8 @@ export type ListingFilterState = {
   sortBy?: string;
 };
 
-export function useListingFilters(listings: Listing[], initialState?: ListingFilterState) {
+/** `rate` converts EUR to the visitor's currency: min/max price are typed in that currency. */
+export function useListingFilters(listings: Listing[], initialState?: ListingFilterState, rate = 1) {
   const [query, setQuery] = useState(initialState?.query ?? "");
   const [categoryId, setCategoryId] = useState(initialState?.categoryId ?? "all");
   const [country, setCountry] = useState(initialState?.country ?? "all");
@@ -27,8 +28,8 @@ export function useListingFilters(listings: Listing[], initialState?: ListingFil
 
   const filtered = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    const min = Number(minPrice) || 0;
-    const max = Number(maxPrice) || Number.POSITIVE_INFINITY;
+    const min = (Number(minPrice) || 0) / rate;
+    const max = (Number(maxPrice) || Number.POSITIVE_INFINITY) / rate;
 
     const result = listings.filter((listing) => {
       const matchesQuery =
@@ -60,7 +61,7 @@ export function useListingFilters(listings: Listing[], initialState?: ListingFil
       if (sortBy === "alphabetical") return left.title.localeCompare(right.title);
       return new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime();
     });
-  }, [listings, query, categoryId, country, origin, status, minPrice, maxPrice, sortBy]);
+  }, [listings, query, categoryId, country, origin, status, minPrice, maxPrice, sortBy, rate]);
 
   function clearFilters() {
     setQuery("");

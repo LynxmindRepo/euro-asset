@@ -11,6 +11,7 @@ import { ListingListRow } from "@/components/listing/listing-list-row";
 import { Select } from "@/components/ui/select";
 import { useListingFilters } from "@/features/listings/use-listing-filters";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
+import { useCurrency } from "@/features/preferences/currency-context";
 import { getListingCountries } from "@/lib/listing-helpers";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +25,7 @@ const views: { id: View; label: string }[] = [
 
 export default function ListingsPage() {
   const { listings } = useMarketplace();
+  const { currency, rate } = useCurrency();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -37,7 +39,7 @@ export default function ListingsPage() {
     minPrice: searchParams.get("min") ?? "",
     maxPrice: searchParams.get("max") ?? "",
     sortBy: searchParams.get("sort") ?? "latest"
-  });
+  }, rate);
   const [view, setView] = useState<View>((searchParams.get("view") as View | null) ?? "grid");
   const pageSize = useMemo(() => (view === "compact" ? 12 : view === "list" ? 6 : 9), [view]);
   const [visibleCount, setVisibleCount] = useState(pageSize);
@@ -109,7 +111,7 @@ export default function ListingsPage() {
           </p>
 
           <div className="mt-10">
-            <ListingFilters filters={filters} countries={countries} />
+            <ListingFilters filters={filters} countries={countries} currency={currency} />
           </div>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
