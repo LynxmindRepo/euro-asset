@@ -10,7 +10,7 @@ import { StatusBadge } from "@/components/auction/status-badge";
 import { buttonStyles } from "@/components/ui/button";
 
 function getProcedureTone(value: Auction["saleProcedure"]) {
-  if (value === "insolvencia") return "bg-accent-soft text-accent-ink";
+  if (value === "insolvencia") return "bg-surface-tint text-primary";
   if (value === "venda-judicial") return "bg-primary text-white";
   if (value === "reestruturacao") return "bg-surface-high text-primary";
   return "bg-surface-low text-muted";
@@ -74,7 +74,7 @@ export function AuctionCardBase({
             <span className={`rounded-full px-3 py-1 text-xs ${getProcedureTone(auction.saleProcedure)}`}>
               {getSaleProcedureLabel(auction.saleProcedure)}
             </span>
-            <span className="rounded-full bg-accent-soft px-3 py-1 text-xs text-accent-ink">
+            <span className="rounded-full bg-surface-low px-3 py-1 text-xs text-ink">
               {auction.caseReference}
             </span>
             <span className="rounded-full bg-surface-tint px-3 py-1 text-xs text-muted">
@@ -83,7 +83,7 @@ export function AuctionCardBase({
           </div>
           <div className="mt-10 grid gap-2">
             <p className="institutional-kicker">Current proposal</p>
-            <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-accent-ink">
+            <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-primary">
               {formatCurrency(auction.currentBid)}
             </p>
             <p className="text-sm text-muted">{getTimeRemaining(auction.endDate)}</p>
@@ -136,7 +136,7 @@ export function AuctionCardBase({
         <span className={`rounded-full px-3 py-1 text-xs ${getProcedureTone(auction.saleProcedure)}`}>
           {getSaleProcedureLabel(auction.saleProcedure)}
         </span>
-        <span className="rounded-full bg-accent-soft px-3 py-1 text-xs text-accent-ink">
+        <span className="rounded-full bg-surface-low px-3 py-1 text-xs text-ink">
           {auction.caseReference}
         </span>
         <span className="rounded-full bg-surface-tint px-3 py-1 text-xs text-muted">
@@ -145,7 +145,7 @@ export function AuctionCardBase({
       </div>
       <div className="mt-10 grid gap-2">
         <p className="institutional-kicker">Current proposal</p>
-        <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-accent-ink">
+        <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-primary">
           {formatCurrency(auction.currentBid)}
         </p>
         <p className="text-sm text-muted">{getTimeRemaining(auction.endDate)}</p>

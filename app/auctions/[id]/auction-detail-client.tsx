@@ -52,7 +52,7 @@ export function AuctionDetailClient({ auction }: { auction: Auction }) {
                   <span className="rounded-full bg-surface-legal px-3 py-1 text-xs text-muted">
                     {getCountryLabel(auction.country)}
                   </span>
-                  <span className="rounded-full bg-accent-soft px-3 py-1 text-xs text-accent-ink">
+                  <span className="rounded-full bg-surface-low px-3 py-1 text-xs text-ink">
                     {auction.caseReference}
                   </span>
                   <span className="rounded-full bg-surface-tint px-3 py-1 text-xs text-muted">
@@ -69,7 +69,7 @@ export function AuctionDetailClient({ auction }: { auction: Auction }) {
                 <div className="mt-8 grid gap-3 md:grid-cols-3">
                   <div className="rounded-2xl bg-surface-tint px-4 py-4 tonal-rule">
                     <p className="institutional-kicker">Current proposal</p>
-                    <p className="mt-2 font-display text-3xl font-semibold tracking-[-0.04em] text-accent-ink">
+                    <p className="mt-2 font-display text-3xl font-semibold tracking-[-0.04em] text-primary">
                       {formatCurrency(auction.currentBid)}
                     </p>
                   </div>

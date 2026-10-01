@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getAssetPath } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -6,7 +7,13 @@ export function Footer() {
       <div className="shell py-12">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="institutional-kicker text-white/75">Institutional marketplace</p>
+            <img
+              src={getAssetPath("/brand/bridgeon-logo-full.png")}
+              alt="Bridgeon Assets"
+              width={640}
+              height={420}
+              className="h-auto w-56"
+            />
             <h3 className="section-title mt-4 max-w-3xl text-white">
               Visual prototype for European special situations and industrial asset sales.
             </h3>

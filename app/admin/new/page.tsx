@@ -318,7 +318,7 @@ export default function NewAuctionPage() {
               </div>
               <div className="mt-6 rounded-[1.5rem] bg-surface-low p-5">
                 <p className="institutional-kicker">Opening value in EUR</p>
-                <p className="mt-2 font-display text-4xl font-semibold tracking-[-0.05em] text-accent-ink">
+                <p className="mt-2 font-display text-4xl font-semibold tracking-[-0.05em] text-primary">
                   {formatCurrency(preview.basePrice)}
                 </p>
               </div>
@@ -328,7 +328,7 @@ export default function NewAuctionPage() {
               </div>
               <div className="mt-6 grid gap-3">
                 {preview.executiveSummary.map((item) => (
-                  <div key={item} className="rounded-2xl bg-accent-soft px-4 py-4 text-sm text-accent-ink">
+                  <div key={item} className="rounded-2xl bg-surface-low px-4 py-4 text-sm text-ink">
                     {item}
                   </div>
                 ))}

@@ -22,10 +22,10 @@ export function Hero() {
             <div className="rounded-2xl bg-white/10 px-4 py-4 backdrop-blur-sm">Structured proposal dossier workflow</div>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/auctions" className={buttonStyles("primary", "no-underline")}>
+            <Link href="/auctions" className={buttonStyles("accent", "no-underline")}>
               Explore processes
             </Link>
-            <Link href="/cart" className={buttonStyles("accent", "no-underline")}>
+            <Link href="/cart" className={buttonStyles("outline-light", "no-underline")}>
               Review dossier
             </Link>
           </div>

@@ -1,17 +1,20 @@
 import Link from "next/link";
+import { getAssetPath } from "@/lib/site";
 
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-3 no-underline">
-      <span className="flex h-11 w-11 items-end justify-center rounded-[1.1rem] bg-primary p-2">
-        <span className="flex h-full w-full items-end gap-1">
-          <span className="h-4 w-2 rounded-full bg-accent/70" />
-          <span className="h-6 w-2 rounded-full bg-accent/85" />
-          <span className="h-8 w-2 rounded-full bg-gradient-to-t from-accent to-[#ffb27f]" />
-        </span>
-      </span>
-      <span className="whitespace-nowrap font-display text-xl font-bold tracking-[-0.04em] text-primary">
-        Bridgeon Assets
+      {/* Decorative: the accessible name comes from the wordmark text. */}
+      <img
+        src={getAssetPath("/brand/bridgeon-mark.png")}
+        alt=""
+        width={80}
+        height={44}
+        className="h-11 w-auto rounded-xl"
+      />
+      {/* "Assets" uses the brand orange as in the logo (logotypes are exempt from WCAG 1.4.3). */}
+      <span className="whitespace-nowrap font-brand text-[1.55rem] font-semibold leading-none tracking-[0.05em] text-primary">
+        Bridgeon <span className="text-accent">Assets</span>
       </span>
     </Link>
   );

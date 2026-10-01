@@ -46,10 +46,10 @@ export default function SuccessPage() {
               </div>
             ) : null}
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/auctions" className={buttonStyles("primary", "no-underline")}>
+              <Link href="/auctions" className={buttonStyles("accent", "no-underline")}>
                 Back to processes
               </Link>
-              <Link href="/admin" className={buttonStyles("accent", "no-underline")}>
+              <Link href="/admin" className={buttonStyles("outline-light", "no-underline")}>
                 Open admin area
               </Link>
             </div>

@@ -36,7 +36,8 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-manrope)", "sans-serif"],
-        body: ["var(--font-inter)", "sans-serif"]
+        body: ["var(--font-inter)", "sans-serif"],
+        brand: ["var(--font-brand)", "Georgia", "serif"]
       },
       boxShadow: {
         ambient: "0 20px 40px rgba(25, 28, 30, 0.06)",

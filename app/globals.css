@@ -11,17 +11,17 @@
   --surface-tint: 229 237 245;
   --surface-legal: 232 238 244;
   /* Brand: navy */
-  --primary: 10 34 68;
-  --primary-container: 20 54 102;
-  --primary-accent: 36 80 140;
+  --primary: 0 24 62; /* #00183E — brand navy (from logo) */
+  --primary-container: 8 40 92;
+  --primary-accent: 22 60 120;
   /* Brand: orange. `accent` is for fills/decoration only (navy text on it, never white);
      `accent-ink` is the orange for text/icons on light surfaces (>= 5:1 on every surface). */
-  --accent: 242 107 29;
+  --accent: 250 111 6; /* #FA6F06 — brand orange (from logo) */
   --accent-ink: 166 62 6;
   --accent-soft: 255 237 224;
   --ink: 25 28 30;
   --muted: 89 98 106;
-  --tint: 10 34 68;
+  --tint: 0 24 62;
   --danger: 243 230 231;
   --danger-ink: 113 52 58;
   --success: 229 237 232;
@@ -37,7 +37,7 @@ html {
 body {
   @apply bg-surface font-body text-ink antialiased;
   background-image:
-    radial-gradient(circle at top left, rgba(242, 107, 29, 0.05), transparent 28%),
+    radial-gradient(circle at top left, rgba(0, 24, 62, 0.05), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 16%);
 }
 

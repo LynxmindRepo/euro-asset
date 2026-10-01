@@ -61,7 +61,7 @@ export function AuctionListRow({ auction }: { auction: Auction }) {
         <div className="mt-6 grid gap-3 text-sm text-muted sm:grid-cols-3">
           <div className="flex min-h-[7.25rem] flex-col justify-between rounded-2xl bg-surface-tint px-4 py-4 tonal-rule">
             <p className="institutional-kicker">Current value</p>
-            <p className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-accent-ink">
+            <p className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-primary">
               {formatCurrency(auction.currentBid)}
             </p>
           </div>

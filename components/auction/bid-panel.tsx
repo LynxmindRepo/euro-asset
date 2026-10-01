@@ -174,7 +174,7 @@ export function BidPanel({ auction }: { auction: Auction }) {
         </p>
         <div className="mt-4">
           <p className="text-sm text-muted">Current reference</p>
-          <p className="mt-2 font-display text-4xl font-semibold tracking-[-0.05em] text-accent-ink">
+          <p className="mt-2 font-display text-4xl font-semibold tracking-[-0.05em] text-primary">
             {formatCurrency(auction.currentBid)}
           </p>
         </div>
