@@ -60,3 +60,17 @@ export function getLatestListings(listings: Listing[], count = 6) {
     .sort((left, right) => new Date(right.publishedAt).getTime() - new Date(left.publishedAt).getTime())
     .slice(0, count);
 }
+
+// Placeholder image per category, used when a new listing has no photos yet.
+const categoryPlaceholders: Record<string, string> = {
+  vehicles: "/listings/truck.svg",
+  machinery: "/listings/excavator.svg",
+  "real-estate": "/lisbon-terminal-hero.png",
+  inventory: "/listings/pallets.svg",
+  "it-office": "/listings/office.svg",
+  energy: "/valencia-solar-hero.png"
+};
+
+export function getCategoryPlaceholder(categoryId: string) {
+  return categoryPlaceholders[categoryId] ?? "/listings/pallets.svg";
+}

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 const items = [
   { href: "/admin", label: "Dashboard" },
+  { href: "/admin/import", label: "Import listing" },
   { href: "/admin/new", label: "New listing" }
 ];
 

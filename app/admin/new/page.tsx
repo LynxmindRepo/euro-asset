@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/admin/sidebar";
 import { FormField } from "@/components/admin/form-field";
@@ -12,19 +13,11 @@ import { Select } from "@/components/ui/select";
 import { categories } from "@/data/categories";
 import { useMockSession } from "@/features/auth/mock-session";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
+import { getCategoryPlaceholder } from "@/lib/listing-helpers";
 import { getAssetPath } from "@/lib/site";
 import { formatCurrency } from "@/lib/utils";
 import { ListingOrigin } from "@/types";
 
-// Placeholder illustration per category, used when no image path is given.
-const categoryImages: Record<string, string> = {
-  vehicles: "/listings/truck.svg",
-  machinery: "/listings/excavator.svg",
-  "real-estate": "/lisbon-terminal-hero.png",
-  inventory: "/listings/pallets.svg",
-  "it-office": "/listings/office.svg",
-  energy: "/valencia-solar-hero.png"
-};
 
 const splitList = (value: string) =>
   value
@@ -59,7 +52,7 @@ export default function NewListingPage() {
   }
 
   const images = splitList(form.images);
-  const previewImage = images[0] ?? categoryImages[form.categoryId] ?? "/listings/pallets.svg";
+  const previewImage = images[0] ?? getCategoryPlaceholder(form.categoryId);
 
   if (!currentUser || currentUser.role !== "admin") {
     return (
@@ -112,7 +105,12 @@ export default function NewListingPage() {
             <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">New listing</h1>
             <p className="support-copy mt-2 max-w-2xl">
               The same information you already prepared for your local sale: category, location, photos and a
-              description. The listing is created in memory for this demo session.
+              description. The listing is created in memory for this demo session. Already have the listing written
+              somewhere?{" "}
+              <Link href="/admin/import" className="font-semibold text-primary">
+                Import it automatically
+              </Link>
+              .
             </p>
 
             <div className="mt-8 grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">

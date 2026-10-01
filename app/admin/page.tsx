@@ -52,9 +52,14 @@ export default function AdminPage() {
           <div className="grid gap-8">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">Dashboard</h1>
-              <Link href="/admin/new" className={buttonStyles("accent", "no-underline")}>
-                New listing
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/admin/import" className={buttonStyles("accent", "no-underline")}>
+                  Import listing
+                </Link>
+                <Link href="/admin/new" className={buttonStyles("secondary", "no-underline")}>
+                  New listing
+                </Link>
+              </div>
             </div>
 
             <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

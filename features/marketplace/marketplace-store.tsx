@@ -38,7 +38,7 @@ function buildListingFromInput(input: NewListingInput, createdBy: string): Listi
     region: input.region,
     country: input.country,
     images: input.images,
-    specs: [],
+    specs: input.specs ?? [],
     highlights: input.highlights,
     partnerId: input.partnerId,
     requiresRegistration: input.requiresRegistration,

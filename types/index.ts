@@ -115,4 +115,6 @@ export type NewListingInput = {
   images: string[];
   highlights: string[];
   requiresRegistration: boolean;
+  /** Optional — filled by the listing import tool. */
+  specs?: ListingSpec[];
 };

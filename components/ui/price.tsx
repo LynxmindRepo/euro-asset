@@ -26,7 +26,7 @@ export function Price({
   return (
     <span className="block">
       {/* A sold price is struck through and muted, whatever colour the caller asked for. */}
-      <span className={cn(sold ? className?.replace(/text-primary/g, "") : className, sold && "text-muted line-through")}>
+      <span className={cn(sold ? className?.replace(/\btext-primary\b/g, "") : className, sold && "text-muted line-through")}>
         {converted ? <span aria-hidden="true">≈ </span> : null}
         {converted ? <span className="sr-only">approximately </span> : null}
         {format(eur)}
