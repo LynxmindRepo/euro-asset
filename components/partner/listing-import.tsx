@@ -455,7 +455,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
           <aside aria-label="Preview" className="overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule lg:sticky lg:top-28">
             <img src={getAssetPath(getCategoryPlaceholder(form.categoryId))} alt="" className="h-48 w-full object-cover" />
             <div className="p-5">
-              <p className="institutional-kicker">Preview</p>
+              <p className="eyebrow">Preview</p>
               <p className="mt-2 font-display text-xl font-semibold text-ink">{form.title || "Untitled listing"}</p>
               <p className="mt-1 text-sm text-muted">{[form.city, form.country].filter(Boolean).join(", ") || "Location missing"}</p>
               <div className="mt-3">

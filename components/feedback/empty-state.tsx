@@ -14,7 +14,6 @@ export function EmptyState({
 }) {
   return (
     <div className="panel-xl bg-surface-low text-center">
-      <p className="institutional-kicker">Empty state</p>
       <h3 className="subsection-title mt-3">{title}</h3>
       <p className="support-copy mx-auto mt-3 max-w-xl">{description}</p>
       {href && cta ? (

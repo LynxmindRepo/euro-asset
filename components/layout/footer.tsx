@@ -22,7 +22,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <p className="text-sm uppercase tracking-[0.18em] text-white/75">Navigate</p>
+            <p className="text-sm font-semibold text-white/75">Navigate</p>
             <div className="mt-4 grid gap-3 text-sm text-white/80">
               <Link href="/" className="no-underline transition hover:text-white">
                 Overview
@@ -43,7 +43,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="text-sm uppercase tracking-[0.18em] text-white/75">Note</p>
+            <p className="text-sm font-semibold text-white/75">About this demo</p>
             <p className="support-copy mt-4 max-w-md text-white/80">
               Presentation prototype: listings, sellers and messages are fictional and nothing is sent or stored.
             </p>

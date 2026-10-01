@@ -123,7 +123,7 @@ export default function ListingsPage() {
     <PageShell>
       <section className="section-space">
         <div className="shell">
-          <p className="institutional-kicker">Listings across Europe</p>
+          <p className="eyebrow">Listings across Europe</p>
           <h1 className="page-title mt-3 max-w-4xl text-[clamp(2.3rem,4vw,3.4rem)]">
             Insolvency assets from professional sellers, in one search.
           </h1>
@@ -219,11 +219,11 @@ export default function ListingsPage() {
                       aria-hidden="true"
                       className={cn("hidden rounded-2xl bg-surface-tint px-5 py-3 lg:grid lg:gap-4", compactColumns)}
                     >
-                      <p className="institutional-kicker">Asset</p>
-                      <p className="institutional-kicker">Category</p>
-                      <p className="institutional-kicker">Seller</p>
-                      <p className="institutional-kicker text-right">Price</p>
-                      <p className="institutional-kicker text-right">Status</p>
+                      <p className="eyebrow">Asset</p>
+                      <p className="eyebrow">Category</p>
+                      <p className="eyebrow">Seller</p>
+                      <p className="eyebrow text-right">Price</p>
+                      <p className="eyebrow text-right">Status</p>
                     </div>
                     {visibleListings.map((listing) => (
                       <ListingCompactRow key={listing.id} listing={listing} />

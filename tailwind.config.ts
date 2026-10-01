@@ -17,7 +17,6 @@ const config: Config = {
         "surface-lowest": "rgb(var(--surface-lowest) / <alpha-value>)",
         "surface-bright": "rgb(var(--surface-bright) / <alpha-value>)",
         "surface-tint": "rgb(var(--surface-tint) / <alpha-value>)",
-        "surface-legal": "rgb(var(--surface-legal) / <alpha-value>)",
         primary: "rgb(var(--primary) / <alpha-value>)",
         "primary-container": "rgb(var(--primary-container) / <alpha-value>)",
         "primary-accent": "rgb(var(--primary-accent) / <alpha-value>)",

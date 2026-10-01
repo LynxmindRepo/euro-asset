@@ -9,7 +9,6 @@
   --surface-lowest: 255 255 255;
   --surface-bright: 251 252 253;
   --surface-tint: 229 237 245;
-  --surface-legal: 232 238 244;
   /* Brand: navy */
   --primary: 0 24 62; /* #00183E — brand navy (from logo) */
   --primary-container: 8 40 92;
@@ -58,7 +57,6 @@ a {
 
 .bg-primary :focus-visible,
 .bg-midnight-gradient :focus-visible,
-.display-frame :focus-visible,
 footer :focus-visible {
   outline-color: #fff;
 }
@@ -110,49 +108,25 @@ footer :focus-visible {
     @apply py-20;
   }
 
-  .surface-base {
-    @apply bg-surface;
-  }
-
   .surface-mid {
     @apply bg-surface-low;
   }
 
-  .surface-top {
-    @apply bg-surface-lowest;
-  }
-
-  .surface-utility {
-    @apply bg-surface-high;
-  }
-
-  .surface-tint {
-    @apply bg-surface-tint;
-  }
-
-  .surface-legal {
-    @apply bg-surface-legal;
-  }
-
-  .surface-float {
-    @apply bg-surface-bright/90 backdrop-blur-xl;
-    box-shadow: 0 22px 50px rgba(10, 26, 47, 0.08);
-  }
-
-  .institutional-kicker {
-    @apply font-body text-xs uppercase tracking-[0.18em] text-muted;
+  /* Small label above a title. Sentence case, no forced capitals — plain and direct, not "institutional". */
+  .eyebrow {
+    @apply font-body text-sm font-medium text-muted;
   }
 
   .page-title {
-    @apply font-display text-5xl font-semibold tracking-[-0.05em];
+    @apply font-display text-5xl font-semibold tracking-[-0.03em];
   }
 
   .section-title {
-    @apply font-display text-4xl font-semibold tracking-[-0.05em];
+    @apply font-display text-4xl font-semibold tracking-[-0.03em];
   }
 
   .subsection-title {
-    @apply font-display text-3xl font-semibold tracking-[-0.04em];
+    @apply font-display text-3xl font-semibold tracking-[-0.02em];
   }
 
   .body-copy {
@@ -161,29 +135,6 @@ footer :focus-visible {
 
   .support-copy {
     @apply text-sm leading-6 text-muted;
-  }
-
-  .display-frame {
-    @apply rounded-3xl bg-midnight-gradient text-white shadow-ambient;
-    box-shadow:
-      0 24px 60px rgba(7, 25, 50, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  }
-
-  .ghost-outline {
-    box-shadow: inset 0 0 0 2px rgba(0, 30, 64, 0.15);
-  }
-
-  .soft-hover {
-    @apply transition duration-200 hover:bg-[rgba(0,30,64,0.05)];
-  }
-
-  .editorial-panel {
-    @apply rounded-[2rem] bg-surface-low px-6 py-7;
-  }
-
-  .premium-card {
-    @apply rounded-[1.75rem] bg-surface-lowest shadow-ambient;
   }
 
   .metric-figure {
@@ -196,10 +147,6 @@ footer :focus-visible {
 
   .panel-xl {
     @apply rounded-[2rem] p-8;
-  }
-
-  .panel-fill {
-    @apply bg-surface-lowest shadow-ambient tonal-rule;
   }
 
   .field-label {
@@ -217,11 +164,6 @@ footer :focus-visible {
     @apply placeholder:text-muted;
     /* Invalid fields get a visible border too (errors are never shown by colour alone: the message text is always there). */
     @apply aria-[invalid=true]:shadow-[inset_0_0_0_2px_rgb(var(--danger-ink))];
-  }
-
-  .legal-panel {
-    @apply rounded-[1.75rem] bg-surface-legal p-6;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
   }
 
   .tonal-rule {

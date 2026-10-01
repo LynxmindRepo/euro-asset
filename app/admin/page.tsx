@@ -65,7 +65,7 @@ export default function AdminPage() {
             <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {metrics.map((metric) => (
                 <Card key={metric.label} variant="metric">
-                  <dt className="institutional-kicker">{metric.label}</dt>
+                  <dt className="eyebrow">{metric.label}</dt>
                   <dd className="metric-figure mt-3 text-primary">{metric.value}</dd>
                 </Card>
               ))}

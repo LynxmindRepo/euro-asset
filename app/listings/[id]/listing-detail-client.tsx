@@ -52,7 +52,7 @@ export function ListingDetailClient({ listing: initial }: { listing: Listing }) 
             <Gallery images={listing.images} title={listing.title} />
 
             <header>
-              <p className="institutional-kicker">
+              <p className="eyebrow">
                 {getCategoryLabel(listing.categoryId)} · {getOriginLabel(listing.origin)}
               </p>
               <h1 className="page-title mt-3 text-[clamp(2rem,4vw,3rem)]">{listing.title}</h1>

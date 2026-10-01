@@ -11,7 +11,7 @@ export function ListingFilters({ filters, countries, currency }: { filters: Filt
   return (
     <section aria-labelledby="filters-title" className="rounded-[2rem] bg-surface-low px-5 py-5 shadow-ambient tonal-rule">
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
-        <h2 id="filters-title" className="institutional-kicker">
+        <h2 id="filters-title" className="eyebrow">
           Search and filter
         </h2>
         {filters.activeCount > 0 ? (

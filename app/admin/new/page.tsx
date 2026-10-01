@@ -192,7 +192,7 @@ export default function NewListingPage() {
               <aside aria-label="Preview" className="h-fit overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule">
                 <img src={getAssetPath(previewImage)} alt="" className="h-48 w-full object-cover" />
                 <div className="p-5">
-                  <p className="institutional-kicker">Preview</p>
+                  <p className="eyebrow">Preview</p>
                   <p className="mt-2 font-display text-xl font-semibold text-ink">{form.title || "Untitled listing"}</p>
                   <p className="mt-1 text-sm text-muted">
                     {form.city}, {form.country}

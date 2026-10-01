@@ -178,9 +178,9 @@ export function Header() {
           >
             <div className="flex items-start justify-between gap-6">
               <div>
-                <p className="institutional-kicker">Mock sign in</p>
+                <p className="eyebrow">Demo sign in</p>
                 <h2 id="mock-login-title" className="subsection-title mt-3">
-                  Enter the platform with a demo profile.
+                  Choose a demo profile
                 </h2>
                 <p className="support-copy mt-3 max-w-2xl">
                   Demo login only — no real account is created. Switch between
@@ -210,7 +210,7 @@ export function Header() {
                   <div className="flex items-center justify-between gap-4">
                     <span
                       className={cn(
-                        "rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em]",
+                        "rounded-full px-3 py-1 text-xs font-semibold",
                         user.role === "admin" && "bg-surface-high text-primary",
                         user.role === "partner" && "bg-accent text-primary",
                         user.role === "user" && "bg-primary text-white"
@@ -218,7 +218,7 @@ export function Header() {
                     >
                       {roleCopy[user.role].badge}
                     </span>
-                    <span className="text-xs uppercase tracking-[0.16em] text-muted group-hover:text-primary">
+                    <span className="text-sm font-medium text-muted group-hover:text-primary">
                       Sign in
                     </span>
                   </div>

@@ -87,7 +87,7 @@ export function ContactPanel({ listing }: { listing: Listing }) {
 
       {partner ? (
         <section aria-labelledby="seller-title" className="rounded-[1.75rem] bg-surface-lowest p-6 shadow-panel tonal-rule">
-          <p className="institutional-kicker">Disposal Partner</p>
+          <p className="eyebrow">Disposal Partner</p>
           <h2 id="seller-title" className="mt-2 font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
             {partner.name}
           </h2>

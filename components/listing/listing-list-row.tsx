@@ -26,7 +26,7 @@ export function ListingListRow({ listing }: { listing: Listing }) {
       </div>
       <div className="grid gap-5 p-6 lg:grid-cols-[1fr_auto]">
         <div>
-          <p className="institutional-kicker">
+          <p className="eyebrow">
             {getCategoryLabel(listing.categoryId)} · {getOriginLabel(listing.origin)}
           </p>
           <h3 className="mt-2 font-display text-2xl font-semibold leading-snug tracking-[-0.03em] text-ink">

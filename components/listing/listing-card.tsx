@@ -54,7 +54,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <p className="institutional-kicker">{getCategoryLabel(listing.categoryId)}</p>
+        <p className="eyebrow">{getCategoryLabel(listing.categoryId)}</p>
         <h3 className="mt-2 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-ink">
           <ListingTitle listing={listing} />
         </h3>

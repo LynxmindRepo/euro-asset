@@ -15,7 +15,7 @@ export function AdminSidebar() {
 
   return (
     <aside aria-label="Admin" className="h-fit rounded-[2rem] bg-surface-low p-4 tonal-rule">
-      <p className="institutional-kicker px-3 pt-2">Administrative area</p>
+      <p className="eyebrow px-3 pt-2">Back office</p>
       <p className="px-3 pt-3 text-sm leading-6 text-muted">
         Publish listings, follow buyer messages and see the marketplace at a glance.
       </p>
