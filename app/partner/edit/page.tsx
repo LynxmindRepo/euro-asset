@@ -8,8 +8,10 @@ import { useToast } from "@/components/feedback/toast-provider";
 import { PartnerShell } from "@/components/partner/partner-shell";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/input";
+import { PhotoUploader } from "@/components/ui/photo-uploader";
 import { Select } from "@/components/ui/select";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
+import { getCategoryPlaceholder } from "@/lib/listing-helpers";
 import { Listing, ListingStatus } from "@/types";
 
 // Static export: the listing id comes from the query string (?id=…), so this one page can edit any listing,
@@ -52,6 +54,7 @@ function EditForm({ listing }: { listing: Listing }) {
     highlights: listing.highlights.join(", ")
   });
   const [error, setError] = useState("");
+  const [photos, setPhotos] = useState<string[]>(listing.images);
 
   function update<K extends keyof typeof form>(key: K, value: (typeof form)[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -73,6 +76,7 @@ function EditForm({ listing }: { listing: Listing }) {
       city: form.city.trim(),
       region: form.region.trim(),
       country: form.country.trim(),
+      images: photos.length > 0 ? photos : [getCategoryPlaceholder(listing.categoryId)],
       highlights: form.highlights
         .split(",")
         .map((item) => item.trim())
@@ -128,6 +132,7 @@ function EditForm({ listing }: { listing: Listing }) {
           <Input value={form.country} onChange={(event) => update("country", event.target.value)} />
         </FormField>
       </div>
+      <PhotoUploader photos={photos} onChange={setPhotos} label="Photos" />
       <FormField label="Highlights" hint="Comma separated.">
         <Input value={form.highlights} onChange={(event) => update("highlights", event.target.value)} />
       </FormField>

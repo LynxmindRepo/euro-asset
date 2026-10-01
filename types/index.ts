@@ -31,7 +31,7 @@ export type User = {
 
 /** Fields a Disposal Partner can change on an existing listing. */
 export type ListingUpdate = Partial<
-  Pick<Listing, "title" | "description" | "price" | "status" | "city" | "region" | "country" | "highlights">
+  Pick<Listing, "title" | "description" | "price" | "status" | "city" | "region" | "country" | "highlights" | "images">
 >;
 
 /** A professional seller (broker, licensed auctioneer, disposal firm or administrator). */

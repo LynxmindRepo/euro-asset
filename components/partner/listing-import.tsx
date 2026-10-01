@@ -6,6 +6,7 @@ import { useToast } from "@/components/feedback/toast-provider";
 import { Banner } from "@/components/feedback/banner";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/input";
+import { PhotoUploader } from "@/components/ui/photo-uploader";
 import { Price } from "@/components/ui/price";
 import { Select } from "@/components/ui/select";
 import { SparkleIcon } from "@/components/ui/sparkle-icon";
@@ -54,6 +55,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
   const [form, setForm] = useState<ImportResult["listing"] | null>(null);
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [announcement, setAnnouncement] = useState("");
+  const [photos, setPhotos] = useState<string[]>([]);
   const reviewHeading = useRef<HTMLHeadingElement>(null);
 
   function convert() {
@@ -125,7 +127,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
         region: "",
         country: form.country.trim(),
         partnerId,
-        images: [getCategoryPlaceholder(form.categoryId)],
+        images: photos.length > 0 ? photos : [getCategoryPlaceholder(form.categoryId)],
         highlights: form.highlights,
         requiresRegistration: form.requiresRegistration,
         specs: form.specs
@@ -381,6 +383,8 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
                 />
               </div>
 
+              <PhotoUploader photos={photos} onChange={setPhotos} label="Photos" />
+
               <fieldset className="grid gap-2">
                 <legend className="field-label mb-2">Specifications found</legend>
                 {form.specs.length === 0 ? (
@@ -443,6 +447,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
                   onClick={() => {
                     setPhase("input");
                     setResult(null);
+                    setPhotos([]);
                     setErrors({});
                   }}
                 >
@@ -453,7 +458,7 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
           </section>
 
           <aside aria-label="Preview" className="overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule lg:sticky lg:top-28">
-            <img src={getAssetPath(getCategoryPlaceholder(form.categoryId))} alt="" className="h-48 w-full object-cover" />
+            <img src={getAssetPath(photos[0] ?? getCategoryPlaceholder(form.categoryId))} alt="" className="h-48 w-full object-cover" />
             <div className="p-5">
               <p className="eyebrow">Preview</p>
               <p className="mt-2 font-display text-xl font-semibold text-ink">{form.title || "Untitled listing"}</p>
@@ -470,7 +475,9 @@ export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixed
                   ))}
                 </ul>
               ) : null}
-              <p className="mt-4 text-xs text-muted">Add real photos after publishing — a category illustration is used for now.</p>
+              {photos.length === 0 ? (
+                <p className="mt-4 text-xs text-muted">No photos yet — a category illustration is used until you add some.</p>
+              ) : null}
             </div>
           </aside>
         </div>

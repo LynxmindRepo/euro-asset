@@ -9,6 +9,7 @@ import { useToast } from "@/components/feedback/toast-provider";
 import { PageShell } from "@/components/layout/page-shell";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/input";
+import { PhotoUploader } from "@/components/ui/photo-uploader";
 import { Select } from "@/components/ui/select";
 import { categories } from "@/data/categories";
 import { useMockSession } from "@/features/auth/mock-session";
@@ -42,7 +43,6 @@ export default function NewListingPage() {
     region: "Norte",
     country: "Portugal",
     partnerId: partners[0]?.id ?? "",
-    images: "",
     highlights: "Full service history, Recent tyres, Ready for export",
     requiresRegistration: true
   });
@@ -51,8 +51,8 @@ export default function NewListingPage() {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  const images = splitList(form.images);
-  const previewImage = images[0] ?? getCategoryPlaceholder(form.categoryId);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const previewImage = photos[0] ?? getCategoryPlaceholder(form.categoryId);
 
   if (!currentUser || currentUser.role !== "admin") {
     return (
@@ -85,7 +85,7 @@ export default function NewListingPage() {
         region: form.region.trim(),
         country: form.country.trim(),
         partnerId: form.partnerId,
-        images: images.length > 0 ? images : [previewImage],
+        images: photos.length > 0 ? photos : [previewImage],
         highlights: splitList(form.highlights),
         requiresRegistration: form.requiresRegistration
       },
@@ -169,9 +169,7 @@ export default function NewListingPage() {
                     <Input required value={form.country} onChange={(event) => update("country", event.target.value)} />
                   </FormField>
                 </div>
-                <FormField label="Image paths" hint="Optional, comma separated. Leave empty to use the category illustration.">
-                  <Input value={form.images} onChange={(event) => update("images", event.target.value)} />
-                </FormField>
+                <PhotoUploader photos={photos} onChange={setPhotos} label="Photos (optional — a category illustration is used if empty)" />
                 <FormField label="Highlights" hint="Comma separated.">
                   <Input value={form.highlights} onChange={(event) => update("highlights", event.target.value)} />
                 </FormField>
