@@ -10,14 +10,18 @@
   --surface-bright: 251 252 253;
   --surface-tint: 229 237 245;
   --surface-legal: 232 238 244;
-  --primary: 6 24 51;
-  --primary-container: 18 48 88;
-  --primary-accent: 34 69 115;
-  --tertiary: 236 226 194;
-  --tertiary-ink: 116 92 28;
+  /* Brand: navy */
+  --primary: 10 34 68;
+  --primary-container: 20 54 102;
+  --primary-accent: 36 80 140;
+  /* Brand: orange. `accent` is for fills/decoration only (navy text on it, never white);
+     `accent-ink` is the orange for text/icons on light surfaces (>= 5:1 on every surface). */
+  --accent: 242 107 29;
+  --accent-ink: 166 62 6;
+  --accent-soft: 255 237 224;
   --ink: 25 28 30;
   --muted: 89 98 106;
-  --tint: 0 30 64;
+  --tint: 10 34 68;
   --danger: 243 230 231;
   --danger-ink: 113 52 58;
   --success: 229 237 232;
@@ -33,7 +37,7 @@ html {
 body {
   @apply bg-surface font-body text-ink antialiased;
   background-image:
-    radial-gradient(circle at top left, rgba(34, 69, 115, 0.06), transparent 28%),
+    radial-gradient(circle at top left, rgba(242, 107, 29, 0.05), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 16%);
 }
 
@@ -42,7 +46,37 @@ a {
 }
 
 ::selection {
-  background: rgba(0, 30, 64, 0.12);
+  background: rgba(242, 107, 29, 0.22);
+}
+
+/* WCAG 2.4.7 / 1.4.11: one consistent, high-contrast keyboard focus indicator.
+   Orange-ink on light surfaces (>= 5:1), white on navy surfaces (>= 8:1). */
+:focus-visible {
+  outline: 3px solid rgb(var(--accent-ink));
+  outline-offset: 3px;
+}
+
+.bg-primary :focus-visible,
+.bg-midnight-gradient :focus-visible,
+.display-frame :focus-visible,
+footer :focus-visible {
+  outline-color: #fff;
+}
+
+/* WCAG 2.3.3: honour reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer components {
@@ -157,7 +191,7 @@ a {
   .control-base {
     @apply w-full rounded-2xl border-0 bg-surface-low px-4 py-3 text-sm text-ink outline-none transition;
     @apply shadow-[inset_0_0_0_1px_rgba(9,31,58,0.08)] hover:bg-surface-bright;
-    @apply focus:bg-surface-lowest focus:shadow-[inset_0_0_0_2px_rgba(0,30,64,0.15)];
+    @apply focus:bg-surface-lowest focus:shadow-[inset_0_0_0_2px_rgb(var(--primary))];
     @apply placeholder:text-muted;
   }
 

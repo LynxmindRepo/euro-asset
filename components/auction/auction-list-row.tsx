@@ -34,7 +34,7 @@ export function AuctionListRow({ auction }: { auction: Auction }) {
       tabIndex={hasDetailPage ? 0 : undefined}
       onClick={hasDetailPage ? openProcess : undefined}
       onKeyDown={hasDetailPage ? handleKeyDown : undefined}
-      className={`panel-lg grid gap-6 bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 lg:grid-cols-[248px_1fr_248px] lg:items-stretch ${hasDetailPage ? "cursor-pointer" : ""}`}
+      className={`panel-lg grid gap-6 bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright lg:grid-cols-[248px_1fr_248px] lg:items-stretch ${hasDetailPage ? "cursor-pointer" : ""}`}
     >
       <div className="overflow-hidden rounded-2xl">
         <img
@@ -61,7 +61,7 @@ export function AuctionListRow({ auction }: { auction: Auction }) {
         <div className="mt-6 grid gap-3 text-sm text-muted sm:grid-cols-3">
           <div className="flex min-h-[7.25rem] flex-col justify-between rounded-2xl bg-surface-tint px-4 py-4 tonal-rule">
             <p className="institutional-kicker">Current value</p>
-            <p className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-tertiary-ink">
+            <p className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-accent-ink">
               {formatCurrency(auction.currentBid)}
             </p>
           </div>

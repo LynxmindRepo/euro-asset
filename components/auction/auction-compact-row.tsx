@@ -33,7 +33,7 @@ export function AuctionCompactRow({ auction }: { auction: Auction }) {
       tabIndex={hasDetailPage ? 0 : undefined}
       onClick={hasDetailPage ? openProcess : undefined}
       onKeyDown={hasDetailPage ? handleKeyDown : undefined}
-      className={`grid gap-4 rounded-2xl bg-surface-lowest px-4 py-4 shadow-ambient tonal-rule transition hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 lg:grid-cols-[1.7fr_1.15fr_0.85fr_0.95fr_0.95fr_0.9fr] lg:items-center ${hasDetailPage ? "cursor-pointer" : ""}`}
+      className={`grid gap-4 rounded-2xl bg-surface-lowest px-4 py-4 shadow-ambient tonal-rule transition hover:bg-surface-bright lg:grid-cols-[1.7fr_1.15fr_0.85fr_0.95fr_0.95fr_0.9fr] lg:items-center ${hasDetailPage ? "cursor-pointer" : ""}`}
     >
       <div className="min-w-0">
         <p className="truncate font-display text-[1.2rem] font-semibold tracking-[-0.03em] text-ink">

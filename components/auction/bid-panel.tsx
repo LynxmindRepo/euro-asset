@@ -58,7 +58,7 @@ function BidForm({
 
       <div className="mt-5 grid gap-3 rounded-[1.25rem] bg-primary px-4 py-4 text-white">
         <div className="flex items-center justify-between gap-4 text-sm">
-          <span className="text-white/70">Increment over current reference</span>
+          <span className="text-white/75">Increment over current reference</span>
           <span className="font-semibold">{formatCurrency(currentAmount - auction.currentBid)}</span>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -174,7 +174,7 @@ export function BidPanel({ auction }: { auction: Auction }) {
         </p>
         <div className="mt-4">
           <p className="text-sm text-muted">Current reference</p>
-          <p className="mt-2 font-display text-4xl font-semibold tracking-[-0.05em] text-tertiary-ink">
+          <p className="mt-2 font-display text-4xl font-semibold tracking-[-0.05em] text-accent-ink">
             {formatCurrency(auction.currentBid)}
           </p>
         </div>

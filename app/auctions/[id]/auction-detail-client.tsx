@@ -18,7 +18,7 @@ import { Auction } from "@/types";
 function getDocumentAvailabilityClass(value: "disponivel" | "sob-pedido") {
   return value === "disponivel"
     ? "bg-success text-success-ink"
-    : "bg-tertiary text-tertiary-ink";
+    : "bg-accent-soft text-accent-ink";
 }
 
 export function AuctionDetailClient({ auction }: { auction: Auction }) {
@@ -52,7 +52,7 @@ export function AuctionDetailClient({ auction }: { auction: Auction }) {
                   <span className="rounded-full bg-surface-legal px-3 py-1 text-xs text-muted">
                     {getCountryLabel(auction.country)}
                   </span>
-                  <span className="rounded-full bg-tertiary/60 px-3 py-1 text-xs text-tertiary-ink">
+                  <span className="rounded-full bg-accent-soft px-3 py-1 text-xs text-accent-ink">
                     {auction.caseReference}
                   </span>
                   <span className="rounded-full bg-surface-tint px-3 py-1 text-xs text-muted">
@@ -69,7 +69,7 @@ export function AuctionDetailClient({ auction }: { auction: Auction }) {
                 <div className="mt-8 grid gap-3 md:grid-cols-3">
                   <div className="rounded-2xl bg-surface-tint px-4 py-4 tonal-rule">
                     <p className="institutional-kicker">Current proposal</p>
-                    <p className="mt-2 font-display text-3xl font-semibold tracking-[-0.04em] text-tertiary-ink">
+                    <p className="mt-2 font-display text-3xl font-semibold tracking-[-0.04em] text-accent-ink">
                       {formatCurrency(auction.currentBid)}
                     </p>
                   </div>
@@ -87,7 +87,7 @@ export function AuctionDetailClient({ auction }: { auction: Auction }) {
               </div>
             </section>
             <section className="panel-lg rounded-[1.75rem] bg-midnight-gradient text-white shadow-panel">
-              <p className="institutional-kicker text-white/60">Executive summary</p>
+              <p className="institutional-kicker text-white/75">Executive summary</p>
               <div className="mt-4 grid gap-3 lg:grid-cols-3">
                 {auction.executiveSummary.map((item) => (
                   <div

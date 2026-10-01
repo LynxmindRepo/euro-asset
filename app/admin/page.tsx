@@ -73,7 +73,7 @@ export default function AdminPage() {
               </Card>
               <Card variant="metric">
                 <p className="institutional-kicker">Closing soon</p>
-                <p className="mt-3 metric-figure text-tertiary-ink">{closingSoonCount}</p>
+                <p className="mt-3 metric-figure text-accent-ink">{closingSoonCount}</p>
                 <p className="mt-2 text-sm text-muted">Assets requiring immediate commercial attention</p>
               </Card>
               <Card variant="metric" className="bg-surface-legal">

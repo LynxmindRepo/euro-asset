@@ -21,7 +21,7 @@ export default function SuccessPage() {
         <div className="shell">
           <FlowSteps current="success" />
           <div className="mx-auto max-w-4xl rounded-[2.25rem] bg-midnight-gradient px-8 py-12 text-white shadow-ambient sm:px-12">
-            <p className="institutional-kicker text-white/60">Submission completed</p>
+            <p className="institutional-kicker text-white/75">Submission completed</p>
             <h1 className="mt-4 font-display text-5xl font-semibold tracking-[-0.05em]">
               Proposal dossier delivered successfully.
             </h1>
@@ -32,15 +32,15 @@ export default function SuccessPage() {
             {lastSubmission ? (
               <div className="mt-8 grid gap-4 rounded-[1.5rem] bg-white/10 p-5 backdrop-blur-md">
                 <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-white/70">Reference</span>
+                  <span className="text-white/75">Reference</span>
                   <span className="font-semibold">{lastSubmission.id}</span>
                 </div>
                 <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-white/70">Date</span>
+                  <span className="text-white/75">Date</span>
                   <span className="font-semibold">{formatDateTime(lastSubmission.createdAt)}</span>
                 </div>
                 <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-white/70">Total</span>
+                  <span className="text-white/75">Total</span>
                   <span className="font-semibold">{formatCurrency(lastSubmission.totalAmount)}</span>
                 </div>
               </div>
@@ -49,7 +49,7 @@ export default function SuccessPage() {
               <Link href="/auctions" className={buttonStyles("primary", "no-underline")}>
                 Back to processes
               </Link>
-              <Link href="/admin" className={buttonStyles("gold", "no-underline")}>
+              <Link href="/admin" className={buttonStyles("accent", "no-underline")}>
                 Open admin area
               </Link>
             </div>

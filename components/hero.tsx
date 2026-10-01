@@ -8,7 +8,7 @@ export function Hero() {
         <div className="display-frame relative overflow-hidden px-8 py-10 sm:px-12 sm:py-14">
           <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),transparent)]" />
           <div className="absolute -right-10 top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-          <p className="institutional-kicker text-white/65">European special situations platform</p>
+          <p className="institutional-kicker text-white/75">European special situations platform</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold tracking-[-0.05em] text-white sm:text-6xl">
             Review, assess, and submit proposals across insolvency, restructuring, and judicial sale mandates.
           </h1>
@@ -25,7 +25,7 @@ export function Hero() {
             <Link href="/auctions" className={buttonStyles("primary", "no-underline")}>
               Explore processes
             </Link>
-            <Link href="/cart" className={buttonStyles("gold", "no-underline")}>
+            <Link href="/cart" className={buttonStyles("accent", "no-underline")}>
               Review dossier
             </Link>
           </div>

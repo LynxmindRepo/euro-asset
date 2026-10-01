@@ -23,7 +23,7 @@ export function FlowSteps({
             className={cn(
               "rounded-2xl px-4 py-3 text-sm transition",
               index < currentIndex && "bg-primary text-white",
-              index === currentIndex && "bg-tertiary text-tertiary-ink",
+              index === currentIndex && "bg-accent font-semibold text-primary",
               index > currentIndex && "bg-surface-lowest text-muted"
             )}
           >

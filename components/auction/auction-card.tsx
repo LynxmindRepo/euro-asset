@@ -10,7 +10,7 @@ import { StatusBadge } from "@/components/auction/status-badge";
 import { buttonStyles } from "@/components/ui/button";
 
 function getProcedureTone(value: Auction["saleProcedure"]) {
-  if (value === "insolvencia") return "bg-tertiary text-tertiary-ink";
+  if (value === "insolvencia") return "bg-accent-soft text-accent-ink";
   if (value === "venda-judicial") return "bg-primary text-white";
   if (value === "reestruturacao") return "bg-surface-high text-primary";
   return "bg-surface-low text-muted";
@@ -52,7 +52,7 @@ export function AuctionCardBase({
         tabIndex={hasDetailPage ? 0 : undefined}
         onClick={hasDetailPage ? openProcess : undefined}
         onKeyDown={hasDetailPage ? handleKeyDown : undefined}
-        className={`group grid overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 md:grid-cols-[0.92fr_1.08fr] ${hasDetailPage ? "cursor-pointer" : ""}`}
+        className={`group grid overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright md:grid-cols-[0.92fr_1.08fr] ${hasDetailPage ? "cursor-pointer" : ""}`}
       >
         <div className="overflow-hidden md:h-full">
           <img
@@ -74,7 +74,7 @@ export function AuctionCardBase({
             <span className={`rounded-full px-3 py-1 text-xs ${getProcedureTone(auction.saleProcedure)}`}>
               {getSaleProcedureLabel(auction.saleProcedure)}
             </span>
-            <span className="rounded-full bg-tertiary/60 px-3 py-1 text-xs text-tertiary-ink">
+            <span className="rounded-full bg-accent-soft px-3 py-1 text-xs text-accent-ink">
               {auction.caseReference}
             </span>
             <span className="rounded-full bg-surface-tint px-3 py-1 text-xs text-muted">
@@ -83,7 +83,7 @@ export function AuctionCardBase({
           </div>
           <div className="mt-10 grid gap-2">
             <p className="institutional-kicker">Current proposal</p>
-            <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-tertiary-ink">
+            <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-accent-ink">
               {formatCurrency(auction.currentBid)}
             </p>
             <p className="text-sm text-muted">{getTimeRemaining(auction.endDate)}</p>
@@ -115,7 +115,7 @@ export function AuctionCardBase({
       tabIndex={hasDetailPage ? 0 : undefined}
       onClick={hasDetailPage ? openProcess : undefined}
       onKeyDown={hasDetailPage ? handleKeyDown : undefined}
-      className={`group panel-lg flex h-full flex-col bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright focus:outline-none focus:ring-2 focus:ring-primary/30 ${hasDetailPage ? "cursor-pointer" : ""}`}
+      className={`group panel-lg flex h-full flex-col bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 hover:bg-surface-bright ${hasDetailPage ? "cursor-pointer" : ""}`}
     >
       <div className="overflow-hidden rounded-2xl">
         <img
@@ -136,7 +136,7 @@ export function AuctionCardBase({
         <span className={`rounded-full px-3 py-1 text-xs ${getProcedureTone(auction.saleProcedure)}`}>
           {getSaleProcedureLabel(auction.saleProcedure)}
         </span>
-        <span className="rounded-full bg-tertiary/60 px-3 py-1 text-xs text-tertiary-ink">
+        <span className="rounded-full bg-accent-soft px-3 py-1 text-xs text-accent-ink">
           {auction.caseReference}
         </span>
         <span className="rounded-full bg-surface-tint px-3 py-1 text-xs text-muted">
@@ -145,7 +145,7 @@ export function AuctionCardBase({
       </div>
       <div className="mt-10 grid gap-2">
         <p className="institutional-kicker">Current proposal</p>
-        <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-tertiary-ink">
+        <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-accent-ink">
           {formatCurrency(auction.currentBid)}
         </p>
         <p className="text-sm text-muted">{getTimeRemaining(auction.endDate)}</p>

@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "ghost" | "gold";
+  variant?: "primary" | "secondary" | "ghost" | "accent";
 };
 
 export function buttonStyles(
@@ -18,7 +18,7 @@ export function buttonStyles(
     variant === "secondary" &&
       "bg-surface-high text-ink tonal-rule hover:bg-surface-tint hover:text-primary",
     variant === "ghost" && "bg-transparent text-primary hover:bg-[rgba(6,24,51,0.05)]",
-    variant === "gold" && "bg-tertiary text-tertiary-ink shadow-ambient hover:brightness-[0.98]",
+    variant === "accent" && "bg-accent text-primary shadow-ambient hover:-translate-y-0.5 hover:brightness-105",
     className
   );
 }

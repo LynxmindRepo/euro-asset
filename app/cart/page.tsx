@@ -103,7 +103,7 @@ export default function CartPage() {
               </div>
             </div>
             <div className="panel-lg mt-6 bg-primary text-white">
-              <p className="institutional-kicker text-white/60">Dossier readiness</p>
+              <p className="institutional-kicker text-white/75">Dossier readiness</p>
               <p className="section-title mt-3 text-white">
                 {cartItems.length > 0 ? "Ready for final review" : "No processes selected"}
               </p>

@@ -12,7 +12,7 @@ export function StatusBadge({
     <span
       className={cn(
         "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold",
-        status === "a-encerrar" && "bg-tertiary text-tertiary-ink",
+        status === "a-encerrar" && "bg-accent text-primary",
         status === "aberto" && "bg-primary text-white",
         status === "agendado" && "bg-surface-legal text-primary",
         status === "encerrado" && "bg-surface-high text-muted",

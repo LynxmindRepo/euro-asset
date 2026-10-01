@@ -171,7 +171,7 @@ export function Header() {
                     <span
                       className={
                         user.role === "admin"
-                          ? "rounded-full bg-tertiary px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-tertiary-ink"
+                          ? "rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-accent-ink"
                           : "rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white"
                       }
                     >
