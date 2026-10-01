@@ -3,19 +3,23 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { initialListings } from "@/data/listings";
 import { partners } from "@/data/partners";
-import { DisposalPartner, Inquiry, Listing, NewListingInput, SessionEvent } from "@/types";
+import { DisposalPartner, Inquiry, Listing, NewListingInput, PartnerApplication, SessionEvent } from "@/types";
 import { slugify } from "@/lib/utils";
 
 type InquiryInput = Pick<Inquiry, "listingId" | "name" | "email" | "message">;
+type ApplicationInput = Omit<PartnerApplication, "id" | "createdAt">;
 
 type MarketplaceContextValue = {
   listings: Listing[];
   partners: DisposalPartner[];
   inquiries: Inquiry[];
+  applications: PartnerApplication[];
   sessionEvents: SessionEvent[];
   /** Simulates sending a message to the Disposal Partner (no backend). */
   sendInquiry: (input: InquiryInput) => Promise<Inquiry>;
   createListing: (input: NewListingInput, createdBy: string) => Listing;
+  /** Simulates a Disposal Partner registration request (no backend). */
+  submitApplication: (input: ApplicationInput) => Promise<PartnerApplication>;
 };
 
 const MarketplaceContext = createContext<MarketplaceContextValue | null>(null);
@@ -46,6 +50,7 @@ function buildListingFromInput(input: NewListingInput, createdBy: string): Listi
 export function MarketplaceProvider({ children }: { children: React.ReactNode }) {
   const [listings, setListings] = useState<Listing[]>(initialListings);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [applications, setApplications] = useState<PartnerApplication[]>([]);
   const [sessionEvents, setSessionEvents] = useState<SessionEvent[]>([]);
 
   const value = useMemo<MarketplaceContextValue>(
@@ -53,6 +58,7 @@ export function MarketplaceProvider({ children }: { children: React.ReactNode })
       listings,
       partners,
       inquiries,
+      applications,
       sessionEvents,
       sendInquiry: async (input) => {
         const listing = listings.find((candidate) => candidate.id === input.listingId);
@@ -80,9 +86,21 @@ export function MarketplaceProvider({ children }: { children: React.ReactNode })
           ...current
         ]);
         return created;
+      },
+      submitApplication: async (input) => {
+        const application: PartnerApplication = { ...input, id: `app-${Date.now()}`, createdAt: new Date().toISOString() };
+
+        await new Promise((resolve) => setTimeout(resolve, 900));
+
+        setApplications((current) => [application, ...current]);
+        setSessionEvents((current) => [
+          { id: `event-${Date.now()}`, type: "partner-application", createdAt: application.createdAt },
+          ...current
+        ]);
+        return application;
       }
     }),
-    [listings, inquiries, sessionEvents]
+    [listings, inquiries, applications, sessionEvents]
   );
 
   return <MarketplaceContext.Provider value={value}>{children}</MarketplaceContext.Provider>;

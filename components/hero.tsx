@@ -62,7 +62,7 @@ export function Hero() {
                   type="search"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder="What are you looking for? e.g. truck, forklift"
+                  placeholder="What are you looking for?"
                   className={`${fieldClass} placeholder:text-muted`}
                 />
               </div>
@@ -137,7 +137,7 @@ export function Hero() {
                 <Link href="/listings" className={buttonStyles("outline-light", "no-underline")}>
                   Browse listings
                 </Link>
-                <Link href="#for-sellers" className={buttonStyles("outline-light", "no-underline")}>
+                <Link href="/sell" className={buttonStyles("outline-light", "no-underline")}>
                   List your assets
                 </Link>
               </div>

@@ -80,10 +80,25 @@ export type Inquiry = {
   createdAt: string;
 };
 
+/** Registration request from a company that wants to become a Disposal Partner (demo only). */
+export type PartnerApplication = {
+  id: string;
+  company: string;
+  type: PartnerType;
+  country: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  website: string;
+  volume: "1" | "2-10" | "10+";
+  message: string;
+  createdAt: string;
+};
+
 export type SessionEvent = {
   id: string;
-  type: "listing-created" | "inquiry-sent";
-  listingId: string;
+  type: "listing-created" | "inquiry-sent" | "partner-application";
+  listingId?: string;
   createdAt: string;
 };
 

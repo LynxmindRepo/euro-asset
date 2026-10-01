@@ -32,6 +32,8 @@ export function Header() {
       label: "Listings",
       active: pathname.startsWith("/listings"),
     },
+    { href: "/buyers", label: "For buyers", active: pathname.startsWith("/buyers") },
+    { href: "/sell", label: "Sell with us", active: pathname.startsWith("/sell") },
   ];
 
   return (

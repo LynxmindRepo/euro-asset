@@ -8,13 +8,13 @@ import { Button, buttonStyles } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useMockSession } from "@/features/auth/mock-session";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
-import { getListingCountries, getPartner } from "@/lib/listing-helpers";
+import { getListingCountries, getPartner, getPartnerTypeLabel } from "@/lib/listing-helpers";
 import { hasStaticListingDetail } from "@/lib/site";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
 
 export default function AdminPage() {
   const { currentUser } = useMockSession();
-  const { listings, partners, inquiries } = useMarketplace();
+  const { listings, partners, inquiries, applications } = useMarketplace();
 
   if (!currentUser || currentUser.role !== "admin") {
     return (
@@ -40,7 +40,8 @@ export default function AdminPage() {
     { label: "Disposal Partners", value: partners.length },
     { label: "Countries covered", value: getListingCountries(listings).length },
     { label: "Listings sold", value: listings.filter((listing) => listing.status === "sold").length },
-    { label: "Messages this session", value: inquiries.length }
+    { label: "Messages this session", value: inquiries.length },
+    { label: "Partner registrations", value: applications.length }
   ];
 
   return (
@@ -56,7 +57,7 @@ export default function AdminPage() {
               </Link>
             </div>
 
-            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {metrics.map((metric) => (
                 <Card key={metric.label} variant="metric">
                   <dt className="institutional-kicker">{metric.label}</dt>
@@ -89,6 +90,31 @@ export default function AdminPage() {
                       </li>
                     );
                   })}
+                </ul>
+              )}
+            </section>
+
+            <section aria-labelledby="applications-title">
+              <h2 id="applications-title" className="subsection-title text-2xl">
+                Disposal Partner registrations
+              </h2>
+              {applications.length === 0 ? (
+                <p className="support-copy mt-3">
+                  No registrations yet. Submit one from the <Link href="/sell#register" className="text-primary">Sell with us</Link> page.
+                </p>
+              ) : (
+                <ul className="mt-4 grid gap-3">
+                  {applications.map((application) => (
+                    <li key={application.id} className="rounded-2xl bg-surface-lowest p-5 shadow-ambient tonal-rule">
+                      <p className="font-semibold text-ink">
+                        {application.company} <span className="font-normal text-muted">· {getPartnerTypeLabel(application.type)}, {application.country}</span>
+                      </p>
+                      <p className="mt-1 text-sm text-muted">
+                        {application.contactName} ({application.email}) · wants to list {application.volume === "1" ? "one asset" : application.volume === "2-10" ? "2–10 assets" : "10+ assets"} · {formatDateTime(application.createdAt)}
+                      </p>
+                      {application.message ? <p className="mt-2 text-sm text-ink">{application.message}</p> : null}
+                    </li>
+                  ))}
                 </ul>
               )}
             </section>

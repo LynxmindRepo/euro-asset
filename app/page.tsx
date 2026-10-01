@@ -97,9 +97,14 @@ export default function HomePage() {
 
       <section id="how-it-works" aria-labelledby="how-title" className="section-space scroll-mt-28">
         <div className="shell">
-          <h2 id="how-title" className="section-title text-[clamp(1.8rem,3vw,2.5rem)]">
-            How buying works
-          </h2>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 id="how-title" className="section-title text-[clamp(1.8rem,3vw,2.5rem)]">
+              How buying works
+            </h2>
+            <Link href="/buyers" className={buttonStyles("secondary", "no-underline")}>
+              Why buyers choose us
+            </Link>
+          </div>
           <ol className="mt-6 grid gap-4 md:grid-cols-3">
             {buyerSteps.map((step, index) => (
               <li key={step.title} className="rounded-[1.5rem] bg-surface-low p-6 tonal-rule">
@@ -129,12 +134,14 @@ export default function HomePage() {
                 Brokers, licensed auctioneers, disposal firms and administrators: you&apos;ve already done the hard
                 part. One listing reaches buyers in every market we cover — with zero extra work on your end.
               </p>
-              <a
-                href="mailto:partners@bridgeon.example?subject=Become%20a%20Disposal%20Partner"
-                className={buttonStyles("accent", "mt-6 no-underline")}
-              >
-                Become a Disposal Partner
-              </a>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/sell#register" className={buttonStyles("accent", "no-underline")}>
+                  Become a Disposal Partner
+                </Link>
+                <Link href="/sell" className={buttonStyles("outline-light", "no-underline")}>
+                  Why list with us
+                </Link>
+              </div>
             </div>
             <ul className="grid gap-3">
               {sellerPoints.map((point) => (
