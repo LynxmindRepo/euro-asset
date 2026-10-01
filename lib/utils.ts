@@ -55,12 +55,33 @@ const unitLabels: Record<NonNullable<ListingSpec["unit"]>, string> = {
   year: ""
 };
 
-export function formatSpecValue(spec: ListingSpec) {
+export type UnitSystem = "metric" | "imperial";
+
+/** Metric → imperial factors. Specs are always stored in metric units. */
+const imperial: Partial<Record<NonNullable<ListingSpec["unit"]>, { factor: number; label: string }>> = {
+  kg: { factor: 2.20462, label: "lb" },
+  km: { factor: 0.621371, label: "mi" },
+  m2: { factor: 10.7639, label: "sq ft" }
+};
+
+/** Convert a metric measurement for display; units without an imperial equivalent (h, kW, years…) are unchanged. */
+export function convertMeasure(value: number, unit: NonNullable<ListingSpec["unit"]>, system: UnitSystem = "metric") {
+  const target = system === "imperial" ? imperial[unit] : undefined;
+  return target ? { value: Math.round(value * target.factor), label: target.label } : { value, label: unitLabels[unit] };
+}
+
+/** e.g. formatMeasure(612000, "km", "imperial") → "380,279 mi". */
+export function formatMeasure(value: number, unit: NonNullable<ListingSpec["unit"]>, system: UnitSystem = "metric") {
+  const converted = convertMeasure(value, unit, system);
+  return converted.label ? `${formatNumber(converted.value)} ${converted.label}` : formatNumber(converted.value);
+}
+
+export function formatSpecValue(spec: ListingSpec, system: UnitSystem = "metric") {
   if (typeof spec.value === "string") return spec.value;
   if (spec.unit === "year") return String(spec.value);
+  if (!spec.unit) return formatNumber(spec.value);
 
-  const unit = spec.unit ? unitLabels[spec.unit] : "";
-  return unit ? `${formatNumber(spec.value)} ${unit}` : formatNumber(spec.value);
+  return formatMeasure(spec.value, spec.unit, system);
 }
 
 export function slugify(value: string) {
@@ -73,10 +94,10 @@ export function slugify(value: string) {
 }
 
 /** Short form for chips: counts keep their label ("46 pallets"), measures keep their unit ("7,800 kg"). */
-export function formatSpecShort(spec: ListingSpec) {
+export function formatSpecShort(spec: ListingSpec, system: UnitSystem = "metric") {
   if (spec.unit === "units" && typeof spec.value === "number") {
     return `${formatNumber(spec.value)} ${spec.label.toLowerCase()}`;
   }
 
-  return formatSpecValue(spec);
+  return formatSpecValue(spec, system);
 }

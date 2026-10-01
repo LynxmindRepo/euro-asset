@@ -6,9 +6,12 @@ import { StatusBadge } from "@/components/listing/status-badge";
 import { getCategoryLabel, getOriginLabel } from "@/lib/listing-helpers";
 import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
 import { Price } from "@/components/ui/price";
+import { useUnits } from "@/features/preferences/units-context";
 import { cn, formatPublished, formatSpecValue } from "@/lib/utils";
 
 export function ListingListRow({ listing }: { listing: Listing }) {
+  const { units } = useUnits();
+
   return (
     <article className="card-link group grid overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5 md:grid-cols-[280px_1fr]">
       <div className="relative overflow-hidden">
@@ -37,7 +40,7 @@ export function ListingListRow({ listing }: { listing: Listing }) {
             <ul className="mt-4 flex flex-wrap gap-2" aria-label="Key specifications">
               {listing.specs.slice(0, 4).map((spec) => (
                 <li key={spec.label} className="rounded-full bg-surface-low px-3 py-1 text-xs text-ink">
-                  <span className="text-muted">{spec.label}:</span> {formatSpecValue(spec)}
+                  <span className="text-muted">{spec.label}:</span> {formatSpecValue(spec, units)}
                 </li>
               ))}
             </ul>

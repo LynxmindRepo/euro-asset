@@ -7,12 +7,14 @@ import { CostEstimator } from "@/components/listing/cost-estimator";
 import { Gallery } from "@/components/listing/gallery";
 import { ListingCard } from "@/components/listing/listing-card";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
+import { useUnits } from "@/features/preferences/units-context";
 import { getCategoryLabel, getOriginLabel } from "@/lib/listing-helpers";
 import { formatDate, formatSpecValue } from "@/lib/utils";
 import { Listing } from "@/types";
 
 export function ListingDetailClient({ listing }: { listing: Listing }) {
   const { listings } = useMarketplace();
+  const { units } = useUnits();
   const similar = listings
     .filter(
       (candidate) =>
@@ -73,7 +75,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                   {listing.specs.map((spec) => (
                     <div key={spec.label} className="rounded-2xl bg-surface-low px-4 py-3 tonal-rule">
                       <dt className="text-sm text-muted">{spec.label}</dt>
-                      <dd className="mt-1 font-semibold text-ink">{formatSpecValue(spec)}</dd>
+                      <dd className="mt-1 font-semibold text-ink">{formatSpecValue(spec, units)}</dd>
                     </div>
                   ))}
                   <div className="rounded-2xl bg-surface-low px-4 py-3 tonal-rule">

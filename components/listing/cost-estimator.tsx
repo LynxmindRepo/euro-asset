@@ -5,6 +5,7 @@ import { Select } from "@/components/ui/select";
 import { buyerCountries } from "@/data/cost-rates";
 import { currencies } from "@/data/currencies";
 import { useCurrency } from "@/features/preferences/currency-context";
+import { useUnits } from "@/features/preferences/units-context";
 import { CostEstimate, estimateTotalCost, guessBuyerCountry } from "@/lib/cost-estimator";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Listing } from "@/types";
@@ -48,6 +49,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   const fallbackCountry = listing.country === "Germany" ? "France" : "Germany";
   const [country, setCountry] = useState(fallbackCountry);
   const { currency: siteCurrency } = useCurrency();
+  const { units } = useUnits();
   const [currency, setCurrency] = useState(siteCurrency);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [animation, setAnimation] = useState<Animation | null>(null);
@@ -71,7 +73,9 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   const lastEstimateEntry = [...entries].reverse().find((entry) => entry.estimate);
   const inputsChanged =
     lastEstimateEntry?.estimate &&
-    (lastEstimateEntry.estimate.currency !== currency || !lastEstimateEntry.question.includes(country));
+    (lastEstimateEntry.estimate.currency !== currency ||
+      lastEstimateEntry.estimate.units !== units ||
+      !lastEstimateEntry.question.includes(country));
 
   function ask(question: string, answer: { estimate?: CostEstimate; text: string; steps: string[] }) {
     const id = nextId.current++;
@@ -85,7 +89,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   }
 
   function askTotalCost() {
-    const estimate = estimateTotalCost(listing, country, currency);
+    const estimate = estimateTotalCost(listing, country, currency, units);
     ask(`What's the total cost to bring it to ${country}, in ${currency}?`, {
       estimate,
       text: estimate.summary,

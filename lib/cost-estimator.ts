@@ -9,7 +9,7 @@ import {
   transportRates
 } from "@/data/cost-rates";
 import { eurRates } from "@/data/currencies";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatCurrency, formatMeasure, UnitSystem } from "@/lib/utils";
 import { Listing } from "@/types";
 
 export type CostLine = {
@@ -24,6 +24,7 @@ export type CostEstimate = {
   totalEur: number;
   extrasEur: number;
   currency: string;
+  units: UnitSystem;
   rate: number;
   distanceKm: number | null;
   /** "Thinking" steps shown by the AI-style animation. */
@@ -66,12 +67,19 @@ export function guessBuyerCountry(language: string | undefined, fallback: string
   return byFull ?? byShort ?? fallback;
 }
 
-export function estimateTotalCost(listing: Listing, buyerCountryName: string, currency: string): CostEstimate {
+export function estimateTotalCost(
+  listing: Listing,
+  buyerCountryName: string,
+  currency: string,
+  units: UnitSystem = "metric"
+): CostEstimate {
   const buyer = buyerCountries.find((country) => country.name === buyerCountryName) ?? buyerCountries[0];
   const assetCountry = buyerCountries.find((country) => country.name === listing.country);
   const origin = assetCities[listing.city] ?? assetCountry ?? buyer;
   const rate = eurRates[currency] ?? 1;
   const money = (eur: number) => formatCurrency(eur * rate, currency);
+  const km = (value: number) => formatMeasure(value, "km", units);
+  const kg = (value: number) => formatMeasure(value, "kg", units);
   const sameCountry = buyer.name === listing.country;
   const crossesBorder = !sameCountry;
   const outsideEu = crossesBorder && (!buyer.eu || (assetCountry ? !assetCountry.eu : false));
@@ -103,26 +111,31 @@ export function estimateTotalCost(listing: Listing, buyerCountryName: string, cu
   } else {
     const roadKm = Math.max(50, Math.round(haversineKm(origin, buyer) * transportRates.roadFactor));
     distanceKm = roadKm;
-    steps.push(`Calculating the road route ${listing.city} → ${buyer.city} (≈${formatNumber(roadKm)} km)`);
+    steps.push(`Calculating the road route ${listing.city} → ${buyer.city} (≈${km(roadKm)})`);
 
     const count = itemCount(listing);
     const weight = totalWeightKg(listing);
     let transport: number;
     let mode: string;
+    /** Same choice phrased for the follow-up answer (without repeating the weight). */
+    let modeSentence: string;
 
     if (listing.categoryId === "vehicles") {
       transport = count * (transportRates.vehicle.handling + roadKm * transportRates.vehicle.perKm);
       mode = count > 1 ? `${count} vehicles, driven or on a car transporter` : "Driven or on a car transporter";
+      modeSentence = count > 1 ? `the ${count} vehicles are driven or carried on a car transporter` : "it is driven or carried on a car transporter";
     } else if (listing.categoryId === "machinery" && weight / count >= transportRates.lowLoader.heavyFromKg) {
       transport = count * (transportRates.lowLoader.handling + roadKm * transportRates.lowLoader.perKm);
-      mode = `Low-loader for ${formatNumber(weight)} kg`;
+      mode = `Low-loader for ${kg(weight)}`;
+      modeSentence = "it needs a low-loader for heavy machinery";
     } else {
       const trucks = Math.max(1, Math.ceil(weight / transportRates.truck.capacityKg));
       transport = trucks * (transportRates.truck.handling + roadKm * transportRates.truck.perKm);
-      mode = `${trucks} truck${trucks > 1 ? "s" : ""} for ${formatNumber(weight)} kg`;
+      mode = `${trucks} truck${trucks > 1 ? "s" : ""} for ${kg(weight)}`;
+      modeSentence = `it fits on ${trucks === 1 ? "one standard truck" : `${trucks} standard trucks`}`;
     }
 
-    lines.push({ id: "transport", label: "Transport", detail: `${mode} · ≈${formatNumber(roadKm)} km`, amountEur: Math.round(transport) });
+    lines.push({ id: "transport", label: "Transport", detail: `${mode} · ≈${km(roadKm)}`, amountEur: Math.round(transport) });
 
     const ferryNeeded = crossesBorder && (buyer.ferry || Boolean(assetCountry?.ferry));
     if (ferryNeeded) {
@@ -131,9 +144,7 @@ export function estimateTotalCost(listing: Listing, buyerCountryName: string, cu
 
     followUps.push({
       question: "Explain the transport estimate",
-      answer: `The asset is in ${listing.city}, about ${formatNumber(roadKm)} km by road from ${buyer.city}. Based on its weight (${formatNumber(
-        weight
-      )} kg) I assumed: ${mode.toLowerCase()}. That comes to roughly ${money(transport)}${
+      answer: `The asset is in ${listing.city}, about ${km(roadKm)} by road from ${buyer.city}. Based on its weight (${kg(weight)}), I assumed ${modeSentence}. That comes to roughly ${money(transport)}${
         ferryNeeded ? `, plus about ${money(transportRates.ferry)} for the ferry` : ""
       }. A transport company can give you an exact quote.`
     });
@@ -205,5 +216,5 @@ export function estimateTotalCost(listing: Listing, buyerCountryName: string, cu
       "These figures use typical rates for transport, registration and currency exchange, not live quotes. Real costs depend on the carrier, the date, the exact route and local rules — confirm them with the seller and service providers before you buy."
   });
 
-  return { lines, totalEur, extrasEur, currency, rate, distanceKm, steps, summary, followUps };
+  return { lines, totalEur, extrasEur, currency, units, rate, distanceKm, steps, summary, followUps };
 }

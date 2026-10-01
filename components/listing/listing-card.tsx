@@ -6,6 +6,7 @@ import { StatusBadge } from "@/components/listing/status-badge";
 import { getCategoryLabel, getPartner } from "@/lib/listing-helpers";
 import { getAssetPath, hasStaticListingDetail } from "@/lib/site";
 import { Price } from "@/components/ui/price";
+import { useUnits } from "@/features/preferences/units-context";
 import { cn, formatPublished, formatSpecShort } from "@/lib/utils";
 
 export function ListingTitle({ listing, className }: { listing: Listing; className?: string }) {
@@ -38,6 +39,8 @@ export function PartnerLine({ partnerId }: { partnerId: string }) {
 }
 
 export function ListingCard({ listing }: { listing: Listing }) {
+  const { units } = useUnits();
+
   return (
     <article className="card-link group flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-surface-lowest shadow-panel tonal-rule transition hover:-translate-y-0.5">
       <div className="relative overflow-hidden">
@@ -70,7 +73,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
             {listing.specs.slice(0, 3).map((spec) => (
               <li key={spec.label} className="rounded-full bg-surface-low px-3 py-1 text-xs text-ink">
                 <span className="sr-only">{spec.label}: </span>
-                {formatSpecShort(spec)}
+                {formatSpecShort(spec, units)}
               </li>
             ))}
           </ul>
