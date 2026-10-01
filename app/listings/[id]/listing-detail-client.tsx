@@ -12,8 +12,10 @@ import { getCategoryLabel, getOriginLabel } from "@/lib/listing-helpers";
 import { formatDate, formatSpecValue } from "@/lib/utils";
 import { Listing } from "@/types";
 
-export function ListingDetailClient({ listing }: { listing: Listing }) {
+export function ListingDetailClient({ listing: initial }: { listing: Listing }) {
   const { listings } = useMarketplace();
+  // The page is pre-rendered from the initial data; use the in-session version so edits (price, status…) show up.
+  const listing = listings.find((candidate) => candidate.id === initial.id) ?? initial;
   const { units } = useUnits();
   const similar = listings
     .filter(

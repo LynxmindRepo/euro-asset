@@ -1,4 +1,5 @@
-export type UserRole = "admin" | "user";
+/** "user" = buyer, "partner" = Disposal Partner (seller), "admin" = Bridgeon back office. */
+export type UserRole = "admin" | "partner" | "user";
 
 export type ListingStatus = "available" | "reserved" | "sold";
 
@@ -24,7 +25,14 @@ export type User = {
   company: string;
   role: UserRole;
   avatar: string;
+  /** Set for role "partner": the Disposal Partner this user works for. */
+  partnerId?: string;
 };
+
+/** Fields a Disposal Partner can change on an existing listing. */
+export type ListingUpdate = Partial<
+  Pick<Listing, "title" | "description" | "price" | "status" | "city" | "region" | "country" | "highlights">
+>;
 
 /** A professional seller (broker, licensed auctioneer, disposal firm or administrator). */
 export type DisposalPartner = {

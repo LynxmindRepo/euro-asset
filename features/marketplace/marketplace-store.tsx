@@ -3,7 +3,15 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { initialListings } from "@/data/listings";
 import { partners } from "@/data/partners";
-import { DisposalPartner, Inquiry, Listing, NewListingInput, PartnerApplication, SessionEvent } from "@/types";
+import {
+  DisposalPartner,
+  Inquiry,
+  Listing,
+  ListingUpdate,
+  NewListingInput,
+  PartnerApplication,
+  SessionEvent
+} from "@/types";
 import { slugify } from "@/lib/utils";
 
 type InquiryInput = Pick<Inquiry, "listingId" | "name" | "email" | "message">;
@@ -18,6 +26,8 @@ type MarketplaceContextValue = {
   /** Simulates sending a message to the Disposal Partner (no backend). */
   sendInquiry: (input: InquiryInput) => Promise<Inquiry>;
   createListing: (input: NewListingInput, createdBy: string) => Listing;
+  /** Edit a listing or change its status (e.g. mark as sold). In-memory only. */
+  updateListing: (listingId: string, changes: ListingUpdate) => void;
   /** Simulates a Disposal Partner registration request (no backend). */
   submitApplication: (input: ApplicationInput) => Promise<PartnerApplication>;
 };
@@ -86,6 +96,11 @@ export function MarketplaceProvider({ children }: { children: React.ReactNode })
           ...current
         ]);
         return created;
+      },
+      updateListing: (listingId, changes) => {
+        setListings((current) =>
+          current.map((listing) => (listing.id === listingId ? { ...listing, ...changes } : listing))
+        );
       },
       submitApplication: async (input) => {
         const application: PartnerApplication = { ...input, id: `app-${Date.now()}`, createdAt: new Date().toISOString() };

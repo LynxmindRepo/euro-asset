@@ -6,6 +6,7 @@ import { BenefitGrid, ClosingStatement } from "@/components/marketing/benefit-gr
 import { PageHero } from "@/components/marketing/page-hero";
 import { PartnerSignupForm } from "@/components/marketing/partner-signup-form";
 import { buttonStyles } from "@/components/ui/button";
+import { SparkleIcon } from "@/components/ui/sparkle-icon";
 import { useMarketplace } from "@/features/marketplace/marketplace-store";
 import { getListingCountries } from "@/lib/listing-helpers";
 
@@ -108,6 +109,30 @@ export default function SellPage() {
       </section>
 
       <BenefitGrid id="why-list-title" title="Why list with us" benefits={benefits} />
+
+      <section aria-labelledby="try-import-title" className="pb-20">
+        <div className="shell">
+          <div className="flex flex-col gap-5 rounded-[2rem] bg-surface-lowest p-6 shadow-panel tonal-rule sm:p-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
+                <SparkleIcon className="h-6 w-6" />
+              </span>
+              <div>
+                <h2 id="try-import-title" className="font-display text-2xl font-semibold text-ink">
+                  See how importing works
+                </h2>
+                <p className="support-copy mt-1 max-w-2xl">
+                  Paste a listing you already have — any language, any currency — and it becomes a Bridgeon listing in
+                  seconds. Then manage it, mark it as sold and read buyer inquiries from your dashboard.
+                </p>
+              </div>
+            </div>
+            <Link href="/partner/import" className={buttonStyles("accent", "shrink-0 no-underline")}>
+              Try the import tool
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <ClosingStatement tagline="List once. Sell everywhere.">
         You&apos;ve already done the hard part — appraising, photographing, and documenting the asset. We take it from

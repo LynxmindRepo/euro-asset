@@ -36,14 +36,18 @@ function AutoHint({ filled }: { filled: boolean }) {
   );
 }
 
-export function ListingImport() {
+/**
+ * Used by the admin (chooses the Disposal Partner) and by a signed-in partner (`fixedPartnerId`:
+ * listings are always published under their own company).
+ */
+export function ListingImport({ fixedPartnerId, redirectTo = "/admin" }: { fixedPartnerId?: string; redirectTo?: string }) {
   const router = useRouter();
   const { currentUser } = useMockSession();
   const { partners, createListing } = useMarketplace();
   const { units } = useUnits();
   const { pushToast } = useToast();
   const [text, setText] = useState("");
-  const [partnerId, setPartnerId] = useState(partners[0]?.id ?? "");
+  const [partnerId, setPartnerId] = useState(fixedPartnerId ?? partners[0]?.id ?? "");
   const [phase, setPhase] = useState<Phase>("input");
   const [step, setStep] = useState(0);
   const [result, setResult] = useState<ImportResult | null>(null);
@@ -129,7 +133,7 @@ export function ListingImport() {
       currentUser?.id ?? "import"
     );
     pushToast({ tone: "success", text: `"${created.title}" is now live in every market (demo session).` });
-    router.push("/admin");
+    router.push(redirectTo);
   }
 
   const missing = (key: "price" | "location" | "category") => result?.missing.includes(key) ?? false;
@@ -186,18 +190,20 @@ export function ListingImport() {
             {phase === "input" ? fieldError("title") : null}
           </div>
 
-          <div className="mt-4 grid gap-2 sm:max-w-sm">
-            <label htmlFor="import-partner" className="field-label">
-              Publish as Disposal Partner
-            </label>
-            <Select id="import-partner" value={partnerId} onChange={(event) => setPartnerId(event.target.value)}>
-              {partners.map((partner) => (
-                <option key={partner.id} value={partner.id}>
-                  {partner.name}
-                </option>
-              ))}
-            </Select>
-          </div>
+          {fixedPartnerId ? null : (
+            <div className="mt-4 grid gap-2 sm:max-w-sm">
+              <label htmlFor="import-partner" className="field-label">
+                Publish as Disposal Partner
+              </label>
+              <Select id="import-partner" value={partnerId} onChange={(event) => setPartnerId(event.target.value)}>
+                {partners.map((partner) => (
+                  <option key={partner.id} value={partner.id}>
+                    {partner.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          )}
 
           <button
             type="button"

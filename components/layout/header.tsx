@@ -8,6 +8,25 @@ import { PreferenceControls } from "@/components/layout/preference-controls";
 import { Button, buttonStyles } from "@/components/ui/button";
 import { useMockSession } from "@/features/auth/mock-session";
 import { cn } from "@/lib/utils";
+import { UserRole } from "@/types";
+
+const roleCopy: Record<UserRole, { badge: string; description: string; demo: string }> = {
+  user: {
+    badge: "Buyer",
+    description: "Search listings across Europe and contact Disposal Partners directly.",
+    demo: "Use this profile to demo the buyer journey."
+  },
+  partner: {
+    badge: "Disposal Partner",
+    description: "Import and manage your listings, mark items as sold and read buyer inquiries.",
+    demo: "Use this profile to demo the seller journey."
+  },
+  admin: {
+    badge: "Admin",
+    description: "Open the back office: all listings, buyer messages and partner registrations.",
+    demo: "Use this profile to demo the Bridgeon back office."
+  }
+};
 
 export function Header() {
   const { currentUser, users, loginAs, logout } = useMockSession();
@@ -73,6 +92,20 @@ export function Header() {
                   Admin
                 </Link>
               ) : null}
+              {currentUser?.role === "partner" ? (
+                <Link
+                  aria-current={pathname.startsWith("/partner") ? "page" : undefined}
+                  href="/partner"
+                  className={cn(
+                    "rounded-[1.1rem] px-4 py-2.5 no-underline transition duration-200",
+                    pathname.startsWith("/partner")
+                      ? "bg-surface-low text-primary tonal-rule"
+                      : "hover:bg-surface-low/80 hover:text-primary",
+                  )}
+                >
+                  My listings
+                </Link>
+              ) : null}
               <PreferenceControls id="site-currency-mobile" className="ml-auto sm:hidden" />
           </nav>
 
@@ -121,7 +154,7 @@ export function Header() {
       </header>
 
       {isLoginOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-8">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 py-8 md:items-center">
           <button
             type="button"
             aria-label="Close login modal"
@@ -132,7 +165,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="mock-login-title"
-            className="relative z-10 w-full max-w-3xl rounded-[2rem] bg-surface-lowest p-8 shadow-[0_32px_90px_rgba(7,25,50,0.22)] tonal-rule"
+            className="relative z-10 w-full max-w-5xl rounded-[2rem] bg-surface-lowest p-8 shadow-[0_32px_90px_rgba(7,25,50,0.22)] tonal-rule"
           >
             <div className="flex items-start justify-between gap-6">
               <div>
@@ -142,7 +175,7 @@ export function Header() {
                 </h2>
                 <p className="support-copy mt-3 max-w-2xl">
                   Demo login only — no real account is created. Switch between
-                  the buyer and admin profiles to present both journeys.
+                  the buyer, Disposal Partner and admin profiles to present each journey.
                 </p>
               </div>
               <button
@@ -154,7 +187,7 @@ export function Header() {
               </button>
             </div>
 
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
               {users.map((user) => (
                 <button
                   key={user.id}
@@ -167,31 +200,26 @@ export function Header() {
                 >
                   <div className="flex items-center justify-between gap-4">
                     <span
-                      className={
-                        user.role === "admin"
-                          ? "rounded-full bg-surface-high px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-primary"
-                          : "rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white"
-                      }
+                      className={cn(
+                        "rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em]",
+                        user.role === "admin" && "bg-surface-high text-primary",
+                        user.role === "partner" && "bg-accent text-primary",
+                        user.role === "user" && "bg-primary text-white"
+                      )}
                     >
-                      {user.role === "admin" ? "Admin" : "Buyer"}
+                      {roleCopy[user.role].badge}
                     </span>
                     <span className="text-xs uppercase tracking-[0.16em] text-muted group-hover:text-primary">
                       Sign in
                     </span>
                   </div>
-                  <p className="mt-5 font-display text-3xl font-semibold tracking-[-0.04em] text-ink">
+                  <p className="mt-5 font-display text-2xl font-semibold tracking-[-0.03em] text-ink">
                     {user.name}
                   </p>
                   <p className="mt-2 text-sm text-muted">{user.company}</p>
-                  <p className="mt-6 text-sm leading-6 text-muted">
-                    {user.role === "admin"
-                      ? "Open the dashboard, publish new listings and see buyer messages from this session."
-                      : "Search listings across Europe and contact Disposal Partners directly."}
-                  </p>
+                  <p className="mt-6 text-sm leading-6 text-muted">{roleCopy[user.role].description}</p>
                   <div className="mt-6 rounded-[1.35rem] bg-surface-lowest/80 px-4 py-4 text-sm text-muted tonal-rule">
-                    {user.role === "admin"
-                      ? "Use this profile to demo the back office."
-                      : "Use this profile to demo the buyer journey."}
+                    {roleCopy[user.role].demo}
                   </div>
                 </button>
               ))}
