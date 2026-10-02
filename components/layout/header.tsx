@@ -67,7 +67,9 @@ export function Header() {
 
   return (
     <Localized>
-      <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-xl">
+      {/* Sticky only on large screens: on phones the wrapped header is ~220px tall and would cover a quarter of the screen
+          (and could hide the focused element, WCAG 2.4.11). */}
+      <header className="relative z-40 bg-surface/90 backdrop-blur-xl lg:sticky lg:top-0">
         <div className="shell flex flex-wrap items-center gap-x-6 gap-y-3 py-4">
           <Logo />
           {/* Mobile: logo + account on the first row, navigation on its own row below. */}

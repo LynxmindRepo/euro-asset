@@ -47,9 +47,9 @@ export default function AdminPage() {
   return (
     <PageShell>
       <section className="section-space">
-        <div className="shell grid gap-8 xl:grid-cols-[260px_1fr]">
+        <div className="shell grid grid-cols-[minmax(0,1fr)] gap-8 xl:grid-cols-[260px_minmax(0,1fr)]">
           <AdminSidebar />
-          <div className="grid gap-8">
+          <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">Dashboard</h1>
               <div className="flex flex-wrap gap-3">
@@ -128,7 +128,13 @@ export default function AdminPage() {
               <h2 id="listings-title" className="subsection-title text-2xl">
                 All listings
               </h2>
-              <div className="mt-4 overflow-x-auto rounded-2xl bg-surface-lowest shadow-ambient tonal-rule">
+              {/* Scrolls sideways on phones; focusable so keyboard users can scroll it too (WCAG 2.1.1). */}
+              <div
+                role="region"
+                aria-labelledby="listings-title"
+                tabIndex={0}
+                className="mt-4 overflow-x-auto rounded-2xl bg-surface-lowest shadow-ambient tonal-rule"
+              >
                 <table className="w-full min-w-[720px] text-left text-sm">
                   <thead className="bg-surface-tint">
                     <tr>

@@ -24,20 +24,20 @@ export function Footer() {
 
           <nav aria-label="Footer">
             <p className="text-sm font-semibold text-white/75">Navigate</p>
-            <div className="mt-4 grid gap-3 text-sm text-white/80">
-              <Link href="/" className="no-underline transition hover:text-white">
+            <div className="mt-2 grid justify-items-start gap-1 text-sm text-white/80">
+              <Link href="/" className="inline-flex min-h-10 items-center no-underline transition hover:text-white">
                 Overview
               </Link>
-              <Link href="/listings" className="no-underline transition hover:text-white">
+              <Link href="/listings" className="inline-flex min-h-10 items-center no-underline transition hover:text-white">
                 Listings
               </Link>
-              <Link href="/buyers" className="no-underline transition hover:text-white">
+              <Link href="/buyers" className="inline-flex min-h-10 items-center no-underline transition hover:text-white">
                 For buyers
               </Link>
-              <Link href="/sell" className="no-underline transition hover:text-white">
+              <Link href="/sell" className="inline-flex min-h-10 items-center no-underline transition hover:text-white">
                 Sell with us
               </Link>
-              <Link href="/resources" className="no-underline transition hover:text-white">
+              <Link href="/resources" className="inline-flex min-h-10 items-center no-underline transition hover:text-white">
                 Partners &amp; Resources
               </Link>
             </div>

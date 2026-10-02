@@ -99,7 +99,7 @@ export default function NewListingPage() {
   return (
     <PageShell>
       <section className="section-space">
-        <div className="shell grid gap-8 xl:grid-cols-[260px_1fr]">
+        <div className="shell grid grid-cols-[minmax(0,1fr)] gap-8 xl:grid-cols-[260px_minmax(0,1fr)]">
           <AdminSidebar />
           <div>
             <h1 className="page-title text-[clamp(2rem,4vw,3rem)]">New listing</h1>

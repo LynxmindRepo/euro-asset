@@ -17,6 +17,7 @@ export const uiFr: Record<string, string> = {
   "Daily views, last 14 days": "Vues par jour, 14 derniers jours", "Day": "Jour", "Views": "Vues",
   "Where your viewers are": "D’où viennent vos visiteurs", "· your market": "· votre marché", "Per listing": "Par annonce",
   "Messages": "Messages",
+  "More filters": "Plus de filtres", "Fewer filters": "Moins de filtres",
   // Favourites
   "Favourites": "Favoris", "Your favourites": "Vos favoris", "listing": "annonce", "listings": "annonces",
   "Listings you saved with the heart, to compare and come back to later. Saved in this browser only (demo).": "Les annonces enregistrées avec le cœur, pour les comparer et y revenir plus tard. Enregistrées dans ce navigateur uniquement (démo).",
@@ -255,6 +256,7 @@ export const uiSv: Record<string, string> = {
   "Daily views, last 14 days": "Visningar per dag, senaste 14 dagarna", "Day": "Dag", "Views": "Visningar",
   "Where your viewers are": "Var dina besökare finns", "· your market": "· din marknad", "Per listing": "Per annons",
   "Messages": "Meddelanden",
+  "More filters": "Fler filter", "Fewer filters": "Färre filter",
   // Favourites
   "Favourites": "Favoriter", "Your favourites": "Dina favoriter", "listing": "annons", "listings": "annonser",
   "Listings you saved with the heart, to compare and come back to later. Saved in this browser only (demo).": "Annonser du har sparat med hjärtat, för att jämföra och återvända till senare. Sparas bara i den här webbläsaren (demo).",
