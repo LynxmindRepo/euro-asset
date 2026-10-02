@@ -57,6 +57,8 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   const [animation, setAnimation] = useState<Animation | null>(null);
   const [announcement, setAnnouncement] = useState("");
   const nextId = useRef(1);
+  /** Entry whose question should receive focus: the button that asked it disappears, so focus must not fall to <body>. */
+  const [focusEntryId, setFocusEntryId] = useState<number | null>(null);
   const reducedMotion = usePrefersReducedMotion();
 
   // Default the buyer country from the browser language (client-only to avoid hydration mismatches).
@@ -83,6 +85,7 @@ export function CostEstimator({ listing }: { listing: Listing }) {
   function ask(question: string, answer: { estimate?: CostEstimate; text: string; steps: string[] }) {
     const id = nextId.current++;
     setEntries((current) => [...current, { id, question, ...answer }]);
+    setFocusEntryId(id);
     setAnnouncement(answer.estimate ? copy.estimating : `${copy.thinking}…`);
     setAnimation(
       reducedMotion
@@ -99,6 +102,12 @@ export function CostEstimator({ listing }: { listing: Listing }) {
       steps: estimate.steps
     });
   }
+
+  useEffect(() => {
+    if (focusEntryId === null) return;
+    document.getElementById(`estimator-question-${focusEntryId}`)?.focus();
+    setFocusEntryId(null);
+  }, [focusEntryId]);
 
   // Drive the AI-style animation: thinking steps → streamed text → cost lines.
   useEffect(() => {
@@ -207,7 +216,11 @@ export function CostEstimator({ listing }: { listing: Listing }) {
 
               return (
                 <li key={entry.id} className="grid gap-3">
-                  <p className="ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-primary px-4 py-3 text-sm text-white">
+                  <p
+                    id={`estimator-question-${entry.id}`}
+                    tabIndex={-1}
+                    className="ml-auto max-w-[85%] scroll-mt-28 rounded-2xl rounded-br-md bg-primary px-4 py-3 text-sm text-white"
+                  >
                     <span className="sr-only">You asked: </span>
                     {entry.question}
                   </p>
@@ -240,7 +253,10 @@ export function CostEstimator({ listing }: { listing: Listing }) {
                           ) : (
                             <p aria-hidden="true" className="leading-6">
                               {entry.text.split(" ").slice(0, live!.words + 1).join(" ")}
-                              <span className="ml-0.5 inline-block h-4 w-1.5 animate-pulse bg-primary align-middle" />
+                              {/* Typing cursor only while words are streaming, not while the cost lines appear. */}
+                              {live!.phase === "writing" ? (
+                                <span className="ml-0.5 inline-block h-4 w-1.5 animate-pulse bg-primary align-middle" />
+                              ) : null}
                             </p>
                           )}
                           {entry.estimate && (done || live!.phase === "lines") ? (

@@ -44,7 +44,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={toast.id}
             className={cn(
-              "rounded-2xl px-4 py-4 text-sm shadow-ambient backdrop-blur-md tonal-rule",
+              "rounded-2xl px-4 py-4 text-sm shadow-ambient backdrop-blur-md tonal-rule motion-safe:animate-[fadeIn_0.3s_ease-out]",
               toast.tone === "info" && "bg-surface-bright/95 text-ink",
               toast.tone === "success" && "bg-success/95 text-success-ink",
               toast.tone === "error" && "bg-danger/95 text-danger-ink"
